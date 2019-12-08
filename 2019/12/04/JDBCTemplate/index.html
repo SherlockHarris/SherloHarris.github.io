@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="第三方扩展包   *** ##Maven ***  Mysql驱动   Spring组件(core、beans、context、aop)   JDBC Template(jdbc、tx)  &amp;gt; 1&amp;lt;!--spring版本--&amp;gt;2    &amp;lt;properties&amp;gt;3        &amp;lt;spring-version&amp;gt;4            5.2.1.RELEASE">
+  <meta name="description" content="第三方扩展包 Maven    Mysql驱动   Spring组件(core、beans、context、aop)   JDBC Template(jdbc、tx)  &amp;gt; 1&amp;lt;!--spring版本--&amp;gt;2    &amp;lt;properties&amp;gt;3        &amp;lt;spring-version&amp;gt;4            5.2.1.RELEASE5        &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JDBCTemplate">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;04&#x2F;JDBCTemplate&#x2F;index.html">
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
-<meta property="og:description" content="第三方扩展包   *** ##Maven ***  Mysql驱动   Spring组件(core、beans、context、aop)   JDBC Template(jdbc、tx)  &amp;gt; 1&amp;lt;!--spring版本--&amp;gt;2    &amp;lt;properties&amp;gt;3        &amp;lt;spring-version&amp;gt;4            5.2.1.RELEASE">
+<meta property="og:description" content="第三方扩展包 Maven    Mysql驱动   Spring组件(core、beans、context、aop)   JDBC Template(jdbc、tx)  &amp;gt; 1&amp;lt;!--spring版本--&amp;gt;2    &amp;lt;properties&amp;gt;3        &amp;lt;spring-version&amp;gt;4            5.2.1.RELEASE5        &amp;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-08T07:32:57.230Z">
+<meta property="og:updated_time" content="2019-12-08T07:36:18.066Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2019/12/04/JDBCTemplate/">
@@ -201,7 +201,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-08 15:32:57" itemprop="dateModified" datetime="2019-12-08T15:32:57+08:00">2019-12-08</time>
+                <time title="Modified: 2019-12-08 15:36:18" itemprop="dateModified" datetime="2019-12-08T15:36:18+08:00">2019-12-08</time>
               </span>
 
           
@@ -216,10 +216,10 @@
 
       
         <hr>
-<h1>第三方扩展包  
-***
-##Maven
-***
+<h1>第三方扩展包
+<h2>Maven
+
+<hr>
 <ul>
 <li>Mysql驱动  
 <li>Spring组件(core、beans、context、aop)  
@@ -227,9 +227,7 @@
 >
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;!--spring版本--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    &lt;properties&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        &lt;spring-version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            5.2.1.RELEASE</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;spring-version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;properties&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &lt;dependencies&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&lt;!--mysql--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;5.1.41&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&lt;!--spring--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-beans&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-beans&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-context&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-aop&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        &lt;!--JDBC Template--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-jdbc&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-tx&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;dependencies&gt;</span></pre></td></tr></table></figure>
 
-<hr>
 <h1>Spring配置
-***
 >数据源
 >JDBC Template
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;bean id &#x3D; &quot;dataSource&quot; class &#x3D; &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;driverClassName&quot; value &#x3D; &quot;com.mysql.jdbc.Driver&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;selection_course?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf-8&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;root&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;521shiqi&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &lt;bean id &#x3D; &quot;jdbcTemplate&quot; class &#x3D; &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr></table></figure>
@@ -238,9 +236,9 @@
 <p>spring.xml  </p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">       xmlns:aop&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">       xmlns:tx&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&#x2F;spring-tx.xsd</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&#x2F;spring-aop.xsd&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &lt;bean id &#x3D; &quot;dataSource&quot; class &#x3D; &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;driverClassName&quot; value &#x3D; &quot;com.mysql.jdbc.Driver&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;selection_course?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf-8&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;root&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;521shiqi&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &lt;bean id &#x3D; &quot;jdbcTemplate&quot; class &#x3D; &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;beans&gt;</span></pre></td></tr></table></figure>
-<hr>
+
 <h1>JDBC Template基本使用
-***
+
 <h4>获取JdbcTemplate对象  
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ApplicationContext context &#x3D; new ClassPathXmlApplicationContext(&quot;spring.xml&quot;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">JdbcTemplate jdbcTemplate &#x3D; (JdbcTemplate) context.getBean(&quot;jdbcTemplate&quot;);</span></pre></td></tr></table></figure>
 <ol>
@@ -320,10 +318,10 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">第三方扩展包  
-***
-##Maven
-***
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">第三方扩展包
+Maven
+
+
 
 Mysql驱动  
 Spring组件(core、beans、context、aop)  
@@ -331,9 +329,7 @@ JDBC Template(jdbc、tx)
 &gt;
 1&lt;!--spring版本--&gt;2    &lt;properties&gt;3        &lt;spring-version&gt;4            5.2.1.RELEASE5        &lt;/spring-version&gt;6    &lt;/properties&gt;78    &lt;dependencies&gt;9&lt;!--mysql--&gt;10        &lt;dependency&gt;11            &lt;groupId&gt;mysql&lt;/groupId&gt;12            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;13            &lt;version&gt;5.1.41&lt;/version&gt;14        &lt;/dependency&gt;15&lt;!--spring--&gt;16        &lt;dependency&gt;17            &lt;groupId&gt;org.springframework&lt;/groupId&gt;18            &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;19            &lt;version&gt;${spring-version}&lt;/version&gt;20        &lt;/dependency&gt;21        &lt;dependency&gt;22            &lt;groupId&gt;org.springframework&lt;/groupId&gt;23            &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;24            &lt;version&gt;${spring-version}&lt;/version&gt;25        &lt;/dependency&gt;26        &lt;dependency&gt;27            &lt;groupId&gt;org.springframework&lt;/groupId&gt;28            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;29            &lt;version&gt;${spring-version}&lt;/version&gt;30        &lt;/dependency&gt;31        &lt;dependency&gt;32            &lt;groupId&gt;org.springframework&lt;/groupId&gt;33            &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;34            &lt;version&gt;${spring-version}&lt;/version&gt;35        &lt;/dependency&gt;36        &lt;!--JDBC Template--&gt;37        &lt;dependency&gt;38            &lt;groupId&gt;org.springframework&lt;/groupId&gt;39            &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;40            &lt;version&gt;${spring-version}&lt;/version&gt;41        &lt;/dependency&gt;42        &lt;dependency&gt;43            &lt;groupId&gt;org.springframework&lt;/groupId&gt;44            &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;45            &lt;version&gt;${spring-version}&lt;/version&gt;46        &lt;/dependency&gt;47    &lt;/dependencies&gt;
 
-
 Spring配置
-***
 &gt;数据源
 &gt;JDBC Template
 1&lt;bean id = &quot;dataSource&quot; class = &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;2        &lt;property name=&quot;driverClassName&quot; value = &quot;com.mysql.jdbc.Driver&quot;/&gt;3        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/selection_course?useUnicode=true&amp;characterEncoding=utf-8&quot;/&gt;4        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;5        &lt;property name=&quot;password&quot; value=&quot;521shiqi&quot;/&gt;6    &lt;/bean&gt;78    &lt;bean id = &quot;jdbcTemplate&quot; class = &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;9        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;10    &lt;/bean&gt;
@@ -344,7 +340,7 @@ spring.xml
 1&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;2&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;3       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;4       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;5       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;6       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;7       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans8       http://www.springframework.org/schema/beans/spring-beans.xsd9    http://www.springframework.org/schema/context10    http://www.springframework.org/schema/context/spring-context.xsd11    http://www.springframework.org/schema/tx12    http://www.springframework.org/schema/tx/spring-tx.xsd13    http://www.springframework.org/schema/aop14    http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;15    &lt;bean id = &quot;dataSource&quot; class = &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;16        &lt;property name=&quot;driverClassName&quot; value = &quot;com.mysql.jdbc.Driver&quot;/&gt;17        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/selection_course?useUnicode=true&amp;characterEncoding=utf-8&quot;/&gt;18        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;19        &lt;property name=&quot;password&quot; value=&quot;521shiqi&quot;/&gt;20    &lt;/bean&gt;2122    &lt;bean id = &quot;jdbcTemplate&quot; class = &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;23        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;24    &lt;/bean&gt;25&lt;/beans&gt;
 
 JDBC Template基本使用
-***
+
 获取JdbcTemplate对象  
 1ApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring.xml&quot;);2JdbcTemplate jdbcTemplate = (JdbcTemplate) context.getBean(&quot;jdbcTemplate&quot;);
 
@@ -368,8 +364,17 @@ call方法
 
 ``
 
-</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">Spring配置
-***
+</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">Maven
+
+
+
+Mysql驱动  
+Spring组件(core、beans、context、aop)  
+JDBC Template(jdbc、tx) 
+&gt;
+1&lt;!--spring版本--&gt;2    &lt;properties&gt;3        &lt;spring-version&gt;4            5.2.1.RELEASE5        &lt;/spring-version&gt;6    &lt;/properties&gt;78    &lt;dependencies&gt;9&lt;!--mysql--&gt;10        &lt;dependency&gt;11            &lt;groupId&gt;mysql&lt;/groupId&gt;12            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;13            &lt;version&gt;5.1.41&lt;/version&gt;14        &lt;/dependency&gt;15&lt;!--spring--&gt;16        &lt;dependency&gt;17            &lt;groupId&gt;org.springframework&lt;/groupId&gt;18            &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;19            &lt;version&gt;${spring-version}&lt;/version&gt;20        &lt;/dependency&gt;21        &lt;dependency&gt;22            &lt;groupId&gt;org.springframework&lt;/groupId&gt;23            &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;24            &lt;version&gt;${spring-version}&lt;/version&gt;25        &lt;/dependency&gt;26        &lt;dependency&gt;27            &lt;groupId&gt;org.springframework&lt;/groupId&gt;28            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;29            &lt;version&gt;${spring-version}&lt;/version&gt;30        &lt;/dependency&gt;31        &lt;dependency&gt;32            &lt;groupId&gt;org.springframework&lt;/groupId&gt;33            &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;34            &lt;version&gt;${spring-version}&lt;/version&gt;35        &lt;/dependency&gt;36        &lt;!--JDBC Template--&gt;37        &lt;dependency&gt;38            &lt;groupId&gt;org.springframework&lt;/groupId&gt;39            &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;40            &lt;version&gt;${spring-version}&lt;/version&gt;41        &lt;/dependency&gt;42        &lt;dependency&gt;43            &lt;groupId&gt;org.springframework&lt;/groupId&gt;44            &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;45            &lt;version&gt;${spring-version}&lt;/version&gt;46        &lt;/dependency&gt;47    &lt;/dependencies&gt;
+
+Spring配置
 &gt;数据源
 &gt;JDBC Template
 1&lt;bean id = &quot;dataSource&quot; class = &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;2        &lt;property name=&quot;driverClassName&quot; value = &quot;com.mysql.jdbc.Driver&quot;/&gt;3        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/selection_course?useUnicode=true&amp;characterEncoding=utf-8&quot;/&gt;4        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;5        &lt;property name=&quot;password&quot; value=&quot;521shiqi&quot;/&gt;6    &lt;/bean&gt;78    &lt;bean id = &quot;jdbcTemplate&quot; class = &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;9        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;10    &lt;/bean&gt;
@@ -380,7 +385,42 @@ spring.xml
 1&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;2&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;3       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;4       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;5       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;6       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;7       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans8       http://www.springframework.org/schema/beans/spring-beans.xsd9    http://www.springframework.org/schema/context10    http://www.springframework.org/schema/context/spring-context.xsd11    http://www.springframework.org/schema/tx12    http://www.springframework.org/schema/tx/spring-tx.xsd13    http://www.springframework.org/schema/aop14    http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;15    &lt;bean id = &quot;dataSource&quot; class = &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;16        &lt;property name=&quot;driverClassName&quot; value = &quot;com.mysql.jdbc.Driver&quot;/&gt;17        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/selection_course?useUnicode=true&amp;characterEncoding=utf-8&quot;/&gt;18        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;19        &lt;property name=&quot;password&quot; value=&quot;521shiqi&quot;/&gt;20    &lt;/bean&gt;2122    &lt;bean id = &quot;jdbcTemplate&quot; class = &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;23        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;24    &lt;/bean&gt;25&lt;/beans&gt;
 
 JDBC Template基本使用
-***
+
+获取JdbcTemplate对象  
+1ApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring.xml&quot;);2JdbcTemplate jdbcTemplate = (JdbcTemplate) context.getBean(&quot;jdbcTemplate&quot;);
+
+execute方法(可以实行任何sql语句，主要用于DDL语句)
+
+
+jdbcTemplate.execute(&quot;create table userl(id int,name varchar(20))&quot;);  
+
+update与batchUpdate方法  
+
+
+``
+
+query与queryXXX方法
+
+
+``
+
+call方法
+
+
+``
+
+</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">Spring配置
+&gt;数据源
+&gt;JDBC Template
+1&lt;bean id = &quot;dataSource&quot; class = &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;2        &lt;property name=&quot;driverClassName&quot; value = &quot;com.mysql.jdbc.Driver&quot;/&gt;3        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/selection_course?useUnicode=true&amp;characterEncoding=utf-8&quot;/&gt;4        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;5        &lt;property name=&quot;password&quot; value=&quot;521shiqi&quot;/&gt;6    &lt;/bean&gt;78    &lt;bean id = &quot;jdbcTemplate&quot; class = &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;9        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;10    &lt;/bean&gt;
+
+
+spring.xml  
+
+1&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;2&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;3       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;4       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;5       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;6       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;7       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans8       http://www.springframework.org/schema/beans/spring-beans.xsd9    http://www.springframework.org/schema/context10    http://www.springframework.org/schema/context/spring-context.xsd11    http://www.springframework.org/schema/tx12    http://www.springframework.org/schema/tx/spring-tx.xsd13    http://www.springframework.org/schema/aop14    http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;15    &lt;bean id = &quot;dataSource&quot; class = &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;16        &lt;property name=&quot;driverClassName&quot; value = &quot;com.mysql.jdbc.Driver&quot;/&gt;17        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/selection_course?useUnicode=true&amp;characterEncoding=utf-8&quot;/&gt;18        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;19        &lt;property name=&quot;password&quot; value=&quot;521shiqi&quot;/&gt;20    &lt;/bean&gt;2122    &lt;bean id = &quot;jdbcTemplate&quot; class = &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;23        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;24    &lt;/bean&gt;25&lt;/beans&gt;
+
+JDBC Template基本使用
+
 获取JdbcTemplate对象  
 1ApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring.xml&quot;);2JdbcTemplate jdbcTemplate = (JdbcTemplate) context.getBean(&quot;jdbcTemplate&quot;);
 
@@ -405,7 +445,7 @@ call方法
 ``
 
 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">JDBC Template基本使用
-***
+
 获取JdbcTemplate对象  
 1ApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring.xml&quot;);2JdbcTemplate jdbcTemplate = (JdbcTemplate) context.getBean(&quot;jdbcTemplate&quot;);
 
