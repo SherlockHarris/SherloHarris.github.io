@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="第三方扩展包Maven Mysql驱动   Spring组件(core、beans、context、aop)   JDBC Template(jdbc、tx)     1&amp;lt;!--spring版本--&amp;gt;2    &amp;lt;properties&amp;gt;3        &amp;lt;spring-version&amp;gt;4            5.2.1.RELEASE5        &amp;lt;&amp;">
+  <meta name="description" content="第三方扩展包Maven Mysql驱动   Spring组件(core、beans、context、aop)   JDBC Template(jdbc、tx)      1&amp;lt;!--spring版本--&amp;gt;2    &amp;lt;properties&amp;gt;3        &amp;lt;spring-version&amp;gt;4            5.2.1.RELEASE5        &amp;lt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JDBCTemplate">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;04&#x2F;JDBCTemplate&#x2F;index.html">
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
-<meta property="og:description" content="第三方扩展包Maven Mysql驱动   Spring组件(core、beans、context、aop)   JDBC Template(jdbc、tx)     1&amp;lt;!--spring版本--&amp;gt;2    &amp;lt;properties&amp;gt;3        &amp;lt;spring-version&amp;gt;4            5.2.1.RELEASE5        &amp;lt;&amp;">
+<meta property="og:description" content="第三方扩展包Maven Mysql驱动   Spring组件(core、beans、context、aop)   JDBC Template(jdbc、tx)      1&amp;lt;!--spring版本--&amp;gt;2    &amp;lt;properties&amp;gt;3        &amp;lt;spring-version&amp;gt;4            5.2.1.RELEASE5        &amp;lt;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-08T09:40:19.971Z">
+<meta property="og:updated_time" content="2019-12-08T11:58:52.679Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2019/12/04/JDBCTemplate/">
@@ -201,7 +201,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-08 17:40:19" itemprop="dateModified" datetime="2019-12-08T17:40:19+08:00">2019-12-08</time>
+                <time title="Modified: 2019-12-08 19:58:52" itemprop="dateModified" datetime="2019-12-08T19:58:52+08:00">2019-12-08</time>
               </span>
 
           
@@ -218,7 +218,7 @@
         <h1 id="第三方扩展包"><a href="#第三方扩展包" class="headerlink" title="第三方扩展包"></a>第三方扩展包</h1><h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><ol>
 <li>Mysql驱动  
 <li>Spring组件(core、beans、context、aop)  
-<li>JDBC Template(jdbc、tx) 
+<li>JDBC Template(jdbc、tx)  
 
 <blockquote>
 </blockquote>
@@ -226,7 +226,7 @@
 
 
 <h2 id="Spring配置"><a href="#Spring配置" class="headerlink" title="Spring配置"></a>Spring配置</h2><blockquote>
-<p>数据源<br>JDBC Template<br></p>
+<p>数据源<br>JDBC Template</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;bean id &#x3D; &quot;dataSource&quot; class &#x3D; &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;driverClassName&quot; value &#x3D; &quot;com.mysql.jdbc.Driver&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;selection_course?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf-8&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;root&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;521shiqi&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &lt;bean id &#x3D; &quot;jdbcTemplate&quot; class &#x3D; &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr></table></figure>
 
@@ -275,7 +275,10 @@
     <a href="/2019/11/29/my-first-blog/" rel="prev" title="my first blog">
       <i class="fa fa-chevron-left"></i> my first blog
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/29/Mybatis/" rel="next" title="Mybatis">
+      Mybatis <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -327,7 +330,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
