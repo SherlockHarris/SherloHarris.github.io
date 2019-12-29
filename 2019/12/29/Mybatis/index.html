@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="Mybatis概述ORM模型简介 对象关系映射（Object Relation Mapping）  开发环境搭建   mybatis离线安装包（github） maven方式引入  # 实际操作 ## pom.xml引入依赖   &amp;gt;mybatis依赖 1&amp;lt;dependency&amp;gt;2  &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;&amp;#x2F;groupId&amp;gt;3  &amp;l">
+  <meta name="description" content="Mybatis概述和入门操作ORM模型简介 对象关系映射（Object Relation Mapping）  开发环境搭建   mybatis离线安装包（github） maven方式引入  # 实际操作 ## pom.xml引入依赖   &amp;gt;mybatis依赖 1&amp;lt;dependency&amp;gt;2  &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;&amp;#x2F;groupId&amp;gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis">
+<meta property="og:title" content="Mybatis概述和入门操作">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;29&#x2F;Mybatis&#x2F;index.html">
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
-<meta property="og:description" content="Mybatis概述ORM模型简介 对象关系映射（Object Relation Mapping）  开发环境搭建   mybatis离线安装包（github） maven方式引入  # 实际操作 ## pom.xml引入依赖   &amp;gt;mybatis依赖 1&amp;lt;dependency&amp;gt;2  &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;&amp;#x2F;groupId&amp;gt;3  &amp;l">
+<meta property="og:description" content="Mybatis概述和入门操作ORM模型简介 对象关系映射（Object Relation Mapping）  开发环境搭建   mybatis离线安装包（github） maven方式引入  # 实际操作 ## pom.xml引入依赖   &amp;gt;mybatis依赖 1&amp;lt;dependency&amp;gt;2  &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;&amp;#x2F;groupId&amp;gt;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-29T07:28:36.671Z">
+<meta property="og:updated_time" content="2019-12-29T07:35:11.648Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2019/12/29/Mybatis/">
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title>Mybatis | Sherlcok's blogs</title>
+  <title>Mybatis概述和入门操作 | Sherlcok's blogs</title>
   
 
 
@@ -184,7 +184,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Mybatis
+          Mybatis概述和入门操作
         </h1>
 
         <div class="post-meta">
@@ -195,7 +195,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-12-29 11:07:02 / Modified: 15:28:36" itemprop="dateCreated datePublished" datetime="2019-12-29T11:07:02+08:00">2019-12-29</time>
+              <time title="Created: 2019-12-29 11:07:02 / Modified: 15:35:11" itemprop="dateCreated datePublished" datetime="2019-12-29T11:07:02+08:00">2019-12-29</time>
             </span>
 
           
@@ -209,7 +209,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Mybatis概述"><a href="#Mybatis概述" class="headerlink" title="Mybatis概述"></a>Mybatis概述</h1><h2 id="ORM模型简介"><a href="#ORM模型简介" class="headerlink" title="ORM模型简介"></a>ORM模型简介</h2><blockquote>
+        <h1 id="Mybatis概述和入门操作"><a href="#Mybatis概述和入门操作" class="headerlink" title="Mybatis概述和入门操作"></a>Mybatis概述和入门操作</h1><h2 id="ORM模型简介"><a href="#ORM模型简介" class="headerlink" title="ORM模型简介"></a>ORM模型简介</h2><blockquote>
 <p>对象关系映射（Object Relation Mapping）</p>
 </blockquote>
 <h1 id="开发环境搭建"><a href="#开发环境搭建" class="headerlink" title="开发环境搭建"></a>开发环境搭建</h1><blockquote>
@@ -227,7 +227,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.44</version>
         </dependency>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">## 配置mybatis的主配置文件</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&gt;resource文件下新建mybatis.xml文件(内容从官方文档中查询：https:&#x2F;&#x2F;mybatis.org&#x2F;mybatis-3&#x2F;zh&#x2F;getting-started.html)</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">## 配置mybatis的主配置文件</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&gt;resource文件下新建mybatis.xml文件(内容从官方文档中查询）[Mybatis官方文档](https:&#x2F;&#x2F;mybatis.org&#x2F;mybatis-3&#x2F;zh&#x2F;getting-started.html)</span></pre></td></tr></table></figure>
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
@@ -259,7 +259,7 @@
     <mapper resource="mapper/userMapper.xml"/>
   </mappers>
 </configuration>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">## 创建实体类：</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">## 创建实体类</span></pre></td></tr></table></figure>
 package com.damu.entity.Users;
 
 <p>public class Users {<br>    private Integer id;<br>    private String username;<br>    private String userpass;<br>    private String nickname;</p>
@@ -304,7 +304,7 @@ public String toString() {
             &quot;, nickname=&apos;&quot; + nickname + &apos;\&apos;&apos; +
             &apos;}&apos;;
 }</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">## resource下创建mapper文件夹;在mapper下创建映射文件userMapper.xml（内容从官方文档中查询）</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">## resource下创建mapper文件夹  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">## 在mapper下创建映射文件userMapper.xml（内容从官方文档中查询）</span></pre></td></tr></table></figure>
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -381,7 +381,7 @@ select * from users
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis概述"><span class="nav-number">1.</span> <span class="nav-text">Mybatis概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM模型简介"><span class="nav-number">1.1.</span> <span class="nav-text">ORM模型简介</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发环境搭建"><span class="nav-number">2.</span> <span class="nav-text">开发环境搭建</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis概述和入门操作"><span class="nav-number">1.</span> <span class="nav-text">Mybatis概述和入门操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM模型简介"><span class="nav-number">1.1.</span> <span class="nav-text">ORM模型简介</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发环境搭建"><span class="nav-number">2.</span> <span class="nav-text">开发环境搭建</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
