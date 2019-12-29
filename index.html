@@ -250,7 +250,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-12-29 11:07:02 / Modified: 15:43:07" itemprop="dateCreated datePublished" datetime="2019-12-29T11:07:02+08:00">2019-12-29</time>
+              <time title="Created: 2019-12-29 11:07:02 / Modified: 15:50:28" itemprop="dateCreated datePublished" datetime="2019-12-29T11:07:02+08:00">2019-12-29</time>
             </span>
 
           
@@ -281,7 +281,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.44</version>
 </dependency>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">## 配置mybatis的主配置文件</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt;resource文件下新建mybatis.xml文件(内容从官方文档中查询）[Mybatis官方文档](https:&#x2F;&#x2F;mybatis.org&#x2F;mybatis-3&#x2F;zh&#x2F;getting-started.html)</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">## 配置mybatis的主配置文件</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&gt;resource文件下新建mybatis.xml文件(内容从官方文档中查询）[Mybatis官方文档](https:&#x2F;&#x2F;mybatis.org&#x2F;mybatis-3&#x2F;zh&#x2F;getting-started.html)</span></pre></td></tr></table></figure>
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
@@ -313,7 +313,7 @@
     <mapper resource="mapper/userMapper.xml"/>
   </mappers>
 </configuration>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">## 创建实体类</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt;con.damu.entity.Users</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">## 创建实体类</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&gt;con.damu.entity.Users</span></pre></td></tr></table></figure>
 package com.damu.entity.Users;
 
 <p>public class Users {<br>    private Integer id;<br>    private String username;<br>    private String userpass;<br>    private String nickname;</p>
@@ -358,7 +358,7 @@ public String toString() {
             &quot;, nickname=&apos;&quot; + nickname + &apos;\&apos;&apos; +
             &apos;}&apos;;
 }</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">## resource下创建mapper文件夹  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt;在mapper下创建映射文件userMapper.xml（内容从官方文档中查询）</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">## resource下创建mapper文件夹  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&gt;在mapper下创建映射文件userMapper.xml（内容从官方文档中查询）</span></pre></td></tr></table></figure>
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
