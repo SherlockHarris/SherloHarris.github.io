@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-29T08:28:54.388Z</updated>
+  <updated>2020-01-17T16:58:01.417Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Urllib</title>
+    <link href="http://yoursite.com/2020/01/18/Urllib/"/>
+    <id>http://yoursite.com/2020/01/18/Urllib/</id>
+    <published>2020-01-17T16:13:54.000Z</published>
+    <updated>2020-01-17T16:58:01.417Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote><p>Python内置的HTTP请求库  </p></blockquote><h1 id="四个模块"><a href="#四个模块" class="headerlink" title="四个模块"></a>四个模块</h1><blockquote><p>urllib.request 请求mok<br>urllib.error 异常处理模块<br>urllib.parse url解析模块<br>urllib.robotparser robots.txt解析模块</p></blockquote><h1 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h1><h2 id="urlopen"><a href="#urlopen" class="headerlink" title="urlopen"></a>urlopen</h2><blockquote><p>urllib.request.urlopen(url,data=None,[timeout,]*,cafile=None,capath=None,cadefault=False,context=None)  </p></blockquote><h3 id="一（参数一：url）"><a href="#一（参数一：url）" class="headerlink" title="一（参数一：url）"></a>一（参数一：url）</h3><p>{ %codeblock% }<br>import urllib.request</p><p>response = urllib.request.urlopen(‘<a href="http://baidu.com&#39;" target="_blank" rel="noopener">http://baidu.com&#39;</a>)<br>print(response.read().decode(‘utf-8’))<br>{ %endcodeblock% }  </p><h3 id="二（参数二：data）"><a href="#二（参数二：data）" class="headerlink" title="二（参数二：data）"></a>二（参数二：data）</h3><p>{ %codeblock% }<br>import urllib.parse<br>import urllib.request</p><p>data = bytes(urllib.parse.urlencode({‘word’: ‘hello’}), encoding=’utf8’)<br>response = urllib.request.urlopen(‘<a href="http://httpbin.org/post&#39;" target="_blank" rel="noopener">http://httpbin.org/post&#39;</a>, data=data)<br>print(response.read())<br>{ %endcodeblock% }   </p><h3 id="三（参数三：timeout）"><a href="#三（参数三：timeout）" class="headerlink" title="三（参数三：timeout）"></a>三（参数三：timeout）</h3><p>{ %codeblock% }<br>import urllib.request</p><p>response = urllib.request.urlopen(‘<a href="http://httpbin.org/get&#39;,timeout=1" target="_blank" rel="noopener">http://httpbin.org/get&#39;,timeout=1</a>)<br>print(response.read())<br>{ %endcodeblock% }  </p><h3 id="四"><a href="#四" class="headerlink" title="四"></a>四</h3><p> { %codeblock% }<br>import socket<br>import urllib.request<br>import urllib.error</p><p>try:<br>    response = urllib.request.urlopen(‘<a href="http://httpbin.org/get&#39;,timeout=0.1" target="_blank" rel="noopener">http://httpbin.org/get&#39;,timeout=0.1</a>)<br>except urllib.error.URLError as e:<br>    if isinstance(e.reason,socket.timeout):<br>        print(‘TIME OUT’)<br>{ %endcodeblock% }  </p><h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><h3 id="响应类型"><a href="#响应类型" class="headerlink" title="响应类型"></a>响应类型</h3><p>{ %codeblock% }<br>import urllib.request</p><p>response = urllib.request.urlopen(‘<a href="http://python.org&#39;" target="_blank" rel="noopener">http://python.org&#39;</a>)<br>print(type(response))<br>{ %endcodeblock% }  </p><h3 id="状态码、响应头"><a href="#状态码、响应头" class="headerlink" title="状态码、响应头"></a>状态码、响应头</h3><p>{ %codeblock% }<br>import urllib.request</p><p>response = urllib.request.urlopen(‘<a href="http://python.org&#39;" target="_blank" rel="noopener">http://python.org&#39;</a>)<br>print(response.status)<br>print(response.getheaders())<br>print(response.getheader(‘Seerver’))<br>{ %endcodeblock% }  </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Python内置的HTTP请求库  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;四个模块&quot;&gt;&lt;a hre
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Mybatis概述和入门操作</title>
