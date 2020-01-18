@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
 <meta property="og:description" content="定义 Python实现的简单易用的HTTP库（基于urllib编写）    Requests实例引入import requests  response &#x3D; requests.get(&amp;apos;http:&#x2F;&#x2F;baidu.com&amp;apos;) print(type(response)) print(response.status_code) print(type(response.text)) print(respon">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-18T03:50:02.746Z">
+<meta property="og:updated_time" content="2020-01-18T03:55:13.973Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/01/18/Requests%E5%BA%93/">
@@ -196,7 +196,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-01-18 11:24:21 / Modified: 11:50:02" itemprop="dateCreated datePublished" datetime="2020-01-18T11:24:21+08:00">2020-01-18</time>
+              <time title="Created: 2020-01-18 11:24:21 / Modified: 11:55:13" itemprop="dateCreated datePublished" datetime="2020-01-18T11:24:21+08:00">2020-01-18</time>
             </span>
 
           
@@ -230,10 +230,15 @@ response = requests.get(<span class="string">'http://httpbin.org/get'</span>)  <
 
 response = requests.get(<span class="string">'http://httpbin.org/get'</span>)
 print(response.text)  </code></pre>
-<h3 id="带参数GET请求"><a href="#带参数GET请求" class="headerlink" title="带参数GET请求"></a>带参数GET请求</h3><pre><code class="&quot;繁琐格式&quot;">import requests
+<h3 id="带参数GET请求"><a href="#带参数GET请求" class="headerlink" title="带参数GET请求"></a>带参数GET请求</h3><figure class="highlight python"><figcaption><span>繁琐格式</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">response = requests.get(<span class="string">'http://httpbin.org/get?name=germey&amp;age=22'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">print(response.text)  </span></pre></td></tr></table></figure>
+<pre><code class="python"><span class="keyword">import</span> requests
 
-response = requests.get(&apos;http://httpbin.org/get?name=germey&amp;age=22&apos;)
-print(response.text)  </code></pre>
+data = {
+    <span class="string">'name'</span>: <span class="string">'germey'</span>,
+    <span class="string">'age'</span>: <span class="number">22</span>
+}
+response = requests.get(<span class="string">'http://httpbin.org/get'</span>, params=data)
+print(response.text)</code></pre>
 
     </div>
 
