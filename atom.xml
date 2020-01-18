@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-17T17:16:38.001Z</updated>
+  <updated>2020-01-18T03:50:02.746Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Requests库</title>
+    <link href="http://yoursite.com/2020/01/18/Requests%E5%BA%93/"/>
+    <id>http://yoursite.com/2020/01/18/Requests%E5%BA%93/</id>
+    <published>2020-01-18T03:24:21.000Z</published>
+    <updated>2020-01-18T03:50:02.746Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote><p>Python实现的简单易用的HTTP库（基于urllib编写）  </p></blockquote><h1 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h1><h2 id="实例引入"><a href="#实例引入" class="headerlink" title="实例引入"></a>实例引入</h2><pre><code class="python"><span class="keyword">import</span> requestsresponse = requests.get(<span class="string">'http://baidu.com'</span>)print(type(response))print(response.status_code)print(type(response.text))print(response.text)print(response.cookies)  </code></pre><h2 id="各种请求方式"><a href="#各种请求方式" class="headerlink" title="各种请求方式"></a>各种请求方式</h2><pre><code class="python">requests.post(<span class="string">'http://httpbin.org/post'</span>)requests.put(<span class="string">'http://httpbin.org/put'</span>)requests.delete(<span class="string">'http://httpbin.org/delete'</span>)requests.head(<span class="string">'http://httpbin.org/get'</span>)response = requests.get(<span class="string">'http://httpbin.org/get'</span>)  </code></pre><h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><h2 id="基本GET请求"><a href="#基本GET请求" class="headerlink" title="基本GET请求"></a>基本GET请求</h2><h3 id="基本写法"><a href="#基本写法" class="headerlink" title="基本写法"></a>基本写法</h3><pre><code class="python"><span class="keyword">import</span> requestsresponse = requests.get(<span class="string">'http://httpbin.org/get'</span>)print(response.text)  </code></pre><h3 id="带参数GET请求"><a href="#带参数GET请求" class="headerlink" title="带参数GET请求"></a>带参数GET请求</h3><pre><code class="&quot;繁琐格式&quot;">import requestsresponse = requests.get(&apos;http://httpbin.org/get?name=germey&amp;age=22&apos;)print(response.text)  </code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Python实现的简单易用的HTTP库（基于urllib编写）  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 i
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Urllib</title>
