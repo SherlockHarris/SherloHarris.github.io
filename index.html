@@ -194,7 +194,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-02-15 19:34:53 / Modified: 22:15:13" itemprop="dateCreated datePublished" datetime="2020-02-15T19:34:53+08:00">2020-02-15</time>
+              <time title="Created: 2020-02-15 19:34:53 / Modified: 22:21:48" itemprop="dateCreated datePublished" datetime="2020-02-15T19:34:53+08:00">2020-02-15</time>
             </span>
 
           
@@ -208,7 +208,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="提前概要"><a href="#提前概要" class="headerlink" title="提前概要"></a>提前概要</h2><p>在2020年2月14日与队友讨论A题过程中需要查找苏格兰海域温度变化，因此第一次接触到气象数据netCDF(.nc)格式文件，在这里以北京大学所录数据，即比赛过程中所使用的数据为例，记录对这个格式文件的处理。基本思路是利用Python中xarray库处理，再将提取到的数据存储为csv格式文件。</p>
+          <hr>
+<p>title: nc2csv<br>date: 2020-02-15 19:34:53<br>tags:</p>
+<ul>
+<li>美赛</li>
+<li>netCDF(.nc)</li>
+<li>csv</li>
+</ul>
+<hr>
+<h2 id="提前概要"><a href="#提前概要" class="headerlink" title="提前概要"></a>提前概要</h2><p>在2020年2月14日与队友讨论A题过程中需要查找苏格兰海域温度变化，因此第一次接触到气象数据netCDF(.nc)格式文件，在这里以北京大学所录数据，即比赛过程中所使用的数据为例，记录对这个格式文件的处理。基本思路是利用Python中xarray库处理，再将提取到的数据存储为csv格式文件。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>推荐使用conda安装：<br>conda install xarray<br>在安装过程中出现faild信息，最后采用修改清华镜像解决</p>
 <h2 id="引入包"><a href="#引入包" class="headerlink" title="引入包"></a>引入包</h2><pre><code class="python"><span class="keyword">import</span> xarray <span class="keyword">as</span> xr
 <span class="keyword">import</span> csv  </code></pre>
@@ -264,7 +272,7 @@ Attributes:
     summary:                   ERSST.v5 is developed based on v4 after revisi...
     dataset_title:             NOAA Extended Reconstructed SST V5
 
-Process finished with exit code 0</code></pre><h2 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h2><p>包含的变量：</p>
+Process finished with exit code 0  </code></pre><h2 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h2><p>包含的变量：</p>
 <ul>
 <li>time_bnds</li>
 <li>sst<blockquote>
@@ -276,7 +284,7 @@ Process finished with exit code 0</code></pre><h2 id="数据分析"><a href="#�
 <p>sst:  time、lat、lon  </p>
 </blockquote>
 <blockquote>
-<p>sst是本次数据处理核心，取出sst中信息进行初步分析：  </p>
+<p>sst是本次数据处理核心，取出sst中信息进行初步分析：    </p>
 </blockquote>
 <pre><code class="python">sst = data[<span class="string">'sst'</span>]</code></pre>
 <pre><code>&lt;xarray.DataArray &apos;sst&apos; (time: 1973, lat: 89, lon: 180)&gt;
@@ -296,9 +304,9 @@ Attributes:
     actual_range:  [-1.8     42.32636]
     valid_range:   [-1.8 45. ]
 
-Process finished with exit code 0</code></pre><p>可以看出，sst中包含三个主要信息：lat，lon已经time，事实上，sst的数据是一个三维矩阵，矩阵值的信息为time时刻，lat和lon构成的经纬坐标位置处的海域温度值，我们把sst的数据提取出来确认一下：</p>
+Process finished with exit code 0  </code></pre><p>可以看出，sst中包含三个主要信息：lat，lon已经time，事实上，sst的数据是一个三维矩阵，矩阵值的信息为time时刻，lat和lon构成的经纬坐标位置处的海域温度值，我们把sst的数据提取出来确认一下：  </p>
 <pre><code class="python">sst = data[<span class="string">'sst'</span>].data  </code></pre>
-<p>运行上述代码，得到结果：</p>
+<p>运行上述代码，得到结果：  </p>
 <pre><code>[[[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
   [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
   [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
@@ -347,12 +355,12 @@ Process finished with exit code 0</code></pre><p>可以看出，sst中包含三�
   ...
   [ nan  nan  nan ...  nan  nan  nan]
   [ nan  nan  nan ...  nan  nan  nan]
-  [ nan  nan  nan ...  nan  nan  nan]]]</code></pre><blockquote>
-<p>效仿上述做法，提取其它需要的数据:</p>
+  [ nan  nan  nan ...  nan  nan  nan]]]  </code></pre><blockquote>
+<p>效仿上述做法，提取其它需要的数据:  </p>
 </blockquote>
 <pre><code class="python">lat = data[<span class="string">'lat'</span>].data
 lon = data[<span class="string">'lon'</span>].data
-time = data[<span class="string">'time'</span>].data</code></pre>
+time = data[<span class="string">'time'</span>].data  </code></pre>
 <h2 id="写入csv文件"><a href="#写入csv文件" class="headerlink" title="写入csv文件"></a>写入csv文件</h2><h3 id="打开csv文件"><a href="#打开csv文件" class="headerlink" title="打开csv文件"></a>打开csv文件</h3><pre><code class="python"><span class="keyword">with</span> open(<span class="string">'test11.csv'</span>,mode = <span class="string">'w'</span>,newline=<span class="string">''</span>) <span class="keyword">as</span> ice_file:  </code></pre>
 <blockquote>
 <p>不加   <code>newline=&#39;&#39;</code>      会导致csv每两行数据间会多出一行空格  </p>
@@ -362,7 +370,7 @@ time = data[<span class="string">'time'</span>].data</code></pre>
 </blockquote>
 <pre><code class="python">ice_write.writerow((<span class="string">'time'</span>,<span class="string">'lat'</span>,<span class="string">'0'</span>,<span class="string">'2'</span>,<span class="string">'4'</span>,<span class="string">'6'</span>,<span class="string">'8'</span>,<span class="string">'10'</span>,<span class="string">'12'</span>,<span class="string">'350'</span>,<span class="string">'352'</span>,<span class="string">'354'</span>,<span class="string">'356'</span>,<span class="string">'358'</span>))</code></pre>
 <h3 id="写入信息"><a href="#写入信息" class="headerlink" title="写入信息"></a>写入信息</h3><blockquote>
-<p>从1968-01-01开始写入，time[1368]的值为1968-01-01T00:00:00.000000000</p>
+<p>从1968-01-01开始写入，time[1368]的值为1968-01-01T00:00:00.000000000  </p>
 </blockquote>
 <pre><code class="python"><span class="keyword">with</span> open(<span class="string">'test11.csv'</span>,mode = <span class="string">'w'</span>,newline=<span class="string">''</span>) <span class="keyword">as</span> ice_file:
     ice_write = csv.writer(ice_file)
@@ -379,7 +387,7 @@ time = data[<span class="string">'time'</span>].data</code></pre>
                             <span class="keyword">for</span> p <span class="keyword">in</span> range(len(tt)):
                                 res.append(tt[p])
                             ice_write.writerow(res)
-ice_file.close()</code></pre>
+ice_file.close()  </code></pre>
 <p>因为writerow函数的参数仅为一个，所以把所有数据通过append函数整合在一起，<code>time[i][:10]</code>是为了消除时间后面的T00：00：00.00000000采用的取巧的方法</p>
 <h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><pre><code class="python"><span class="keyword">import</span> xarray <span class="keyword">as</span> xr
 <span class="keyword">import</span> csv
@@ -405,7 +413,7 @@ print(data[<span class="string">'time'</span>])
                             <span class="keyword">for</span> p <span class="keyword">in</span> range(len(tt)):
                                 res.append(tt[p])
                             ice_write.writerow(res)
-ice_file.close()</code></pre>
+ice_file.close()  </code></pre>
 <h2 id="读取的北大数据链接"><a href="#读取的北大数据链接" class="headerlink" title="读取的北大数据链接"></a>读取的北大数据链接</h2><p><a href="https://geodata.pku.edu.cn/index.php?c=content&a=show&id=728%E8%BF%99%E9%87%8C%E5%8F%AF%E4%BB%A5%E4%B8%8B%E8%BD%BD" target="_blank" rel="noopener" title="数据范围：1854-01-01到2018-05-01">北京大学地理数据平台-全球海温数据</a></p>
 
       
@@ -1092,7 +1100,7 @@ print(response.text)</code></pre>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
