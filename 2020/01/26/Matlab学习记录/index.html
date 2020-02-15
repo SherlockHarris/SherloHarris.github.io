@@ -48,17 +48,17 @@
   };
 </script>
 
-  <meta name="description" content="定义 Python实现的简单易用的HTTP库（基于urllib编写）    Requests实例引入import requests  response &#x3D; requests.get(&amp;apos;http:&#x2F;&#x2F;baidu.com&amp;apos;) print(type(response)) print(response.status_code) print(type(response.text)) print(respon">
+  <meta name="description" content="‘’’python% Logistic曲线模型基本形式：%         y&#x3D;1&#x2F;(a+bexp(-t))% 将y’&#x3D;1&#x2F;y,x’&#x3D;exp(-t),就可以将其转换为直线模型：%         y&#x3D;a+bx’ %Author: SherlockHarris%Date: Jan 26 2020 %读入人口数据（1971-2000年）Y&#x3D;[33815 33981 34004 34165 34212">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Requests库">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;18&#x2F;Requests%E5%BA%93&#x2F;index.html">
+<meta property="og:title" content="&#39;Matlab学习记录&#39;">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;26&#x2F;Matlab%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95&#x2F;index.html">
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
-<meta property="og:description" content="定义 Python实现的简单易用的HTTP库（基于urllib编写）    Requests实例引入import requests  response &#x3D; requests.get(&amp;apos;http:&#x2F;&#x2F;baidu.com&amp;apos;) print(type(response)) print(response.status_code) print(type(response.text)) print(respon">
+<meta property="og:description" content="‘’’python% Logistic曲线模型基本形式：%         y&#x3D;1&#x2F;(a+bexp(-t))% 将y’&#x3D;1&#x2F;y,x’&#x3D;exp(-t),就可以将其转换为直线模型：%         y&#x3D;a+bx’ %Author: SherlockHarris%Date: Jan 26 2020 %读入人口数据（1971-2000年）Y&#x3D;[33815 33981 34004 34165 34212">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-18T03:55:13.973Z">
+<meta property="og:updated_time" content="2020-01-26T04:09:09.396Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/01/18/Requests%E5%BA%93/">
+<link rel="canonical" href="http://yoursite.com/2020/01/26/Matlab%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
 
 
 <script id="page-configurations">
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title>Requests库 | Sherlcok's blogs</title>
+  <title>'Matlab学习记录' | Sherlcok's blogs</title>
   
 
 
@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/18/Requests%E5%BA%93/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/26/Matlab%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,7 +185,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Requests库
+          'Matlab学习记录'
         </h1>
 
         <div class="post-meta">
@@ -196,7 +196,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-01-18 11:24:21 / Modified: 11:55:13" itemprop="dateCreated datePublished" datetime="2020-01-18T11:24:21+08:00">2020-01-18</time>
+              <time title="Created: 2020-01-26 11:38:46 / Modified: 12:09:09" itemprop="dateCreated datePublished" datetime="2020-01-26T11:38:46+08:00">2020-01-26</time>
             </span>
 
           
@@ -210,36 +210,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
-<p>Python实现的简单易用的HTTP库（基于urllib编写）  </p>
-</blockquote>
-<h1 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h1><h2 id="实例引入"><a href="#实例引入" class="headerlink" title="实例引入"></a>实例引入</h2><pre><code class="python"><span class="keyword">import</span> requests
-
-response = requests.get(<span class="string">'http://baidu.com'</span>)
-print(type(response))
-print(response.status_code)
-print(type(response.text))
-print(response.text)
-print(response.cookies)  </code></pre>
-<h2 id="各种请求方式"><a href="#各种请求方式" class="headerlink" title="各种请求方式"></a>各种请求方式</h2><pre><code class="python">requests.post(<span class="string">'http://httpbin.org/post'</span>)
-requests.put(<span class="string">'http://httpbin.org/put'</span>)
-requests.delete(<span class="string">'http://httpbin.org/delete'</span>)
-requests.head(<span class="string">'http://httpbin.org/get'</span>)
-response = requests.get(<span class="string">'http://httpbin.org/get'</span>)  </code></pre>
-<h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><h2 id="基本GET请求"><a href="#基本GET请求" class="headerlink" title="基本GET请求"></a>基本GET请求</h2><h3 id="基本写法"><a href="#基本写法" class="headerlink" title="基本写法"></a>基本写法</h3><pre><code class="python"><span class="keyword">import</span> requests
-
-response = requests.get(<span class="string">'http://httpbin.org/get'</span>)
-print(response.text)  </code></pre>
-<h3 id="带参数GET请求"><a href="#带参数GET请求" class="headerlink" title="带参数GET请求"></a>带参数GET请求</h3><figure class="highlight python"><figcaption><span>繁琐格式</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">response = requests.get(<span class="string">'http://httpbin.org/get?name=germey&amp;age=22'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">print(response.text)  </span></pre></td></tr></table></figure>
-<pre><code class="python"><span class="keyword">import</span> requests
-
-data = {
-    <span class="string">'name'</span>: <span class="string">'germey'</span>,
-    <span class="string">'age'</span>: <span class="number">22</span>
-}
-response = requests.get(<span class="string">'http://httpbin.org/get'</span>, params=data)
-print(response.text)</code></pre>
-
+        <p>‘’’python<br>% Logistic曲线模型基本形式：<br>%         y=1/(a+b<em>exp(-t))<br>% 将y’=1/y,x’=exp(-t),就可以将其转换为直线模型：<br>%         y=a+b</em>x’</p>
+<p>%Author: SherlockHarris<br>%Date: Jan 26 2020</p>
+<p>%读入人口数据（1971-2000年）<br>Y=[33815 33981 34004 34165 34212 34327 34344 34458 34498 34476 34483 34488 34513 34497 34511 34520 34507 34509 34521 34513 34515 34517 34519 34519 34521 34521 34523 34525 34525 34527];<br>%读入时间比那辆数据（t=年份-1970）<br>T=[1:30];<br>for t=1:30<br>    x(t) = exp(-t);<br>    y(t) = 1/Y(1,t);<br>end<br>%计算，并输出回归系数<br>c = zeros(30,1)+1;<br>X=[c,x’];<br>B=inv(X’<em>X)</em>X’<em>y’;<br>for i = 1:30<br>    %计算回归拟合值<br>    z(i)=B(1,1)+B(2,1)</em>x(i);<br>    %计算离差<br>    s(i) = y(i)-sum(y)/30;<br>    %计算误差<br>    w(i)=z(i)-y(i);<br>end<br>%计算离差平方和S<br>S=s<em>s’;<br>%计算回归误差平方和Q<br>Q=w</em>w’;<br>%计算回归平方和U<br>U=S-Q;<br>%计算，并输出F检验值<br>F=28<em>U/Q;<br>%计算非线性回归模型的拟合值<br>for j=1:30<br>    Y(j)=1/(B(1,1)+B(2,1)</em>exp(-j));<br>end<br>%计算非线性回归模型的拟合曲线（Logistic曲线）<br>plot(T,Y)<br>‘’’</p>
+<h3 id="inv-函数作用：求矩阵逆运算"><a href="#inv-函数作用：求矩阵逆运算" class="headerlink" title="inv()函数作用：求矩阵逆运算"></a>inv()函数作用：求矩阵逆运算</h3>
     </div>
 
     
@@ -254,12 +228,12 @@ print(response.text)</code></pre>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/01/18/Urllib/" rel="prev" title="Urllib">
-      <i class="fa fa-chevron-left"></i> Urllib
+    <a href="/2020/01/18/Requests%E5%BA%93/" rel="prev" title="Requests库">
+      <i class="fa fa-chevron-left"></i> Requests库
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/01/26/Matlab%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="next" title="'Matlab学习记录'">
-      'Matlab学习记录' <i class="fa fa-chevron-right"></i>
+    <a href="/2020/01/30/Matlab_Fuctions/" rel="next" title="Fuctions'">
+      Fuctions' <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -298,7 +272,7 @@ print(response.text)</code></pre>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Requests"><span class="nav-number">2.</span> <span class="nav-text">Requests</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例引入"><span class="nav-number">2.1.</span> <span class="nav-text">实例引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各种请求方式"><span class="nav-number">2.2.</span> <span class="nav-text">各种请求方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#请求"><span class="nav-number">3.</span> <span class="nav-text">请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本GET请求"><span class="nav-number">3.1.</span> <span class="nav-text">基本GET请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本写法"><span class="nav-number">3.1.1.</span> <span class="nav-text">基本写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带参数GET请求"><span class="nav-number">3.1.2.</span> <span class="nav-text">带参数GET请求</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#inv-函数作用：求矩阵逆运算"><span class="nav-number">1.</span> <span class="nav-text">inv()函数作用：求矩阵逆运算</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
