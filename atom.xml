@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-16T08:03:46.368Z</updated>
+  <updated>2020-02-16T08:07:14.327Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2020/02/16/ECS%E5%AE%89%E8%A3%85NGINX/"/>
     <id>http://yoursite.com/2020/02/16/ECS%E5%AE%89%E8%A3%85NGINX/</id>
     <published>2020-02-16T07:25:19.372Z</published>
-    <updated>2020-02-16T08:03:46.368Z</updated>
+    <updated>2020-02-16T08:07:14.327Z</updated>
     
     <content type="html"><![CDATA[<hr><p>title: ECS安装NGINX<br>date: 2020-02-16 15:25:19<br>tags:</p><ul><li>ECS</li><li>LINUX</li><li>NGINX</li></ul><hr><h2 id="安装nginx依赖环境"><a href="#安装nginx依赖环境" class="headerlink" title="安装nginx依赖环境"></a>安装nginx依赖环境</h2><h3 id="gcc-安装过程一律选y"><a href="#gcc-安装过程一律选y" class="headerlink" title="gcc(安装过程一律选y)"></a>gcc(安装过程一律选y)</h3><pre><code>mv apache-tomcat-9.0.31/ tomcat9    </code></pre><h3 id="pcre-zlib-openssl"><a href="#pcre-zlib-openssl" class="headerlink" title="pcre/zlib/openssl"></a>pcre/zlib/openssl</h3><pre><code>yum -y install pcre pcrer-develyum -y install zlib zlib-develyum -y install openssl openssl-devel  </code></pre><h2 id="官网下载NGINX"><a href="#官网下载NGINX" class="headerlink" title="官网下载NGINX"></a>官网下载NGINX</h2><p><a href="http://nginx.org/en/download.html" target="_blank" rel="noopener" title="NGINX下载">NGINX下载地址官网</a></p><h2 id="将jdk安装到指定目录（可以自定义）"><a href="#将jdk安装到指定目录（可以自定义）" class="headerlink" title="将jdk安装到指定目录（可以自定义）"></a>将jdk安装到指定目录（可以自定义）</h2><h3 id="上传到服务器-usr-local下"><a href="#上传到服务器-usr-local下" class="headerlink" title="上传到服务器 /usr/local下"></a>上传到服务器 /usr/local下</h3><p>这里利用 SSH Secure File Transfer Client 上传</p><h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code>tar -xzvf nginx-1.17.8.tar.gz  </code></pre><p>这里就可以把压缩包删掉了</p><h3 id="改名（方便书写和更改）"><a href="#改名（方便书写和更改）" class="headerlink" title="改名（方便书写和更改）"></a>改名（方便书写和更改）</h3><pre><code>mv nginx-1.17.8/ nginx8    </code></pre><h2 id="安装NGINX"><a href="#安装NGINX" class="headerlink" title="安装NGINX"></a>安装NGINX</h2><h3 id="编译并安装"><a href="#编译并安装" class="headerlink" title="编译并安装"></a>编译并安装</h3><pre><code>cd nginx8  ./configure  makemake install  </code></pre><p>退回上级目录  </p><pre><code>cd ..    </code></pre><p>会发现生成了编译好的nginx文件，同级目录下的nginx8是安装目录，启动、配置、停止使用的是编译好的nginx文件</p><h3 id="开放LINUX的对外访问的端口80（默认情况下，LINUX不会开放）"><a href="#开放LINUX的对外访问的端口80（默认情况下，LINUX不会开放）" class="headerlink" title="开放LINUX的对外访问的端口80（默认情况下，LINUX不会开放）"></a>开放LINUX的对外访问的端口80（默认情况下，LINUX不会开放）</h3><pre><code>/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT    </code></pre><h2 id="检验成功安装"><a href="#检验成功安装" class="headerlink" title="检验成功安装"></a>检验成功安装</h2><pre><code>cd /usr/local/nginx/sbin  ./nginx  </code></pre><p>在网页地址栏输入  公网:80<br>如果能正确显示nginx的欢迎网页，即为安装成功  </p><h2 id="关闭nginx"><a href="#关闭nginx" class="headerlink" title="关闭nginx"></a>关闭nginx</h2><pre><code>./nginx -s stop  </code></pre>]]></content>
     
