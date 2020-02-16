@@ -169,6 +169,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/16/ECS%E5%AE%89%E8%A3%85NGINX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/16/ECS%E5%AE%89%E8%A3%85NGINX/" class="post-title-link" itemprop="url">ECS安装NGINX</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-02-16 15:25:19 / Modified: 15:56:27" itemprop="dateCreated datePublished" datetime="2020-02-16T15:25:19+08:00">2020-02-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<p>title: ECS安装NGINX<br>date: 2020-02-16 15:25:19<br>tags:</p>
+<ul>
+<li>ECS</li>
+<li>LINUX</li>
+<li>NGINX</li>
+</ul>
+<hr>
+<h2 id="安装nginx依赖环境"><a href="#安装nginx依赖环境" class="headerlink" title="安装nginx依赖环境"></a>安装nginx依赖环境</h2><h3 id="gcc-安装过程一律选y"><a href="#gcc-安装过程一律选y" class="headerlink" title="gcc(安装过程一律选y)"></a>gcc(安装过程一律选y)</h3><pre><code>mv apache-tomcat-9.0.31/ tomcat9    </code></pre><h3 id="pcre-zlib-openssl"><a href="#pcre-zlib-openssl" class="headerlink" title="pcre/zlib/openssl"></a>pcre/zlib/openssl</h3><pre><code>yum -y install pcre pcrer-devel
+yum -y install zlib zlib-devel
+yum -y install openssl openssl-devel  </code></pre><h2 id="官网下载NGINX"><a href="#官网下载NGINX" class="headerlink" title="官网下载NGINX"></a>官网下载NGINX</h2><p><a href="http://nginx.org/en/download.html" target="_blank" rel="noopener" title="NGINX下载">NGINX下载地址官网</a></p>
+<h2 id="将jdk安装到指定目录（可以自定义）"><a href="#将jdk安装到指定目录（可以自定义）" class="headerlink" title="将jdk安装到指定目录（可以自定义）"></a>将jdk安装到指定目录（可以自定义）</h2><h3 id="上传到服务器-usr-local下"><a href="#上传到服务器-usr-local下" class="headerlink" title="上传到服务器 /usr/local下"></a>上传到服务器 /usr/local下</h3><p>这里利用 SSH Secure File Transfer Client 上传</p>
+<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code>tar -xzvf nginx-1.17.8.tar.gz  </code></pre><p>这里就可以把压缩包删掉了</p>
+<h3 id="改名（方便书写和更改）"><a href="#改名（方便书写和更改）" class="headerlink" title="改名（方便书写和更改）"></a>改名（方便书写和更改）</h3><pre><code>mv nginx-1.17.8/ nginx8    </code></pre><h2 id="安装NGINX"><a href="#安装NGINX" class="headerlink" title="安装NGINX"></a>安装NGINX</h2><h3 id="编译并安装"><a href="#编译并安装" class="headerlink" title="编译并安装"></a>编译并安装</h3><pre><code>cd nginx8  
+./configure  
+make
+make install  </code></pre><p>退回上级目录  </p>
+<pre><code>cd ..    </code></pre><p>会发现生成了编译好的nginx文件，同级目录下的nginx8是安装目录，启动、配置、停止使用的是编译好的nginx文件</p>
+<h3 id="开放LINUX的对外访问的端口80（默认情况下，LINUX不会开放）"><a href="#开放LINUX的对外访问的端口80（默认情况下，LINUX不会开放）" class="headerlink" title="开放LINUX的对外访问的端口80（默认情况下，LINUX不会开放）"></a>开放LINUX的对外访问的端口80（默认情况下，LINUX不会开放）</h3><pre><code>/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT    </code></pre><h2 id="检验成功安装"><a href="#检验成功安装" class="headerlink" title="检验成功安装"></a>检验成功安装</h2><pre><code>cd /usr/local/nginx/sbin  
+./nginx  </code></pre><p>在网页地址栏输入  公网:80<br>如果能正确显示nginx的欢迎网页，即为安装成功  </p>
+<h2 id="关闭nginx"><a href="#关闭nginx" class="headerlink" title="关闭nginx"></a>关闭nginx</h2><pre><code>./nginx -s stop  </code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/16/ECS%E5%AE%89%E8%A3%85TOMCAT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -194,7 +272,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-02-16 15:13:32 / Modified: 15:22:32" itemprop="dateCreated datePublished" datetime="2020-02-16T15:13:32+08:00">2020-02-16</time>
+              <time title="Created: 2020-02-16 15:13:32 / Modified: 15:56:26" itemprop="dateCreated datePublished" datetime="2020-02-16T15:13:32+08:00">2020-02-16</time>
             </span>
 
           
@@ -208,11 +286,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="官网下载JDK"><a href="#官网下载JDK" class="headerlink" title="官网下载JDK"></a>官网下载JDK</h2><p><a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener" title="TOMCAT9下载">TOMCAT下载地址官网</a></p>
+          <h2 id="官网下载TOMCAT"><a href="#官网下载TOMCAT" class="headerlink" title="官网下载TOMCAT"></a>官网下载TOMCAT</h2><p><a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener" title="TOMCAT9下载">TOMCAT下载地址官网</a></p>
 <h2 id="将jdk安装到指定目录（可以自定义）"><a href="#将jdk安装到指定目录（可以自定义）" class="headerlink" title="将jdk安装到指定目录（可以自定义）"></a>将jdk安装到指定目录（可以自定义）</h2><h3 id="上传到服务器-usr-local下"><a href="#上传到服务器-usr-local下" class="headerlink" title="上传到服务器 /usr/local下"></a>上传到服务器 /usr/local下</h3><p>这里利用 SSH Secure File Transfer Client 上传</p>
 <h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code>tar -xzvf apache-tomcat-9.0.31.tar.gz    </code></pre><p>这里就可以把压缩包删掉了</p>
-<h3 id="改名（方便书写和更改环境变量）"><a href="#改名（方便书写和更改环境变量）" class="headerlink" title="改名（方便书写和更改环境变量）"></a>改名（方便书写和更改环境变量）</h3><pre><code>mv apache-tomcat-9.0.31/ tomcat9  </code></pre><h2 id="开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"><a href="#开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）" class="headerlink" title="开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"></a>开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）</h2><pre><code>/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT  </code></pre><h2 id="检验TOMCAT是否能用"><a href="#检验TOMCAT是否能用" class="headerlink" title="检验TOMCAT是否能用"></a>检验TOMCAT是否能用</h2><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><pre><code>cd tomcat9/bin  
-./stratup.sh</code></pre><h3 id="到网页中查看"><a href="#到网页中查看" class="headerlink" title="到网页中查看"></a>到网页中查看</h3><p>在网页地址栏输入  公网:8080<br>如果能正确显示tomcat的网页，即为安装成功  </p>
+<h3 id="改名（方便书写和更改）"><a href="#改名（方便书写和更改）" class="headerlink" title="改名（方便书写和更改）"></a>改名（方便书写和更改）</h3><pre><code>mv apache-tomcat-9.0.31/ tomcat9  </code></pre><h2 id="开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"><a href="#开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）" class="headerlink" title="开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"></a>开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）</h2><pre><code>/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT  </code></pre><h2 id="检验TOMCAT是否能用"><a href="#检验TOMCAT是否能用" class="headerlink" title="检验TOMCAT是否能用"></a>检验TOMCAT是否能用</h2><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><pre><code>cd tomcat9/bin  
+./stratup.sh  </code></pre><h3 id="到网页中查看"><a href="#到网页中查看" class="headerlink" title="到网页中查看"></a>到网页中查看</h3><p>在网页地址栏输入  公网:8080<br>如果能正确显示tomcat的网页，即为安装成功  </p>
 
       
     </div>
@@ -257,7 +335,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-02-16 09:32:35 / Modified: 14:26:21" itemprop="dateCreated datePublished" datetime="2020-02-16T09:32:35+08:00">2020-02-16</time>
+              <time title="Created: 2020-02-16 09:32:35 / Modified: 15:56:22" itemprop="dateCreated datePublished" datetime="2020-02-16T09:32:35+08:00">2020-02-16</time>
             </span>
 
           
@@ -273,8 +351,8 @@
       
           <h2 id="官网下载JDK"><a href="#官网下载JDK" class="headerlink" title="官网下载JDK"></a>官网下载JDK</h2><p><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener" title="JKD下载">JDK下载地址官网</a></p>
 <h2 id="将jdk安装到指定目录（可以自定义）"><a href="#将jdk安装到指定目录（可以自定义）" class="headerlink" title="将jdk安装到指定目录（可以自定义）"></a>将jdk安装到指定目录（可以自定义）</h2><h3 id="上传到服务器-usr-local下"><a href="#上传到服务器-usr-local下" class="headerlink" title="上传到服务器 /usr/local下"></a>上传到服务器 /usr/local下</h3><p>这里利用 SSH Secure File Transfer Client 上传</p>
-<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u241-linux-x64.tar.gz  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">这里就可以把压缩包删掉了</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">### 改名（方便书写和更改环境变量）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> mv jdk1.8.0_241&#x2F; jdk8</span></pre></td></tr></table></figure>
-<h2 id="写入环境变量"><a href="#写入环境变量" class="headerlink" title="写入环境变量"></a>写入环境变量</h2><p>命令：  </p>
+<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code>tar -zxvf jdk-8u241-linux-x64.tar.gz  </code></pre><p>这里就可以把压缩包删掉了</p>
+<h3 id="改名（方便书写和更改环境变量）"><a href="#改名（方便书写和更改环境变量）" class="headerlink" title="改名（方便书写和更改环境变量）"></a>改名（方便书写和更改环境变量）</h3><pre><code>mv jdk1.8.0_241/ jdk8  </code></pre><h2 id="写入环境变量"><a href="#写入环境变量" class="headerlink" title="写入环境变量"></a>写入环境变量</h2><p>命令：  </p>
 <pre><code>vim /etc/profile  </code></pre><h3 id="按-i-进入编辑模式，输入下面内容"><a href="#按-i-进入编辑模式，输入下面内容" class="headerlink" title="按 i 进入编辑模式，输入下面内容"></a>按 i 进入编辑模式，输入下面内容</h3><pre><code>JAVA_HOME=/usr/local/jdk8
 CLASSPATH=$JAVA_HOME/lib/
 PATH=$PATH:$JAVA_HOME/bin
@@ -1107,68 +1185,6 @@ response = requests.get(<span class="string">'http://github.com/favicon.ico'</sp
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/29/my-first-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sherlock Harris">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherlcok's blogs">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/29/my-first-blog/" class="post-title-link" itemprop="url">my first blog</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-29 16:04:47 / Modified: 16:26:20" itemprop="dateCreated datePublished" datetime="2019-11-29T16:04:47+08:00">2019-11-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>内容</p>
-<hr>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
-<p>参考文献</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1217,7 +1233,7 @@ response = requests.get(<span class="string">'http://github.com/favicon.ico'</sp
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

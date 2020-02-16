@@ -48,15 +48,15 @@
   };
 </script>
 
-  <meta name="description" content="官网下载JDKTOMCAT下载地址官网 将jdk安装到指定目录（可以自定义）上传到服务器 &#x2F;usr&#x2F;local下这里利用 SSH Secure File Transfer Client 上传 解压tar -xzvf apache-tomcat-9.0.31.tar.gz    这里就可以把压缩包删掉了 改名（方便书写和更改环境变量）mv apache-tomcat-9.0.31&#x2F; tomcat9">
+  <meta name="description" content="官网下载TOMCATTOMCAT下载地址官网 将jdk安装到指定目录（可以自定义）上传到服务器 &#x2F;usr&#x2F;local下这里利用 SSH Secure File Transfer Client 上传 解压tar -xzvf apache-tomcat-9.0.31.tar.gz    这里就可以把压缩包删掉了 改名（方便书写和更改）mv apache-tomcat-9.0.31&#x2F; tomcat9">
 <meta name="keywords" content="ECS,LINUX,TOMCAT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECS安装TOMCAT">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;16&#x2F;ECS%E5%AE%89%E8%A3%85TOMCAT&#x2F;index.html">
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
-<meta property="og:description" content="官网下载JDKTOMCAT下载地址官网 将jdk安装到指定目录（可以自定义）上传到服务器 &#x2F;usr&#x2F;local下这里利用 SSH Secure File Transfer Client 上传 解压tar -xzvf apache-tomcat-9.0.31.tar.gz    这里就可以把压缩包删掉了 改名（方便书写和更改环境变量）mv apache-tomcat-9.0.31&#x2F; tomcat9">
+<meta property="og:description" content="官网下载TOMCATTOMCAT下载地址官网 将jdk安装到指定目录（可以自定义）上传到服务器 &#x2F;usr&#x2F;local下这里利用 SSH Secure File Transfer Client 上传 解压tar -xzvf apache-tomcat-9.0.31.tar.gz    这里就可以把压缩包删掉了 改名（方便书写和更改）mv apache-tomcat-9.0.31&#x2F; tomcat9">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-16T07:22:32.821Z">
+<meta property="og:updated_time" content="2020-02-16T07:56:26.031Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/02/16/ECS%E5%AE%89%E8%A3%85TOMCAT/">
@@ -197,7 +197,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-02-16 15:13:32 / Modified: 15:22:32" itemprop="dateCreated datePublished" datetime="2020-02-16T15:13:32+08:00">2020-02-16</time>
+              <time title="Created: 2020-02-16 15:13:32 / Modified: 15:56:26" itemprop="dateCreated datePublished" datetime="2020-02-16T15:13:32+08:00">2020-02-16</time>
             </span>
 
           
@@ -211,11 +211,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="官网下载JDK"><a href="#官网下载JDK" class="headerlink" title="官网下载JDK"></a>官网下载JDK</h2><p><a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener" title="TOMCAT9下载">TOMCAT下载地址官网</a></p>
+        <h2 id="官网下载TOMCAT"><a href="#官网下载TOMCAT" class="headerlink" title="官网下载TOMCAT"></a>官网下载TOMCAT</h2><p><a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener" title="TOMCAT9下载">TOMCAT下载地址官网</a></p>
 <h2 id="将jdk安装到指定目录（可以自定义）"><a href="#将jdk安装到指定目录（可以自定义）" class="headerlink" title="将jdk安装到指定目录（可以自定义）"></a>将jdk安装到指定目录（可以自定义）</h2><h3 id="上传到服务器-usr-local下"><a href="#上传到服务器-usr-local下" class="headerlink" title="上传到服务器 /usr/local下"></a>上传到服务器 /usr/local下</h3><p>这里利用 SSH Secure File Transfer Client 上传</p>
 <h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code>tar -xzvf apache-tomcat-9.0.31.tar.gz    </code></pre><p>这里就可以把压缩包删掉了</p>
-<h3 id="改名（方便书写和更改环境变量）"><a href="#改名（方便书写和更改环境变量）" class="headerlink" title="改名（方便书写和更改环境变量）"></a>改名（方便书写和更改环境变量）</h3><pre><code>mv apache-tomcat-9.0.31/ tomcat9  </code></pre><h2 id="开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"><a href="#开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）" class="headerlink" title="开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"></a>开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）</h2><pre><code>/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT  </code></pre><h2 id="检验TOMCAT是否能用"><a href="#检验TOMCAT是否能用" class="headerlink" title="检验TOMCAT是否能用"></a>检验TOMCAT是否能用</h2><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><pre><code>cd tomcat9/bin  
-./stratup.sh</code></pre><h3 id="到网页中查看"><a href="#到网页中查看" class="headerlink" title="到网页中查看"></a>到网页中查看</h3><p>在网页地址栏输入  公网:8080<br>如果能正确显示tomcat的网页，即为安装成功  </p>
+<h3 id="改名（方便书写和更改）"><a href="#改名（方便书写和更改）" class="headerlink" title="改名（方便书写和更改）"></a>改名（方便书写和更改）</h3><pre><code>mv apache-tomcat-9.0.31/ tomcat9  </code></pre><h2 id="开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"><a href="#开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）" class="headerlink" title="开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"></a>开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）</h2><pre><code>/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT  </code></pre><h2 id="检验TOMCAT是否能用"><a href="#检验TOMCAT是否能用" class="headerlink" title="检验TOMCAT是否能用"></a>检验TOMCAT是否能用</h2><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><pre><code>cd tomcat9/bin  
+./stratup.sh  </code></pre><h3 id="到网页中查看"><a href="#到网页中查看" class="headerlink" title="到网页中查看"></a>到网页中查看</h3><p>在网页地址栏输入  公网:8080<br>如果能正确显示tomcat的网页，即为安装成功  </p>
 
     </div>
 
@@ -239,7 +239,10 @@
     <a href="/2020/02/16/ECS%E5%AE%89%E8%A3%85JDK/" rel="prev" title="'ECS安装JDK'">
       <i class="fa fa-chevron-left"></i> 'ECS安装JDK'
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/16/ECS%E5%AE%89%E8%A3%85NGINX/" rel="next" title="ECS安装NGINX">
+      ECS安装NGINX <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -277,7 +280,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#官网下载JDK"><span class="nav-number">1.</span> <span class="nav-text">官网下载JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将jdk安装到指定目录（可以自定义）"><span class="nav-number">2.</span> <span class="nav-text">将jdk安装到指定目录（可以自定义）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传到服务器-usr-local下"><span class="nav-number">2.1.</span> <span class="nav-text">上传到服务器 /usr/local下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压"><span class="nav-number">2.2.</span> <span class="nav-text">解压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改名（方便书写和更改环境变量）"><span class="nav-number">2.3.</span> <span class="nav-text">改名（方便书写和更改环境变量）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"><span class="nav-number">3.</span> <span class="nav-text">开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检验TOMCAT是否能用"><span class="nav-number">4.</span> <span class="nav-text">检验TOMCAT是否能用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">4.1.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#到网页中查看"><span class="nav-number">4.2.</span> <span class="nav-text">到网页中查看</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#官网下载TOMCAT"><span class="nav-number">1.</span> <span class="nav-text">官网下载TOMCAT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将jdk安装到指定目录（可以自定义）"><span class="nav-number">2.</span> <span class="nav-text">将jdk安装到指定目录（可以自定义）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传到服务器-usr-local下"><span class="nav-number">2.1.</span> <span class="nav-text">上传到服务器 /usr/local下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压"><span class="nav-number">2.2.</span> <span class="nav-text">解压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改名（方便书写和更改）"><span class="nav-number">2.3.</span> <span class="nav-text">改名（方便书写和更改）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）"><span class="nav-number">3.</span> <span class="nav-text">开放LINUX的对外访问的端口8080（默认情况下，LINUX不会开放）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检验TOMCAT是否能用"><span class="nav-number">4.</span> <span class="nav-text">检验TOMCAT是否能用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">4.1.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#到网页中查看"><span class="nav-number">4.2.</span> <span class="nav-text">到网页中查看</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -291,7 +294,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
