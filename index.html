@@ -184,6 +184,611 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/TensorFlow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/TensorFlow/" class="post-title-link" itemprop="url">TensorFlow</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-23 19:43:22" itemprop="dateCreated datePublished" datetime="2020-02-23T19:43:22+08:00">2020-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-24 19:53:23" itemprop="dateModified" datetime="2020-02-24T19:53:23+08:00">2020-02-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="TensorFlow框架介绍"><a href="#TensorFlow框架介绍" class="headerlink" title="TensorFlow框架介绍"></a>TensorFlow框架介绍</h1><h2 id="TF数据流图"><a href="#TF数据流图" class="headerlink" title="TF数据流图"></a>TF数据流图</h2><p>TensorFlow程序通常由两部分组成：<strong>构建图</strong>和<strong>执行图</strong><br>构建阶段：数据（张量-Tensor）与操作（节点-Operation）的执行步骤被描述成一个图<br>执行阶段：使用会话执行构建好的图中的操作  </p>
+<ul>
+<li>图和会话：<blockquote>
+<ul>
+<li>图：时TensorFlow将计算表示为指令之间的依赖关系的一种表示法  </li>
+<li>会话：TensorFlow跨一个或多个本地或远程设备运行数据流图的机制  </li>
+</ul>
+</blockquote>
+</li>
+<li>张量：TensorFlow中的基本操作对象  </li>
+<li>节点：提供图当中执行的操作 <h2 id="图与TensorBoard"><a href="#图与TensorBoard" class="headerlink" title="图与TensorBoard"></a>图与TensorBoard</h2>图包含了一组tf.Operation代表的<strong>计算单元对象</strong>和tf.Tensor代表的<strong>计算单元之间流动的数据</strong>，即<strong>数据+操作</strong><h3 id="默认图"><a href="#默认图" class="headerlink" title="默认图"></a>默认图</h3>TensorFlow默认创建的图<br>查看默认图的方式：</li>
+<li><strong>调用方法</strong>：通过调用tf.get_default_graph()访问，要将操作添加到默认图中，直接创建OP即可</li>
+<li><strong>查看属性</strong>：tensor、op、sess都含有graph属性，默认都在一张图中<h3 id="自定义图"><a href="#自定义图" class="headerlink" title="自定义图"></a>自定义图</h3></li>
+<li>通过tf.Graph()自定义创建图<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">new_g = tf.Graph()  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">- 使用tf.Graph.as_default()上下文管理器在该图中创建OP</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">```python  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> new_g.as_default():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    定义数据和操作：  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">此时开启会话的时候要加参数：  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">```python</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session(graph = new_g) <span class="keyword">as</span> new_sess  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">这是因为tf.Session的默认参数里graph = <span class="literal">None</span> 即默认图</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">### TensorBoard：可视化学习  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">步骤：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">- 数据序列化-events文件（将图序列化）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">```python  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#path最好用绝对路径</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">tf.summary.FileWriter(path,graph)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">```   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">在指定目录下生成一个event文件，其名称格式如下：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&gt;events.out.tfevents.&#123;timestamp&#125;.&#123;hostname&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">- 启动TensorBoard</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&gt;在终端输入</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=path  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">path时序列化时使用的path</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">也可以使用  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">```    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=path --host=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&gt;改变访问地址，注意在浏览器输入终端给出的地址时一定不能使用CTRL+C退出tensorboard  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="comment">### OP  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">| 操作函数 | 生成-&gt; | 操作对象 |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">| :---: | :---: | :---: |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">| tf.constant(Tensor对象) | 生成 | 输入Tensor - Const - 输出 Tensor对象 |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">| tf,add(Tensor对象<span class="number">1</span>,Tensor对象<span class="number">2</span>) | 生成 | 输入Tensor1，Tensor对象<span class="number">2</span> - Add对象 - 输出 Tensor对象<span class="number">3</span> |  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">&gt;一个操作对象（Operation）时TensorFlow途中的一个节点，可以接收<span class="number">0</span>各或者多个Tensor，并且可以输出<span class="number">0</span>个或者多个Tensor，**Operation**对象是通过op构造函数（如tf.mutmul()）创造出来的</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">&gt;例如:c = tf.matmul(a,b)创建了一个Operation对象，类型未MatMul累心，它将张量a，b作为输入，c作为输出，并输出数据，打印的时候也是打印的数据。其中tf.matmul()是函数，在执行matmul函数的过程中会通过MatMul类创建一个与之对应的对象  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">打印张量（Tensor）出来的：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">&gt;Tensor(<span class="string">"Const:0"</span>,shape=(),dtype=float32)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">Tensor(<span class="string">"Const_1:0"</span>,shape=(),dtype=float32)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">Tensor(<span class="string">"Add:0"</span>,shape=(),dtype=float32)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">tf.Tensor对象以输出该Tensor的OP明确命名。Tensor名称的形式：  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">&gt;&lt;OP_NAME&gt;:\&lt;i&gt;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">其中：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">- &lt;OP_NAME&gt;是生成该Tensor的指令的名称  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">- \&lt;i&gt;是一个整数，它表示该张量在指令中的输出中的索引  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">**指令名称**</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">tf.Graph对象为其包含的tf.Operation对象定义的一个命名空间  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">例如：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">```python  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">tf.constant(<span class="number">42.0</span>,name=<span class="string">"answer"</span>)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">创建了一个名为<span class="string">"answer"</span>的新tf.Operation并返回一个名为<span class="string">"answer:0"</span>的tf.Tensor。如果默认图已经包含名为<span class="string">"answer"</span>的指令，则TensorFlow会在名称上附加<span class="string">"1"</span>、<span class="string">"2"</span>等字符，以便让其名称具有唯一性</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">&gt;当修改后，Tensorboard中显示的名字也会被修改</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#### 常见OP  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">| 类型 | 实例 |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">| :---: | :---: |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">| 标量运算 | add,sub,mul,div,log,greater,less,equal |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">| 向量运算 | concat,slice,splot,constant,rank,shape,shuffle |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">| 矩阵运算 | matmul,matrixinverse,matrixdateminant |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">| 带状态的运算 | Variable,assgin,assginadd |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">| 神经网络组件 | softmax,sigmoid,relu,convolution,max_pool |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">| 存储，恢复 | Save,Restore |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">| 队列及同步运算 | Enqueue,Dequeue,MutexAcquire,MutexRelease |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">| 控制流 | Merge,Switch,Enter,Leave,Nextiteration |  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line"><span class="comment">## 会话  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line"><span class="comment">### 会话创建  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">- tf.Session:用于完整的程序当中  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">- tf.InteractiveSession:用于交互式上下文中的TensorFlow，例如shell  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line"><span class="comment">### 会话的注意资源  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">- 会话掌握资源，用完要回收 -- 使用上下文管理器  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">- 初始化会话对象时的参数  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line">&gt;- graph = <span class="literal">None</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">&gt;- target:如果将此参数留空（默认设置），会话将使用本地计算机中的设备，可以指定grpc://网址，以便于指定TensorFlow服务器的地址，这使得会话可以访问该服务器控制的计算机上的所有设备  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">&gt;- config:用来了解设备信息 -- 根据打印的日志了解操作运行在哪个设备上</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">```python</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行会话并打印设备信息   </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">sess = tf.Session(config=tf.ConfigProt(allow_soft_placement=<span class="literal">True</span>,log_device_placement=<span class="literal">True</span>))</span></pre></td></tr></table></figure>
+<h3 id="会话的run"><a href="#会话的run" class="headerlink" title="会话的run()"></a>会话的run()</h3><pre><code class="python">run(fetches,feed_dict=<span class="literal">None</span>,options=<span class="literal">None</span>,run_metadata=<span class="literal">None</span>)  </code></pre>
+<ul>
+<li>通过使用sess.run()来运行operation  </li>
+<li>fetches：单一的operation，或者列表、元组（其他不属于tensorflow的类型不行）  </li>
+<li>feed_dict：参数允许调用者覆盖途中张量的值，运行时赋值  <blockquote>
+<ul>
+<li>与tf.placeholder搭配使用，则会检查值的形状是否与占位符兼容  </li>
+</ul>
+</blockquote>
+<h3 id="feed操作"><a href="#feed操作" class="headerlink" title="feed操作"></a>feed操作</h3></li>
+<li>placeholder提供占位符，run时候通过feed_dict指定参数  <pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">session_run_demo</span><span class="params">()</span>：</span>
+<span class="function">"""</span>
+<span class="function">会话的<span class="title">run</span>方法</span>
+<span class="function">:</span><span class="keyword">return</span>:
+<span class="string">"""  </span>
+<span class="string"># 定义占位符  </span>
+<span class="string">a = tf.placeholder(tf.float32)  </span>
+<span class="string">b = tf.placeholder(tf.float32)</span>
+<span class="string">sum_ab = tf.add(a,b)</span>
+<span class="string">print("sum_ab = \n",sum_ab)</span>
+<span class="string"># 开启会话  </span>
+<span class="string">with tf.Session() as sess:</span>
+<span class="string">print("占位符的结果：\n",sess.run(sum_ab,feed_dict={a:3.0,b:4.0}))</span>
+<span class="string">return None  </span></code></pre>
+<blockquote>
+<p>请注意运行时候的错误error：</p>
+<blockquote>
+<p>RuntimeError:如果这Session时无效状态（会话已关闭）。<br>TypeError:如果fetches或者feed_dict键的类型不合适。<br>ValueError:如果fetches或feed_dict键无效或引用Tensor不存在的键  </p>
+</blockquote>
+</blockquote>
+<h2 id="张量（和ndarray有联系）"><a href="#张量（和ndarray有联系）" class="headerlink" title="张量（和ndarray有联系）"></a>张量（和ndarray有联系）</h2></li>
+</ul>
+</li>
+<li>张量的类型  </li>
+<li>张量的阶  <h3 id="创建张量的指令"><a href="#创建张量的指令" class="headerlink" title="创建张量的指令"></a>创建张量的指令</h3></li>
+<li>固定值张量</li>
+<li>随机值张量  <h3 id="张量的变换"><a href="#张量的变换" class="headerlink" title="张量的变换"></a>张量的变换</h3></li>
+<li>类型改变  </li>
+<li>形状改变<h2 id="变量OP"><a href="#变量OP" class="headerlink" title="变量OP"></a>变量OP</h2><h2 id="高级API"><a href="#高级API" class="headerlink" title="高级API"></a>高级API</h2><h1 id="数据读取、神经网络"><a href="#数据读取、神经网络" class="headerlink" title="数据读取、神经网络"></a>数据读取、神经网络</h1><h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/The-difference-between-Machine-Learning-and-Deep-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/The-difference-between-Machine-Learning-and-Deep-Learning/" class="post-title-link" itemprop="url">The difference between Machine Learning and Deep Learning</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-02-23 19:13:36 / Modified: 19:46:32" itemprop="dateCreated datePublished" datetime="2020-02-23T19:13:36+08:00">2020-02-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="特征值提取"><a href="#特征值提取" class="headerlink" title="特征值提取"></a>特征值提取</h2><ul>
+<li>机器学习的<strong>特征工程步骤需要手动完成，而且需要大量领域专业只是</strong>  </li>
+<li>深度学习<strong>通常由多个层组成，它们通常将更简单的模型组合在一起，将数据从一层传递到另一层来构建更复杂的模型。通过训练大量数据自动得出模型，不需要人工特征提取环节</strong>  <blockquote>
+<p>深度学习算法试图从数据中学习高级功能，这是深度学习的一个非常独特的部分。因此，减少了未每个问题开发新特征提取器的任务。<strong>适合用在难提取特征的图像、语音、自然语言处理领域</strong>  </p>
+</blockquote>
+<h2 id="数据量和计算性能要求"><a href="#数据量和计算性能要求" class="headerlink" title="数据量和计算性能要求"></a>数据量和计算性能要求</h2>机器学习需要执行时间远少于深度学习，深度学习参数往往很庞大，需要通过大量数据的多次优化来训练参数。<blockquote>
+<p>第一、深度学习需要大量的训练数据集<br>第二、训练深度神经网络需要大量的算力<br>可能要花费数天、甚至数周的时间，才能使用数百万张图像的数据集训练出一个深度网络。所以深度学习通常</p>
+<ul>
+<li>需要大量的GPU服务器来进行计算</li>
+<li>全面管理的分布式训练与预测服务–比如<strong>谷歌TensorFlow云机器学习平台</strong>  </li>
+</ul>
+</blockquote>
+<h2 id="算法代表"><a href="#算法代表" class="headerlink" title="算法代表"></a>算法代表</h2></li>
+<li>机器学习  <blockquote>
+<ul>
+<li>朴素贝叶斯、决策树等  </li>
+</ul>
+</blockquote>
+</li>
+<li>深度学习  <blockquote>
+<ul>
+<li>神经网络</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/%E5%86%B3%E7%AD%96%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/%E5%86%B3%E7%AD%96%E6%A0%91/" class="post-title-link" itemprop="url">决策树</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-02-23 08:51:01 / Modified: 19:46:41" itemprop="dateCreated datePublished" datetime="2020-02-23T08:51:01+08:00">2020-02-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ID3系列算法"><a href="#ID3系列算法" class="headerlink" title="ID3系列算法"></a>ID3系列算法</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>明确自变量和因变量，确定信息度量的方式（eg：熵，基尼系数等），确定终止条件（eg：纯度，记录条数，循环次数等）  </p>
+<blockquote>
+<p>信息熵：</p>
+</blockquote>
+<ul>
+<li>信息论中的概念，香农提出  </li>
+<li>描述混乱程度的度量  </li>
+<li>取值范围0~1，值越大，越混乱  </li>
+<li>计算公式：$H(U) = E{-\log p_i} = - \sum_{i=1}^n p_i\log p_i$  <h2 id="选择特征"><a href="#选择特征" class="headerlink" title="选择特征"></a>选择特征</h2>得到当前待处理子集，计算所有特征信息度量，得到当前最佳分类特征  <h3 id="信息增益和特征选择"><a href="#信息增益和特征选择" class="headerlink" title="信息增益和特征选择"></a>信息增益和特征选择</h3><blockquote>
+<p>信息增益：</p>
+</blockquote>
+</li>
+<li>信息是确定性的增加  </li>
+<li>从一个状态到另一个状态信息的变化  </li>
+<li>信息增益越大，对确定性贡献越大  </li>
+</ul>
+<p>计算整体的熵、基于特征1、2、3….n的熵<br>计算特征1、2、3….n的信息增益（整体的熵-特征熵）<br>得到当前最佳特征<br>根据当前最佳特征产生分支  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: 开始框</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">A&#x3D;&gt;operation: 选择当前最佳特征</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">B&#x3D;&gt;operation: 按照取值产生分支</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">C&#x3D;&gt;condition: 满足分支终止条件 </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">D&#x3D;&gt;condition: 是否有待处理分支  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">E&#x3D;&gt;operation: 产生处理结果</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">e&#x3D;&gt;end: 结束</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">st-&gt;A-&gt;B-&gt;C</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">C(no)-&gt;A  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">C(yes)-&gt;D  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">D(no)-&gt;E</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">D(yes,right)-&gt;A  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">E-&gt;e(down)</span></pre></td></tr></table></figure>
+<h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><p>根据选中特征将当前记录分成不同分支，分支个数取决于算法  </p>
+<h2 id="是否终止"><a href="#是否终止" class="headerlink" title="是否终止"></a>是否终止</h2><p>判断是否满足终止条件，满足则退出循环，不满足则继续递归调用（返回2）   </p>
+<h2 id="生成结果"><a href="#生成结果" class="headerlink" title="生成结果"></a>生成结果</h2><p>判断是否需要剪枝，需要则进行适当修剪，不需要则为最终结果  </p>
+<h2 id="ID3（Iterative-Dichotomiser-3，迭代树三代）"><a href="#ID3（Iterative-Dichotomiser-3，迭代树三代）" class="headerlink" title="ID3（Iterative Dichotomiser 3，迭代树三代）"></a>ID3（Iterative Dichotomiser 3，迭代树三代）</h2><ul>
+<li>核心是信息熵，根据<strong>信息增益</strong>决定树的节点  </li>
+<li>存在以下问题：  <blockquote>
+<p>信息度量不合理：倾向于选择取值过多的字段<br>输入类型单一： 离散型<br>不做剪枝，容易过拟合  </p>
+</blockquote>
+<h2 id="C4-5：和ID3相比的改进："><a href="#C4-5：和ID3相比的改进：" class="headerlink" title="C4.5：和ID3相比的改进："></a>C4.5：和ID3相比的改进：</h2></li>
+<li>用信息增益率代替信息增益  </li>
+<li>能对连续属性进行离散化，对不完整数据进行处理 </li>
+<li>进行剪枝<br>C50：C4.5相比的改进：</li>
+<li>使用了boosting  </li>
+<li>前修剪，后修剪  </li>
+</ul>
+<h1 id="CART-Classfication-and-Regression-Tree"><a href="#CART-Classfication-and-Regression-Tree" class="headerlink" title="CART(Classfication and Regression Tree)"></a>CART(Classfication and Regression Tree)</h1><ul>
+<li>核心是基尼系数（Gini） </li>
+<li>分类是二叉树  </li>
+<li>支持连续值和离散值  </li>
+<li>后剪枝进行修剪  </li>
+<li>支持回归，可以预测连续值  </li>
+</ul>
+<h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table>
+<thead>
+<tr>
+<th align="center">算法</th>
+<th align="center">支持模型</th>
+<th align="center">树结构</th>
+<th align="center">特征选择</th>
+<th align="center">连续值处理</th>
+<th align="center">缺省值处理</th>
+<th align="center">剪枝</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ID3</td>
+<td align="center">分类</td>
+<td align="center">多叉树</td>
+<td align="center">信息增益</td>
+<td align="center">不支持</td>
+<td align="center">不支持</td>
+<td align="center">不支持</td>
+</tr>
+<tr>
+<td align="center">C4.5</td>
+<td align="center">分类</td>
+<td align="center">多叉树</td>
+<td align="center">信息增益比</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">CART</td>
+<td align="center">分类、回归</td>
+<td align="center">二叉树</td>
+<td align="center">基尼系数</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+</tbody></table>
+<h1 id="常见有监督学习算法"><a href="#常见有监督学习算法" class="headerlink" title="常见有监督学习算法"></a>常见有监督学习算法</h1><h2 id="分类算法："><a href="#分类算法：" class="headerlink" title="分类算法："></a>分类算法：</h2><ul>
+<li>KNN（K最近邻，K——Nearest Neighbor）</li>
+<li>NB（朴素贝叶斯，Naive Bayes）</li>
+<li>DT（决策树，Decision Tree）：C45、CART  </li>
+<li>SVM（支持向量机，Support Vector Machine）</li>
+<li>…… <h2 id="回归预测"><a href="#回归预测" class="headerlink" title="回归预测"></a>回归预测</h2></li>
+<li>线性回归（Linear Regression）</li>
+<li>逻辑回归（Logistic Regression）</li>
+<li>岭回归（Ridge Regression）</li>
+<li>拉索回归（LASSO Regression）</li>
+<li>……   <h1 id="常见无监督学习算法"><a href="#常见无监督学习算法" class="headerlink" title="常见无监督学习算法"></a>常见无监督学习算法</h1><h2 id="聚类算法："><a href="#聚类算法：" class="headerlink" title="聚类算法："></a>聚类算法：</h2></li>
+<li>K均值（K-Means） </li>
+<li>DBScan</li>
+<li>最大期望（EM：Expectation Maximization）</li>
+<li>降维：PCA（主成分分析）、PLS（偏最小二乘回归）、MDS（多维尺度分析）…</li>
+<li>……<h2 id="关联规则："><a href="#关联规则：" class="headerlink" title="关联规则："></a>关联规则：</h2></li>
+<li>Apriori </li>
+<li>Eclat </li>
+<li>……  <h1 id="其他学习："><a href="#其他学习：" class="headerlink" title="其他学习："></a>其他学习：</h1><h2 id="半监督学习："><a href="#半监督学习：" class="headerlink" title="半监督学习："></a>半监督学习：</h2></li>
+<li>半监督分类</li>
+<li>半监督回归</li>
+<li>半监督聚类</li>
+<li>半监督降维 <h2 id="集成学习：针对同一数据集，训练多种学习器，来解决同一问题"><a href="#集成学习：针对同一数据集，训练多种学习器，来解决同一问题" class="headerlink" title="集成学习：针对同一数据集，训练多种学习器，来解决同一问题"></a>集成学习：针对同一数据集，训练多种学习器，来解决同一问题</h2><h3 id="Bagging："><a href="#Bagging：" class="headerlink" title="Bagging："></a>Bagging：</h3></li>
+<li>有放回抽样构建多个子集</li>
+<li>训练多个分类器</li>
+<li>最终结果由各分类器结果投票得出</li>
+<li>实现非常简单<h3 id="Boosting："><a href="#Boosting：" class="headerlink" title="Boosting："></a>Boosting：</h3></li>
+<li>重复使用一类学习器赖修改训练集</li>
+<li>每次训练后根据结果调整样本的权重</li>
+<li>每个学习器加权后的线性组合即为最终结果<h3 id="Stacking："><a href="#Stacking：" class="headerlink" title="Stacking："></a>Stacking：</h3></li>
+<li>由两级组成，第一级为初级学习器，第二级为高基学习器</li>
+<li>第一级学习器的输出作为第二级学习器的输入  <h2 id="随机森林：RandomForest"><a href="#随机森林：RandomForest" class="headerlink" title="随机森林：RandomForest"></a>随机森林：RandomForest</h2></li>
+<li>由许多决策树组成，树生成时采用了随机的方法</li>
+<li>Smart Bagging </li>
+<li>生成步骤：<blockquote>
+<p>随机采样，生成多个样本集<br>对每个样本集构建决策树  </p>
+</blockquote>
+</li>
+<li>优点：<blockquote>
+<p>可以处理多分类<br>减少过拟合的概率<br>容易实现并行<br>对数据集容错能力强  </p>
+</blockquote>
+<h2 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h2><blockquote>
+<p><strong>深度学习</strong>：深度学习的概念源于对人工神经网络的研究。含多隐层的多层感知器就是一种深度学习结构。深度学习通过组合低层特征形成更加抽象的高层标识属性类别或特征，以发现数据的分布式特征标识。属于机器学习研究中的一个心得领域，其动机在于建立、模拟人脑进行分析学习的神经网络，它模拟人脑的机制来解释数据，例如图像，声音和文本<br>常见深度学习算法：</p>
+</blockquote>
+</li>
+<li>受限玻尔兹曼机 Restricted Boltxmann Machine（RBM）</li>
+<li>深度信你那网络 Deep Belief Networks（DBN）</li>
+<li>卷积网络 Convolutional Network</li>
+<li>栈式自编码 Stacked Auto-encoders <h2 id="增强学习：Reinforcement-Learning"><a href="#增强学习：Reinforcement-Learning" class="headerlink" title="增强学习：Reinforcement Learning"></a>增强学习：Reinforcement Learning</h2><blockquote>
+<p><strong>增强学习</strong>要解决的问题是：一个能感知环境的自治agent，通过学习，选择能达到其目标的最优动作。本质就是解决“决策（decision making）”问题，即学会自动进行决策比如控制移动及机器人、在工厂中学习最优操作工序、学习棋类对弈等。<br>常见增强学习算法：</p>
+</blockquote>
+</li>
+<li>Q-Learning</li>
+<li>时间差学习 Temporal difference learning  <h2 id="迁移迁移：Transfer-Learning"><a href="#迁移迁移：Transfer-Learning" class="headerlink" title="迁移迁移：Transfer Learning"></a>迁移迁移：Transfer Learning</h2><blockquote>
+<p><strong>迁移学习</strong>是把已训练好的模型参数迁移到心得模型来帮助新模型训练数据集。初中时节省人工标记样本的时间，让模型可以通过已有的标记数据向未标记数据迁移。换言之，就是运用已有的只是来学习新的知识，核心时找到已有知识和新知识之间的相似性。</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/22/%E4%BA%8C%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%94%9F%E6%88%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/22/%E4%BA%8C%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%94%9F%E6%88%90/" class="post-title-link" itemprop="url">二维图形生成</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-22 15:09:10" itemprop="dateCreated datePublished" datetime="2020-02-22T15:09:10+08:00">2020-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-23 19:46:49" itemprop="dateModified" datetime="2020-02-23T19:46:49+08:00">2020-02-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="区域填充"><a href="#区域填充" class="headerlink" title="区域填充"></a>区域填充</h2><blockquote>
+<p>多边形区域表示方法：点阵表示和顶点表示  </p>
+</blockquote>
+<blockquote>
+<p>点阵表示：用内部像素集合表示，主要填充算法：种子填充类算法  </p>
+</blockquote>
+<blockquote>
+<p>顶点表示：用顶点序列表示：主要填充算法：扫描类算法  </p>
+</blockquote>
+<h4 id="点阵式区域的填充算法"><a href="#点阵式区域的填充算法" class="headerlink" title="点阵式区域的填充算法"></a>点阵式区域的填充算法</h4><h5 id="边界定义的区域-边界填充算法"><a href="#边界定义的区域-边界填充算法" class="headerlink" title="边界定义的区域-边界填充算法"></a>边界定义的区域-边界填充算法</h5><h5 id="内定义的区域-漫水法"><a href="#内定义的区域-漫水法" class="headerlink" title="内定义的区域-漫水法"></a>内定义的区域-漫水法</h5><h3 id="种子填充算法"><a href="#种子填充算法" class="headerlink" title="种子填充算法"></a>种子填充算法</h3><h4 id="简单的种子填充算法-漫水法"><a href="#简单的种子填充算法-漫水法" class="headerlink" title="简单的种子填充算法-漫水法"></a>简单的种子填充算法-漫水法</h4><h5 id="内部表示区域种子填充算法"><a href="#内部表示区域种子填充算法" class="headerlink" title="内部表示区域种子填充算法"></a>内部表示区域种子填充算法</h5><h5 id="边界表示区域种子填充算法"><a href="#边界表示区域种子填充算法" class="headerlink" title="边界表示区域种子填充算法"></a>边界表示区域种子填充算法</h5><h4 id="扫描线种子填充算法"><a href="#扫描线种子填充算法" class="headerlink" title="扫描线种子填充算法"></a>扫描线种子填充算法</h4><h3 id="多边形填充算法"><a href="#多边形填充算法" class="headerlink" title="多边形填充算法"></a>多边形填充算法</h3><h4 id="多边形包含性测试算法"><a href="#多边形包含性测试算法" class="headerlink" title="多边形包含性测试算法"></a>多边形包含性测试算法</h4><h5 id="射线法"><a href="#射线法" class="headerlink" title="射线法"></a>射线法</h5><blockquote>
+<p>奇异点处理：</p>
+</blockquote>
+<ul>
+<li>在极值点处，按两个交点计算  </li>
+<li>在非极值点处，按一个交点计算  </li>
+</ul>
+<blockquote>
+<p>实际计算前，奇异点（非极值点）的预处理   </p>
+</blockquote>
+<ul>
+<li>将扫描线上方线段阶段一个单位，这样扫描线就只与多边形有一个交点  </li>
+</ul>
+<h5 id="弧长法"><a href="#弧长法" class="headerlink" title="弧长法"></a>弧长法</h5><h4 id="多边形扫描转换算法"><a href="#多边形扫描转换算法" class="headerlink" title="多边形扫描转换算法"></a>多边形扫描转换算法</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">计算机网络</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-18 14:14:34" itemprop="dateCreated datePublished" datetime="2020-02-18T14:14:34+08:00">2020-02-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-21 14:07:37" itemprop="dateModified" datetime="2020-02-21T14:07:37+08:00">2020-02-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="专业术语："><a href="#专业术语：" class="headerlink" title="专业术语："></a>专业术语：</h2><blockquote>
+<p>PSTN:公用电话交换网（电话网）<br>transceiver:收发器<br>Line controller:线路控制器<br>FEP：前端处理机<br>concentrator:集中器   </p>
+</blockquote>
+<blockquote>
+<p>三网：电信网、有线电视网、计算机网络<br>报文：要发送的整块数据<br>三种数据交换方式：电路交换、报文交换、分组交换</p>
+</blockquote>
+<h3 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h3><p>分组也叫包，分组的首部也叫包头  </p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>采用存储转发技术  </li>
+<li>发送数据前对数据进行分段处理     <h4 id="分组交换网的组成"><a href="#分组交换网的组成" class="headerlink" title="分组交换网的组成"></a>分组交换网的组成</h4></li>
+<li>主机（host）</li>
+<li>节点交换器（node switch）<blockquote>
+<ul>
+<li>路由器  </li>
+</ul>
+</blockquote>
+<h4 id="分组交换的优点"><a href="#分组交换的优点" class="headerlink" title="分组交换的优点"></a>分组交换的优点</h4></li>
+<li>高效：逐段占用通信链路，动态分配传输带宽  </li>
+<li>灵活：智能节点能够独立处理数据分发  </li>
+<li>迅速：分组作为传输单位，无需建立链接  </li>
+<li>可靠：完善的网络协议  <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4></li>
+<li>传输时延  </li>
+<li>首部数据存在开销   </li>
+</ul>
+<h3 id="计算机网络分类"><a href="#计算机网络分类" class="headerlink" title="计算机网络分类"></a>计算机网络分类</h3><h4 id="按网络的作用范围："><a href="#按网络的作用范围：" class="headerlink" title="按网络的作用范围："></a>按网络的作用范围：</h4><ul>
+<li>广域网（Wide Area Network）  </li>
+<li>局域网（Local Area Network）  </li>
+<li>城域网（Metropolitan Area Network）  </li>
+<li>个人局域网（Personal Area Network）<h4 id="按使用者分类"><a href="#按使用者分类" class="headerlink" title="按使用者分类"></a>按使用者分类</h4></li>
+<li>公用网  </li>
+<li>专用网  <h4 id="按拓扑结构分类"><a href="#按拓扑结构分类" class="headerlink" title="按拓扑结构分类"></a>按拓扑结构分类</h4></li>
+<li>星型、总线型、环型、树型、网状  <h4 id="交换方式"><a href="#交换方式" class="headerlink" title="交换方式"></a>交换方式</h4></li>
+<li>电路交换网  </li>
+<li>报文交换网  </li>
+<li>分组交换网  <h4 id="交换方式-1"><a href="#交换方式-1" class="headerlink" title="交换方式"></a>交换方式</h4></li>
+<li>电路交换网  </li>
+<li>报文交换网  </li>
+<li>分组交换网  <h4 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h4></li>
+<li>资源子网  </li>
+<li>通信子网  </li>
+<li>接入网  </li>
+</ul>
+<h3 id="计算机网络的性能"><a href="#计算机网络的性能" class="headerlink" title="计算机网络的性能"></a>计算机网络的性能</h3><h4 id="速率"><a href="#速率" class="headerlink" title="速率"></a>速率</h4><blockquote>
+<p>主机在数字信道上传送数据位数的速率，也称data rate或bit rate  单位：b/s,kb/s,Mb/s,Gb/s  </p>
+</blockquote>
+<h4 id="带宽"><a href="#带宽" class="headerlink" title="带宽"></a>带宽</h4><blockquote>
+<p>数字信道所能传送的最高数据率，单位：b/s,kb/s,Mb/s,Gb/s  </p>
+</blockquote>
+<h4 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h4><blockquote>
+<p>单位时间内通过某个网络的数据量  </p>
+</blockquote>
+<h4 id="时延"><a href="#时延" class="headerlink" title="时延"></a>时延</h4><ul>
+<li>发送时延  发送时延 = 数据块长度（比特）/信道带宽（比特/秒）</li>
+<li>传播时延  </li>
+<li>处理时延  </li>
+<li>排队时延  <h4 id="时延带宽积"><a href="#时延带宽积" class="headerlink" title="时延带宽积"></a>时延带宽积</h4><h4 id="往返时间"><a href="#往返时间" class="headerlink" title="往返时间"></a>往返时间</h4><h4 id="利用率"><a href="#利用率" class="headerlink" title="利用率"></a>利用率</h4></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/16/ECS%E5%AE%89%E8%A3%85NGINX/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -413,7 +1018,7 @@ export PATH JAVA_HOME CLASSPATH  </code></pre><h3 id="按-shift-：键，输入w
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-16 16:31:15" itemprop="dateModified" datetime="2020-02-16T16:31:15+08:00">2020-02-16</time>
+                <time title="Modified: 2020-02-21 14:07:50" itemprop="dateModified" datetime="2020-02-21T14:07:50+08:00">2020-02-21</time>
               </span>
 
           
@@ -484,11 +1089,11 @@ Attributes:
     summary:                   ERSST.v5 is developed based on v4 after revisi...
     dataset_title:             NOAA Extended Reconstructed SST V5
 
-Process finished with exit code 0  </code></pre><h2 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h2><p>包含的变量：</p>
+Process finished with exit code 0  </code></pre><h2 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h2><p>包含的变量：  </p>
 <ul>
-<li>time_bnds</li>
-<li>sst<blockquote>
-<p>time_bnds:    time和nbnds</p>
+<li>time_bnds  </li>
+<li>sst    <blockquote>
+<p>time_bnds:    time和nbnds  </p>
 </blockquote>
 </li>
 </ul>
@@ -677,7 +1282,7 @@ ice_file.close()  </code></pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-16 16:11:25" itemprop="dateModified" datetime="2020-02-16T16:11:25+08:00">2020-02-16</time>
+                <time title="Modified: 2020-02-21 14:07:54" itemprop="dateModified" datetime="2020-02-21T14:07:54+08:00">2020-02-21</time>
               </span>
 
           
@@ -742,452 +1347,6 @@ ice_file.close()  </code></pre>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/26/Matlab%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sherlock Harris">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherlcok's blogs">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/26/Matlab%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Matlab学习记录</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-26 11:38:46" itemprop="dateCreated datePublished" datetime="2020-01-26T11:38:46+08:00">2020-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-16 16:23:24" itemprop="dateModified" datetime="2020-02-16T16:23:24+08:00">2020-02-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">% Logistic曲线模型基本形式：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%         y=1/(a+b*exp(-t))</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">% 将y'=1/y,x'=exp(-t),就可以将其转换为直线模型：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%         y=a+b*x'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%Author: SherlockHarris</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%Date: Jan 26 2020</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%读入人口数据（1971-2000年）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">Y=[<span class="number">33815</span> <span class="number">33981</span> <span class="number">34004</span> <span class="number">34165</span> <span class="number">34212</span> <span class="number">34327</span> <span class="number">34344</span> <span class="number">34458</span> <span class="number">34498</span> <span class="number">34476</span> <span class="number">34483</span> <span class="number">34488</span> <span class="number">34513</span> <span class="number">34497</span> <span class="number">34511</span> <span class="number">34520</span> <span class="number">34507</span> <span class="number">34509</span> <span class="number">34521</span> <span class="number">34513</span> <span class="number">34515</span> <span class="number">34517</span> <span class="number">34519</span> <span class="number">34519</span> <span class="number">34521</span> <span class="number">34521</span> <span class="number">34523</span> <span class="number">34525</span> <span class="number">34525</span> <span class="number">34527</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%读入时间比那辆数据（t=年份-1970）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">T=[<span class="number">1</span>:<span class="number">30</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> t=<span class="number">1</span>:<span class="number">30</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    x(t) = <span class="built_in">exp</span>(-t);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    y(t) = <span class="number">1</span>/Y(<span class="number">1</span>,t);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算，并输出回归系数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">c = <span class="built_in">zeros</span>(<span class="number">30</span>,<span class="number">1</span>)+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">X=[c,x'];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">B=inv(X'*X)*X'*y';</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="number">30</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">%计算回归拟合值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    z(<span class="built_in">i</span>)=B(<span class="number">1</span>,<span class="number">1</span>)+B(<span class="number">2</span>,<span class="number">1</span>)*x(<span class="built_in">i</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">%计算离差</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    s(<span class="built_in">i</span>) = y(<span class="built_in">i</span>)-sum(y)/<span class="number">30</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">%计算误差</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    w(<span class="built_in">i</span>)=z(<span class="built_in">i</span>)-y(<span class="built_in">i</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算离差平方和S</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">S=s*s';</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算回归误差平方和Q</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">Q=w*w';</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算回归平方和U</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">U=S-Q;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算，并输出F检验值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">F=<span class="number">28</span>*U/Q;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算非线性回归模型的拟合值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">30</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    Y(<span class="built_in">j</span>)=<span class="number">1</span>/(B(<span class="number">1</span>,<span class="number">1</span>)+B(<span class="number">2</span>,<span class="number">1</span>)*<span class="built_in">exp</span>(-<span class="built_in">j</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算非线性回归模型的拟合曲线（Logistic曲线）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">plot</span>(T,Y)</span></pre></td></tr></table></figure>
-<h2 id="学习心得："><a href="#学习心得：" class="headerlink" title="学习心得："></a>学习心得：</h2><h3 id="inv-函数作用：求矩阵逆运算"><a href="#inv-函数作用：求矩阵逆运算" class="headerlink" title="inv()函数作用：求矩阵逆运算"></a>inv()函数作用：求矩阵逆运算</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/18/Requests%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sherlock Harris">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherlcok's blogs">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/18/Requests%E5%BA%93/" class="post-title-link" itemprop="url">Requests库</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-18 11:24:21" itemprop="dateCreated datePublished" datetime="2020-01-18T11:24:21+08:00">2020-01-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-16 15:14:48" itemprop="dateModified" datetime="2020-02-16T15:14:48+08:00">2020-02-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
-<p>Python实现的简单易用的HTTP库（基于urllib编写）  </p>
-</blockquote>
-<h1 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h1><h2 id="实例引入"><a href="#实例引入" class="headerlink" title="实例引入"></a>实例引入</h2><pre><code class="python"><span class="keyword">import</span> requests
-
-response = requests.get(<span class="string">'http://baidu.com'</span>)
-print(type(response))
-print(response.status_code)
-print(type(response.text))
-print(response.text)
-print(response.cookies)  </code></pre>
-<h2 id="各种请求方式"><a href="#各种请求方式" class="headerlink" title="各种请求方式"></a>各种请求方式</h2><pre><code class="python">requests.post(<span class="string">'http://httpbin.org/post'</span>)
-requests.put(<span class="string">'http://httpbin.org/put'</span>)
-requests.delete(<span class="string">'http://httpbin.org/delete'</span>)
-requests.head(<span class="string">'http://httpbin.org/get'</span>)
-response = requests.get(<span class="string">'http://httpbin.org/get'</span>)  </code></pre>
-<h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><h2 id="基本GET请求"><a href="#基本GET请求" class="headerlink" title="基本GET请求"></a>基本GET请求</h2><h3 id="基本写法"><a href="#基本写法" class="headerlink" title="基本写法"></a>基本写法</h3><pre><code class="python"><span class="keyword">import</span> requests
-
-response = requests.get(<span class="string">'http://httpbin.org/get'</span>)
-print(response.text)  </code></pre>
-<h3 id="带参数GET请求"><a href="#带参数GET请求" class="headerlink" title="带参数GET请求"></a>带参数GET请求</h3><figure class="highlight python"><figcaption><span>繁琐格式</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">response = requests.get(<span class="string">'http://httpbin.org/get?name=germey&amp;age=22'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">print(response.text)  </span></pre></td></tr></table></figure>
-<pre><code class="python"><span class="keyword">import</span> requests
-
-data = {
-    <span class="string">'name'</span>: <span class="string">'germey'</span>,
-    <span class="string">'age'</span>: <span class="number">22</span>
-}
-response = requests.get(<span class="string">'http://httpbin.org/get'</span>, params=data)
-print(response.text)</code></pre>
-<h3 id="解析json"><a href="#解析json" class="headerlink" title="解析json"></a>解析json</h3><pre><code class="python"><span class="keyword">import</span> requests
-
-response = requests.get(<span class="string">'http://httpbin.org/get'</span>)
-print(type(response.text))
-print(response.json())
-print(type(response.json()))</code></pre>
-<h3 id="获取二进制数据"><a href="#获取二进制数据" class="headerlink" title="获取二进制数据"></a>获取二进制数据</h3><pre><code class="python"><span class="keyword">import</span> requests
-
-response = requests.get(<span class="string">'http://github.com/favicon.ico'</span>)
-print(type(response.text),type(response.content))
-print(response.text)
-print(response.content)</code></pre>
-<pre><code class="python"><span class="keyword">import</span> requests
-
-response = requests.get(<span class="string">'http://github.com/favicon.ico'</span>)
-<span class="keyword">with</span> open(<span class="string">'favicon.ico'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:
-    f.write(response.content)
-    f.close()</code></pre>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/18/Urllib/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sherlock Harris">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherlcok's blogs">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/18/Urllib/" class="post-title-link" itemprop="url">Urllib</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-01-18 00:13:54 / Modified: 01:16:38" itemprop="dateCreated datePublished" datetime="2020-01-18T00:13:54+08:00">2020-01-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
-<p>Python内置的HTTP请求库  </p>
-</blockquote>
-<h1 id="四个模块"><a href="#四个模块" class="headerlink" title="四个模块"></a>四个模块</h1><blockquote>
-<p>urllib.request 请求mok<br>urllib.error 异常处理模块<br>urllib.parse url解析模块<br>urllib.robotparser robots.txt解析模块</p>
-</blockquote>
-<h1 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h1><h2 id="urlopen"><a href="#urlopen" class="headerlink" title="urlopen"></a>urlopen</h2><pre><code>urllib.request.urlopen(url,data=None,[timeout,]*,cafile=None,capath=None,cadefault=False,context=None)</code></pre><h3 id="一（参数一：url）"><a href="#一（参数一：url）" class="headerlink" title="一（参数一：url）"></a>一（参数一：url）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">response = urllib.request.urlopen(<span class="string">'http://baidu.com'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">print(response.read().decode(<span class="string">'utf-8'</span>))  </span></pre></td></tr></table></figure>  
-<h3 id="二（参数二：data）"><a href="#二（参数二：data）" class="headerlink" title="二（参数二：data）"></a>二（参数二：data）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.parse</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">data = bytes(urllib.parse.urlencode(&#123;<span class="string">'word'</span>: <span class="string">'hello'</span>&#125;), encoding=<span class="string">'utf8'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">response = urllib.request.urlopen(<span class="string">'http://httpbin.org/post'</span>, data=data)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">print(response.read())  </span></pre></td></tr></table></figure>     
-<h3 id="三（参数三：timeout）"><a href="#三（参数三：timeout）" class="headerlink" title="三（参数三：timeout）"></a>三（参数三：timeout）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">response = urllib.request.urlopen(<span class="string">'http://httpbin.org/get'</span>,timeout=<span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">print(response.read())  </span></pre></td></tr></table></figure>  
-<h3 id="四"><a href="#四" class="headerlink" title="四"></a>四</h3> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.error</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    response = urllib.request.urlopen(<span class="string">'http://httpbin.org/get'</span>,timeout=<span class="number">0.1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">except</span> urllib.error.URLError <span class="keyword">as</span> e:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> isinstance(e.reason,socket.timeout):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        print(<span class="string">'TIME OUT'</span>)   </span></pre></td></tr></table></figure>  
-<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><h3 id="响应类型"><a href="#响应类型" class="headerlink" title="响应类型"></a>响应类型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">response = urllib.request.urlopen(<span class="string">'http://python.org'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">print(type(response))  </span></pre></td></tr></table></figure>  
-<h3 id="状态码、响应头"><a href="#状态码、响应头" class="headerlink" title="状态码、响应头"></a>状态码、响应头</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">response = urllib.request.urlopen(<span class="string">'http://python.org'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">print(response.status)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">print(response.getheaders())</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">print(response.getheader(<span class="string">'Seerver'</span>))  </span></pre></td></tr></table></figure>  
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/29/Mybatis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sherlock Harris">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherlcok's blogs">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/29/Mybatis/" class="post-title-link" itemprop="url">Mybatis概述和入门操作</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-12-29 11:07:02 / Modified: 16:28:54" itemprop="dateCreated datePublished" datetime="2019-12-29T11:07:02+08:00">2019-12-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Mybatis概述和入门操作"><a href="#Mybatis概述和入门操作" class="headerlink" title="Mybatis概述和入门操作"></a>Mybatis概述和入门操作</h1><h2 id="ORM模型简介"><a href="#ORM模型简介" class="headerlink" title="ORM模型简介"></a>ORM模型简介</h2><blockquote>
-<p>对象关系映射（Object Relation Mapping）</p>
-</blockquote>
-<h1 id="开发环境搭建"><a href="#开发环境搭建" class="headerlink" title="开发环境搭建"></a>开发环境搭建</h1><ol>
-<li>mybatis离线安装包（github）</li>
-<li>maven方式引入
-</ol>
-
-<h1 id="实际操作"><a href="#实际操作" class="headerlink" title="实际操作"></a>实际操作</h1><h2 id="pom-xml引入依赖"><a href="#pom-xml引入依赖" class="headerlink" title="pom.xml引入依赖"></a>pom.xml引入依赖</h2><blockquote>
-<p>mybatis依赖  </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &lt;groupId&gt;org.mybatis&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &lt;artifactId&gt;mybatis&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &lt;version&gt;x.x.x&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;dependency&gt;   </span></pre></td></tr></table></figure>
-
-<blockquote>
-<p>mysql驱动jar包依赖  </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"> &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;5.1.44&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;dependency&gt;</span></pre></td></tr></table></figure>
-
-<h2 id="配置mybatis的主配置文件"><a href="#配置mybatis的主配置文件" class="headerlink" title="配置mybatis的主配置文件"></a>配置mybatis的主配置文件</h2><blockquote>
-<p>resource文件下新建mybatis.xml文件(内容从官方文档中查询）<a href="https://mybatis.org/mybatis-3/zh/getting-started.html" target="_blank" rel="noopener">Mybatis官方文档</a></p>
-</blockquote>
-<figure class="highlight"><figcaption><span>mybatis.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE configuration</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  PUBLIC <span class="string">"-//mybatis.org//DTD Config 3.0//EN"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;!--配置信息--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&lt;!--当前开发环境集合--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  &lt;environments <span class="keyword">default</span>=<span class="string">"development"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &lt;!--当前的某一个开发环境--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &lt;environment id=<span class="string">"development"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &lt;!--事务管理：默认JDBC管理--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      &lt;transactionManager type=<span class="string">"JDBC"</span>/&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">      &lt;!--数据源   POLLED：数据库连接池--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">      &lt;dataSource type=<span class="string">"POOLED"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">      &lt;!--数据库连接驱动  eg:   com.mysql.jdbc.Driver--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &lt;property name=<span class="string">"driver"</span> value=<span class="string">"$&#123;driver&#125;"</span>/&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">      &lt;!--数据库连接字符串  eg:   jdbc:mysql:<span class="comment">//localhost::3306/数据库名--&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &lt;property name=<span class="string">"url"</span> value=<span class="string">"$&#123;url&#125;"</span>/&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">      &lt;!--登录账号--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &lt;property name=<span class="string">"username"</span> value=<span class="string">"$&#123;username&#125;"</span>/&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">      &lt;!--登录密码--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &lt;property name=<span class="string">"password"</span> value=<span class="string">"$&#123;password&#125;"</span>/&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">      &lt;/dataSource&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &lt;/environment&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">  &lt;/environments&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">  &lt;!--映射配置文件的路径  mapping.xml中的文件--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">  &lt;mappers&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &lt;mapper resource=<span class="string">"mapper/userMapper.xml"</span>/&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">  &lt;/mappers&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&lt;/configuration&gt;</span></pre></td></tr></table></figure>
-
-<h2 id="创建实体类"><a href="#创建实体类" class="headerlink" title="创建实体类"></a>创建实体类</h2><blockquote>
-<p>con.damu.entity.Users</p>
-</blockquote>
-<figure class="highlight java"><figcaption><span>创建实体类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.damu.entity.Users;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Users</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> Integer id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String username;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String userpass;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String nickname;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.id = id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> username;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.username = username;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUserpass</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> userpass;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserpass</span><span class="params">(String userpass)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.userpass = userpass;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNickname</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> nickname;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNickname</span><span class="params">(String nickname)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.nickname = nickname;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="string">"Users&#123;"</span> +</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"id="</span> + id +</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">                <span class="string">", username='"</span> + username + <span class="string">'\''</span> +</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">                <span class="string">", userpass='"</span> + userpass + <span class="string">'\''</span> +</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">                <span class="string">", nickname='"</span> + nickname + <span class="string">'\''</span> +</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">                <span class="string">'&#125;'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<h2 id="resource下创建mapper文件夹"><a href="#resource下创建mapper文件夹" class="headerlink" title="resource下创建mapper文件夹"></a>resource下创建mapper文件夹</h2><blockquote>
-<p>在mapper下创建映射文件userMapper.xml（内容从官方文档中查询)</p>
-</blockquote>
-<figure class="highlight"><figcaption><span>userMapper.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE mapper</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> PUBLIC <span class="string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> <span class="string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"> &lt;!-- namespace 命名空间</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    通常情况，命名空间的值就是当前操作实体类的全名称    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&lt;mapper namespace=<span class="string">"com.damu.entity.Users"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"> &lt;select id=<span class="string">"userList"</span> resultType=<span class="string">"com.damu.entity.Users"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">select * from users</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"> &lt;/select&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&lt;/mapper&gt;</span></pre></td></tr></table></figure>
-
-
-<figure class="highlight java"><figcaption><span>具体使用方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化mybatis配置环境</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置文件名称</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">String resource = <span class="string">"mybatis.xml"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建SqlsessionFactory所需要的输入流</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">InputStream is = Resources.getResourceAsStream(resource);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建SqlSessionFactory</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">SqlSessionFactory factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().builer(is);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//打开和数据库之间的会话</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">Sqlsession session = factory.openSession();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&lt;!--参数为userMapper.xml中select标签中的id--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">List&lt;Users&gt; ulist = session.selectList(userList)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(User user:ulist)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    System.out.println(user);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">session.close();  </span></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/JDBCTemplate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sherlock Harris">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherlcok's blogs">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/04/JDBCTemplate/" class="post-title-link" itemprop="url">JDBCTemplate</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-04 20:55:43" itemprop="dateCreated datePublished" datetime="2019-12-04T20:55:43+08:00">2019-12-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-08 19:58:52" itemprop="dateModified" datetime="2019-12-08T19:58:52+08:00">2019-12-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第三方扩展包"><a href="#第三方扩展包" class="headerlink" title="第三方扩展包"></a>第三方扩展包</h1><h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><ol>
-<li>Mysql驱动  
-<li>Spring组件(core、beans、context、aop)  
-<li>JDBC Template(jdbc、tx)  
-
-<blockquote>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;!--spring版本--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    &lt;properties&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        &lt;spring-version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            5.2.1.RELEASE</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;spring-version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;properties&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &lt;dependencies&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&lt;!--mysql--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;5.1.41&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&lt;!--spring--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-beans&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-beans&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-context&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-aop&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        &lt;!--JDBC Template--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-jdbc&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            &lt;artifactId&gt;spring-tx&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">            &lt;version&gt;$&#123;spring-version&#125;&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        &lt;&#x2F;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;dependencies&gt;</span></pre></td></tr></table></figure>
-
-
-<h2 id="Spring配置"><a href="#Spring配置" class="headerlink" title="Spring配置"></a>Spring配置</h2><blockquote>
-<p>数据源<br>JDBC Template</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;bean id &#x3D; &quot;dataSource&quot; class &#x3D; &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;driverClassName&quot; value &#x3D; &quot;com.mysql.jdbc.Driver&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;selection_course?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf-8&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;root&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;521shiqi&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &lt;bean id &#x3D; &quot;jdbcTemplate&quot; class &#x3D; &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr></table></figure>
-
-<blockquote>
-<p>spring.xml  </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">       xmlns:aop&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">       xmlns:tx&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&#x2F;spring-tx.xsd</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&#x2F;spring-aop.xsd&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &lt;bean id &#x3D; &quot;dataSource&quot; class &#x3D; &quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;driverClassName&quot; value &#x3D; &quot;com.mysql.jdbc.Driver&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;selection_course?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf-8&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;root&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;521shiqi&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &lt;bean id &#x3D; &quot;jdbcTemplate&quot; class &#x3D; &quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;bean&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;beans&gt;</span></pre></td></tr></table></figure>
-
-<h2 id="JDBC-Template基本使用"><a href="#JDBC-Template基本使用" class="headerlink" title="JDBC Template基本使用"></a>JDBC Template基本使用</h2><h3 id="获取JdbcTemplate对象"><a href="#获取JdbcTemplate对象" class="headerlink" title="获取JdbcTemplate对象"></a>获取JdbcTemplate对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ApplicationContext context &#x3D; new ClassPathXmlApplicationContext(&quot;spring.xml&quot;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">JdbcTemplate jdbcTemplate &#x3D; (JdbcTemplate) context.getBean(&quot;jdbcTemplate&quot;);</span></pre></td></tr></table></figure>
-<ol>
-<li>execute方法(可以实行任何sql语句，主要用于DDL语句)
-
-<blockquote>
-<p><code>jdbcTemplate.execute(&quot;create table userl(id int,name varchar(20))&quot;);</code>  </p>
-</blockquote>
-<li>update与batchUpdate方法  
-
-<blockquote>
-<p>``</p>
-</blockquote>
-<li>query与queryXXX方法
-
-<blockquote>
-<p>``</p>
-</blockquote>
-<li>call方法
-
-<blockquote>
-<p>``</p>
-</blockquote>
-<ol>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1236,12 +1395,12 @@ response = requests.get(<span class="string">'http://github.com/favicon.ico'</sp
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

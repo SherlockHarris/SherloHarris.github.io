@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="TensorFlow框架介绍TF数据流图TensorFlow程序通常由两部分组成：构建图和执行图构建阶段：数据（张量-Tensor）与操作（节点-Operation）的执行步骤被描述成一个图执行阶段：使用会话执行构建好的图中的操作    图和会话：  图：时TensorFlow将计算表示为指令之间的依赖关系的一种表示法   会话：TensorFlow跨一个或多个本地或远程设备运行数据流图的机制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;23&#x2F;TensorFlow&#x2F;index.html">
+<meta property="og:site_name" content="Sherlcok&#39;s blogs">
+<meta property="og:description" content="TensorFlow框架介绍TF数据流图TensorFlow程序通常由两部分组成：构建图和执行图构建阶段：数据（张量-Tensor）与操作（节点-Operation）的执行步骤被描述成一个图执行阶段：使用会话执行构建好的图中的操作    图和会话：  图：时TensorFlow将计算表示为指令之间的依赖关系的一种表示法   会话：TensorFlow跨一个或多个本地或远程设备运行数据流图的机制">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-24T11:53:23.460Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/23/TensorFlow/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>TensorFlow | Sherlcok's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sherlcok's blogs" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sherlcok's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/TensorFlow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TensorFlow
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-23 19:43:22" itemprop="dateCreated datePublished" datetime="2020-02-23T19:43:22+08:00">2020-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-24 19:53:23" itemprop="dateModified" datetime="2020-02-24T19:53:23+08:00">2020-02-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="TensorFlow框架介绍"><a href="#TensorFlow框架介绍" class="headerlink" title="TensorFlow框架介绍"></a>TensorFlow框架介绍</h1><h2 id="TF数据流图"><a href="#TF数据流图" class="headerlink" title="TF数据流图"></a>TF数据流图</h2><p>TensorFlow程序通常由两部分组成：<strong>构建图</strong>和<strong>执行图</strong><br>构建阶段：数据（张量-Tensor）与操作（节点-Operation）的执行步骤被描述成一个图<br>执行阶段：使用会话执行构建好的图中的操作  </p>
+<ul>
+<li>图和会话：<blockquote>
+<ul>
+<li>图：时TensorFlow将计算表示为指令之间的依赖关系的一种表示法  </li>
+<li>会话：TensorFlow跨一个或多个本地或远程设备运行数据流图的机制  </li>
+</ul>
+</blockquote>
+</li>
+<li>张量：TensorFlow中的基本操作对象  </li>
+<li>节点：提供图当中执行的操作 <h2 id="图与TensorBoard"><a href="#图与TensorBoard" class="headerlink" title="图与TensorBoard"></a>图与TensorBoard</h2>图包含了一组tf.Operation代表的<strong>计算单元对象</strong>和tf.Tensor代表的<strong>计算单元之间流动的数据</strong>，即<strong>数据+操作</strong><h3 id="默认图"><a href="#默认图" class="headerlink" title="默认图"></a>默认图</h3>TensorFlow默认创建的图<br>查看默认图的方式：</li>
+<li><strong>调用方法</strong>：通过调用tf.get_default_graph()访问，要将操作添加到默认图中，直接创建OP即可</li>
+<li><strong>查看属性</strong>：tensor、op、sess都含有graph属性，默认都在一张图中<h3 id="自定义图"><a href="#自定义图" class="headerlink" title="自定义图"></a>自定义图</h3></li>
+<li>通过tf.Graph()自定义创建图<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">new_g = tf.Graph()  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">- 使用tf.Graph.as_default()上下文管理器在该图中创建OP</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">```python  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> new_g.as_default():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    定义数据和操作：  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">此时开启会话的时候要加参数：  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">```python</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session(graph = new_g) <span class="keyword">as</span> new_sess  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">这是因为tf.Session的默认参数里graph = <span class="literal">None</span> 即默认图</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">### TensorBoard：可视化学习  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">步骤：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">- 数据序列化-events文件（将图序列化）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">```python  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#path最好用绝对路径</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">tf.summary.FileWriter(path,graph)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">```   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">在指定目录下生成一个event文件，其名称格式如下：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&gt;events.out.tfevents.&#123;timestamp&#125;.&#123;hostname&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">- 启动TensorBoard</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&gt;在终端输入</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=path  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">path时序列化时使用的path</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">也可以使用  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">```    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=path --host=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&gt;改变访问地址，注意在浏览器输入终端给出的地址时一定不能使用CTRL+C退出tensorboard  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="comment">### OP  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">| 操作函数 | 生成-&gt; | 操作对象 |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">| :---: | :---: | :---: |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">| tf.constant(Tensor对象) | 生成 | 输入Tensor - Const - 输出 Tensor对象 |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">| tf,add(Tensor对象<span class="number">1</span>,Tensor对象<span class="number">2</span>) | 生成 | 输入Tensor1，Tensor对象<span class="number">2</span> - Add对象 - 输出 Tensor对象<span class="number">3</span> |  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">&gt;一个操作对象（Operation）时TensorFlow途中的一个节点，可以接收<span class="number">0</span>各或者多个Tensor，并且可以输出<span class="number">0</span>个或者多个Tensor，**Operation**对象是通过op构造函数（如tf.mutmul()）创造出来的</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">&gt;例如:c = tf.matmul(a,b)创建了一个Operation对象，类型未MatMul累心，它将张量a，b作为输入，c作为输出，并输出数据，打印的时候也是打印的数据。其中tf.matmul()是函数，在执行matmul函数的过程中会通过MatMul类创建一个与之对应的对象  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">打印张量（Tensor）出来的：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">&gt;Tensor(<span class="string">"Const:0"</span>,shape=(),dtype=float32)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">Tensor(<span class="string">"Const_1:0"</span>,shape=(),dtype=float32)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">Tensor(<span class="string">"Add:0"</span>,shape=(),dtype=float32)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">tf.Tensor对象以输出该Tensor的OP明确命名。Tensor名称的形式：  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">&gt;&lt;OP_NAME&gt;:\&lt;i&gt;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">其中：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">- &lt;OP_NAME&gt;是生成该Tensor的指令的名称  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">- \&lt;i&gt;是一个整数，它表示该张量在指令中的输出中的索引  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">**指令名称**</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">tf.Graph对象为其包含的tf.Operation对象定义的一个命名空间  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">例如：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">```python  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">tf.constant(<span class="number">42.0</span>,name=<span class="string">"answer"</span>)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">```  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">创建了一个名为<span class="string">"answer"</span>的新tf.Operation并返回一个名为<span class="string">"answer:0"</span>的tf.Tensor。如果默认图已经包含名为<span class="string">"answer"</span>的指令，则TensorFlow会在名称上附加<span class="string">"1"</span>、<span class="string">"2"</span>等字符，以便让其名称具有唯一性</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">&gt;当修改后，Tensorboard中显示的名字也会被修改</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#### 常见OP  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">| 类型 | 实例 |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">| :---: | :---: |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">| 标量运算 | add,sub,mul,div,log,greater,less,equal |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">| 向量运算 | concat,slice,splot,constant,rank,shape,shuffle |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">| 矩阵运算 | matmul,matrixinverse,matrixdateminant |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">| 带状态的运算 | Variable,assgin,assginadd |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">| 神经网络组件 | softmax,sigmoid,relu,convolution,max_pool |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">| 存储，恢复 | Save,Restore |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">| 队列及同步运算 | Enqueue,Dequeue,MutexAcquire,MutexRelease |</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">| 控制流 | Merge,Switch,Enter,Leave,Nextiteration |  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line"><span class="comment">## 会话  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line"><span class="comment">### 会话创建  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">- tf.Session:用于完整的程序当中  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">- tf.InteractiveSession:用于交互式上下文中的TensorFlow，例如shell  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line"><span class="comment">### 会话的注意资源  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">- 会话掌握资源，用完要回收 -- 使用上下文管理器  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">- 初始化会话对象时的参数  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line">&gt;- graph = <span class="literal">None</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">&gt;- target:如果将此参数留空（默认设置），会话将使用本地计算机中的设备，可以指定grpc://网址，以便于指定TensorFlow服务器的地址，这使得会话可以访问该服务器控制的计算机上的所有设备  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">&gt;- config:用来了解设备信息 -- 根据打印的日志了解操作运行在哪个设备上</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">```python</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行会话并打印设备信息   </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">sess = tf.Session(config=tf.ConfigProt(allow_soft_placement=<span class="literal">True</span>,log_device_placement=<span class="literal">True</span>))</span></pre></td></tr></table></figure>
+<h3 id="会话的run"><a href="#会话的run" class="headerlink" title="会话的run()"></a>会话的run()</h3><pre><code class="python">run(fetches,feed_dict=<span class="literal">None</span>,options=<span class="literal">None</span>,run_metadata=<span class="literal">None</span>)  </code></pre>
+<ul>
+<li>通过使用sess.run()来运行operation  </li>
+<li>fetches：单一的operation，或者列表、元组（其他不属于tensorflow的类型不行）  </li>
+<li>feed_dict：参数允许调用者覆盖途中张量的值，运行时赋值  <blockquote>
+<ul>
+<li>与tf.placeholder搭配使用，则会检查值的形状是否与占位符兼容  </li>
+</ul>
+</blockquote>
+<h3 id="feed操作"><a href="#feed操作" class="headerlink" title="feed操作"></a>feed操作</h3></li>
+<li>placeholder提供占位符，run时候通过feed_dict指定参数  <pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">session_run_demo</span><span class="params">()</span>：</span>
+<span class="function">"""</span>
+<span class="function">会话的<span class="title">run</span>方法</span>
+<span class="function">:</span><span class="keyword">return</span>:
+<span class="string">"""  </span>
+<span class="string"># 定义占位符  </span>
+<span class="string">a = tf.placeholder(tf.float32)  </span>
+<span class="string">b = tf.placeholder(tf.float32)</span>
+<span class="string">sum_ab = tf.add(a,b)</span>
+<span class="string">print("sum_ab = \n",sum_ab)</span>
+<span class="string"># 开启会话  </span>
+<span class="string">with tf.Session() as sess:</span>
+<span class="string">print("占位符的结果：\n",sess.run(sum_ab,feed_dict={a:3.0,b:4.0}))</span>
+<span class="string">return None  </span></code></pre>
+<blockquote>
+<p>请注意运行时候的错误error：</p>
+<blockquote>
+<p>RuntimeError:如果这Session时无效状态（会话已关闭）。<br>TypeError:如果fetches或者feed_dict键的类型不合适。<br>ValueError:如果fetches或feed_dict键无效或引用Tensor不存在的键  </p>
+</blockquote>
+</blockquote>
+<h2 id="张量（和ndarray有联系）"><a href="#张量（和ndarray有联系）" class="headerlink" title="张量（和ndarray有联系）"></a>张量（和ndarray有联系）</h2></li>
+</ul>
+</li>
+<li>张量的类型  </li>
+<li>张量的阶  <h3 id="创建张量的指令"><a href="#创建张量的指令" class="headerlink" title="创建张量的指令"></a>创建张量的指令</h3></li>
+<li>固定值张量</li>
+<li>随机值张量  <h3 id="张量的变换"><a href="#张量的变换" class="headerlink" title="张量的变换"></a>张量的变换</h3></li>
+<li>类型改变  </li>
+<li>形状改变<h2 id="变量OP"><a href="#变量OP" class="headerlink" title="变量OP"></a>变量OP</h2><h2 id="高级API"><a href="#高级API" class="headerlink" title="高级API"></a>高级API</h2><h1 id="数据读取、神经网络"><a href="#数据读取、神经网络" class="headerlink" title="数据读取、神经网络"></a>数据读取、神经网络</h1><h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/23/The-difference-between-Machine-Learning-and-Deep-Learning/" rel="prev" title="The difference between Machine Learning and Deep Learning">
+      <i class="fa fa-chevron-left"></i> The difference between Machine Learning and Deep Learning
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow框架介绍"><span class="nav-number">1.</span> <span class="nav-text">TensorFlow框架介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TF数据流图"><span class="nav-number">1.1.</span> <span class="nav-text">TF数据流图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图与TensorBoard"><span class="nav-number">1.2.</span> <span class="nav-text">图与TensorBoard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认图"><span class="nav-number">1.2.1.</span> <span class="nav-text">默认图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义图"><span class="nav-number">1.2.2.</span> <span class="nav-text">自定义图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话的run"><span class="nav-number">1.2.3.</span> <span class="nav-text">会话的run()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feed操作"><span class="nav-number">1.2.4.</span> <span class="nav-text">feed操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量（和ndarray有联系）"><span class="nav-number">1.3.</span> <span class="nav-text">张量（和ndarray有联系）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建张量的指令"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建张量的指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量的变换"><span class="nav-number">1.3.2.</span> <span class="nav-text">张量的变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量OP"><span class="nav-number">1.4.</span> <span class="nav-text">变量OP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级API"><span class="nav-number">1.5.</span> <span class="nav-text">高级API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据读取、神经网络"><span class="nav-number">2.</span> <span class="nav-text">数据读取、神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卷积神经网络"><span class="nav-number">3.</span> <span class="nav-text">卷积神经网络</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Sherlock Harris</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sherlockharris" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sherlockharris" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sherlock Harris</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+ <script src="https://cdn.jsdelivr.net/gh/SherlockHarris/live2d-widget/autoload.js"></script>
+
+
+
+
+
+</body>
+</html>
+
