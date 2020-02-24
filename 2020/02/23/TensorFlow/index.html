@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
 <meta property="og:description" content="TensorFlow框架介绍TF数据流图TensorFlow程序通常由两部分组成：构建图和执行图构建阶段：数据（张量-Tensor）与操作（节点-Operation）的执行步骤被描述成一个图执行阶段：使用会话执行构建好的图中的操作    图和会话：  图：时TensorFlow将计算表示为指令之间的依赖关系的一种表示法   会话：TensorFlow跨一个或多个本地或远程设备运行数据流图的机制">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T12:53:56.155Z">
+<meta property="og:updated_time" content="2020-02-24T12:56:05.253Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/02/23/TensorFlow/">
@@ -217,7 +217,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-24 20:53:56" itemprop="dateModified" datetime="2020-02-24T20:53:56+08:00">2020-02-24</time>
+                <time title="Modified: 2020-02-24 20:56:05" itemprop="dateModified" datetime="2020-02-24T20:56:05+08:00">2020-02-24</time>
               </span>
 
           
@@ -354,36 +354,12 @@ tf.summary.FileWriter(path,graph)   </code></pre>
 <td align="center">控制流</td>
 <td align="center">Merge,Switch,Enter,Leave,Nextiteration</td>
 </tr>
-<tr>
-<td align="center">## 会话</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">### 会话创建</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">- tf.Session:用于完整的程序当中</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">- tf.InteractiveSession:用于交互式上下文中的TensorFlow，例如shell</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">### 会话的注意资源</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">- 会话掌握资源，用完要回收 – 使用上下文管理器</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">- 初始化会话对象时的参数</td>
-<td align="center"></td>
-</tr>
 </tbody></table>
-<blockquote>
+<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><h3 id="会话创建"><a href="#会话创建" class="headerlink" title="会话创建"></a>会话创建</h3><ul>
+<li>tf.Session:用于完整的程序当中  </li>
+<li>tf.InteractiveSession:用于交互式上下文中的TensorFlow，例如shell  <h3 id="会话的注意资源"><a href="#会话的注意资源" class="headerlink" title="会话的注意资源"></a>会话的注意资源</h3></li>
+<li>会话掌握资源，用完要回收 – 使用上下文管理器  </li>
+<li>初始化会话对象时的参数  <blockquote>
 <ul>
 <li>graph = None </li>
 <li>target:如果将此参数留空（默认设置），会话将使用本地计算机中的设备，可以指定grpc://网址，以便于指定TensorFlow服务器的地址，这使得会话可以访问该服务器控制的计算机上的所有设备  </li>
@@ -414,7 +390,7 @@ sess = tf.Session(config=tf.ConfigProt(allow_soft_placement=<span class="literal
 <span class="string">print("sum_ab = \n",sum_ab)</span>
 <span class="string"># 开启会话  </span>
 <span class="string">with tf.Session() as sess:</span>
-<span class="string"> print("占位符的结果：\n",sess.run(sum_ab,feed_dict={a:3.0,b:4.0}))</span>
+<span class="string">print("占位符的结果：\n",sess.run(sum_ab,feed_dict={a:3.0,b:4.0}))</span>
 <span class="string">return None  </span></code></pre>
 <blockquote>
 <p>请注意运行时候的错误error：</p>
@@ -422,15 +398,15 @@ sess = tf.Session(config=tf.ConfigProt(allow_soft_placement=<span class="literal
 <p>RuntimeError:如果这Session时无效状态（会话已关闭）。<br>TypeError:如果fetches或者feed_dict键的类型不合适。<br>ValueError:如果fetches或feed_dict键无效或引用Tensor不存在的键  </p>
 </blockquote>
 </blockquote>
-<h2 id="张量（和ndarray有联系）"><a href="#张量（和ndarray有联系）" class="headerlink" title="张量（和ndarray有联系）"></a>张量（和ndarray有联系）</h2><ul>
+<h2 id="张量（和ndarray有联系）"><a href="#张量（和ndarray有联系）" class="headerlink" title="张量（和ndarray有联系）"></a>张量（和ndarray有联系）</h2></li>
+</ul>
+</li>
 <li>张量的类型  </li>
 <li>张量的阶  <h3 id="创建张量的指令"><a href="#创建张量的指令" class="headerlink" title="创建张量的指令"></a>创建张量的指令</h3></li>
 <li>固定值张量</li>
 <li>随机值张量  <h3 id="张量的变换"><a href="#张量的变换" class="headerlink" title="张量的变换"></a>张量的变换</h3></li>
 <li>类型改变  </li>
 <li>形状改变<h2 id="变量OP"><a href="#变量OP" class="headerlink" title="变量OP"></a>变量OP</h2><h2 id="高级API"><a href="#高级API" class="headerlink" title="高级API"></a>高级API</h2><h1 id="数据读取、神经网络"><a href="#数据读取、神经网络" class="headerlink" title="数据读取、神经网络"></a>数据读取、神经网络</h1><h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1></li>
-</ul>
-</li>
 </ul>
 
     </div>
@@ -488,7 +464,7 @@ sess = tf.Session(config=tf.ConfigProt(allow_soft_placement=<span class="literal
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow框架介绍"><span class="nav-number">1.</span> <span class="nav-text">TensorFlow框架介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TF数据流图"><span class="nav-number">1.1.</span> <span class="nav-text">TF数据流图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图与TensorBoard"><span class="nav-number">1.2.</span> <span class="nav-text">图与TensorBoard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认图"><span class="nav-number">1.2.1.</span> <span class="nav-text">默认图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义图"><span class="nav-number">1.2.2.</span> <span class="nav-text">自定义图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TensorBoard：可视化学习"><span class="nav-number">1.2.3.</span> <span class="nav-text">TensorBoard：可视化学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OP"><span class="nav-number">1.2.4.</span> <span class="nav-text">OP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见OP"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">常见OP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话的run"><span class="nav-number">1.2.5.</span> <span class="nav-text">会话的run()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feed操作"><span class="nav-number">1.2.6.</span> <span class="nav-text">feed操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量（和ndarray有联系）"><span class="nav-number">1.3.</span> <span class="nav-text">张量（和ndarray有联系）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建张量的指令"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建张量的指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量的变换"><span class="nav-number">1.3.2.</span> <span class="nav-text">张量的变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量OP"><span class="nav-number">1.4.</span> <span class="nav-text">变量OP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级API"><span class="nav-number">1.5.</span> <span class="nav-text">高级API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据读取、神经网络"><span class="nav-number">2.</span> <span class="nav-text">数据读取、神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卷积神经网络"><span class="nav-number">3.</span> <span class="nav-text">卷积神经网络</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow框架介绍"><span class="nav-number">1.</span> <span class="nav-text">TensorFlow框架介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TF数据流图"><span class="nav-number">1.1.</span> <span class="nav-text">TF数据流图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图与TensorBoard"><span class="nav-number">1.2.</span> <span class="nav-text">图与TensorBoard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认图"><span class="nav-number">1.2.1.</span> <span class="nav-text">默认图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义图"><span class="nav-number">1.2.2.</span> <span class="nav-text">自定义图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TensorBoard：可视化学习"><span class="nav-number">1.2.3.</span> <span class="nav-text">TensorBoard：可视化学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OP"><span class="nav-number">1.2.4.</span> <span class="nav-text">OP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见OP"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">常见OP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话"><span class="nav-number">1.3.</span> <span class="nav-text">会话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#会话创建"><span class="nav-number">1.3.1.</span> <span class="nav-text">会话创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话的注意资源"><span class="nav-number">1.3.2.</span> <span class="nav-text">会话的注意资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话的run"><span class="nav-number">1.3.3.</span> <span class="nav-text">会话的run()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feed操作"><span class="nav-number">1.3.4.</span> <span class="nav-text">feed操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量（和ndarray有联系）"><span class="nav-number">1.4.</span> <span class="nav-text">张量（和ndarray有联系）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建张量的指令"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建张量的指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量的变换"><span class="nav-number">1.4.2.</span> <span class="nav-text">张量的变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量OP"><span class="nav-number">1.5.</span> <span class="nav-text">变量OP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级API"><span class="nav-number">1.6.</span> <span class="nav-text">高级API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据读取、神经网络"><span class="nav-number">2.</span> <span class="nav-text">数据读取、神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卷积神经网络"><span class="nav-number">3.</span> <span class="nav-text">卷积神经网络</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
