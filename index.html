@@ -215,7 +215,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-24 20:56:05" itemprop="dateModified" datetime="2020-02-24T20:56:05+08:00">2020-02-24</time>
+                <time title="Modified: 2020-02-25 00:27:40" itemprop="dateModified" datetime="2020-02-25T00:27:40+08:00">2020-02-25</time>
               </span>
 
           
@@ -396,15 +396,241 @@ sess = tf.Session(config=tf.ConfigProt(allow_soft_placement=<span class="literal
 <p>RuntimeError:如果这Session时无效状态（会话已关闭）。<br>TypeError:如果fetches或者feed_dict键的类型不合适。<br>ValueError:如果fetches或feed_dict键无效或引用Tensor不存在的键  </p>
 </blockquote>
 </blockquote>
-<h2 id="张量（和ndarray有联系）"><a href="#张量（和ndarray有联系）" class="headerlink" title="张量（和ndarray有联系）"></a>张量（和ndarray有联系）</h2></li>
+<h2 id="张量（和ndarray有联系）"><a href="#张量（和ndarray有联系）" class="headerlink" title="张量（和ndarray有联系）"></a>张量（和ndarray有联系）</h2>TensorFlow的张量就是一个n维数组，类型为tf.Tensor。Tensor具有两个重要的属性：</li>
 </ul>
 </li>
-<li>张量的类型  </li>
-<li>张量的阶  <h3 id="创建张量的指令"><a href="#创建张量的指令" class="headerlink" title="创建张量的指令"></a>创建张量的指令</h3></li>
-<li>固定值张量</li>
-<li>随机值张量  <h3 id="张量的变换"><a href="#张量的变换" class="headerlink" title="张量的变换"></a>张量的变换</h3></li>
-<li>类型改变  </li>
-<li>形状改变<h2 id="变量OP"><a href="#变量OP" class="headerlink" title="变量OP"></a>变量OP</h2><h2 id="高级API"><a href="#高级API" class="headerlink" title="高级API"></a>高级API</h2><h1 id="数据读取、神经网络"><a href="#数据读取、神经网络" class="headerlink" title="数据读取、神经网络"></a>数据读取、神经网络</h1><h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1></li>
+<li>type：数据类型  </li>
+<li>shape：形状（阶）  <h3 id="张量的类型"><a href="#张量的类型" class="headerlink" title="张量的类型"></a>张量的类型</h3><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">Python类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DT_FLOAT</td>
+<td align="center">tf.float32</td>
+<td align="center">32位浮点数</td>
+</tr>
+<tr>
+<td align="center">DT_DOUBLE</td>
+<td align="center">tf.float64</td>
+<td align="center">64位浮点数</td>
+</tr>
+<tr>
+<td align="center">DT_INT64</td>
+<td align="center">tf.int64</td>
+<td align="center">64位有符号整型</td>
+</tr>
+<tr>
+<td align="center">DT_INT32</td>
+<td align="center">tf.int32</td>
+<td align="center">32位有符号整型</td>
+</tr>
+<tr>
+<td align="center">DT_INT16</td>
+<td align="center">tf.int16</td>
+<td align="center">16位有符号整型</td>
+</tr>
+<tr>
+<td align="center">DT_INT8</td>
+<td align="center">tf.int8</td>
+<td align="center">8位有符号整型</td>
+</tr>
+<tr>
+<td align="center">DT_UINT8</td>
+<td align="center">tf.uint8</td>
+<td align="center">8位无符号整型</td>
+</tr>
+<tr>
+<td align="center">DT_STRING</td>
+<td align="center">tf.string</td>
+<td align="center">可变长度的字节数组，每一个张量元素都是一个字节数组</td>
+</tr>
+<tr>
+<td align="center">DT_BOOL</td>
+<td align="center">tf.bool</td>
+<td align="center">布尔型</td>
+</tr>
+<tr>
+<td align="center">DT_COMPLEX64</td>
+<td align="center">tf.complex64</td>
+<td align="center">由两个32位浮点数组成的复数：实数和虚数</td>
+</tr>
+<tr>
+<td align="center">DT_QINT32</td>
+<td align="center">tf.qint32</td>
+<td align="center">用于量化Ops的32位有符号整型</td>
+</tr>
+<tr>
+<td align="center">DT_QINT8</td>
+<td align="center">tf.qint8</td>
+<td align="center">用于量化Ops的8位有符号整型</td>
+</tr>
+<tr>
+<td align="center">DT_QUINT8</td>
+<td align="center">tf.quint8</td>
+<td align="center">用于量化Ops的8位无符号整型</td>
+</tr>
+<tr>
+<td align="center">### 张量的阶</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">数据</td>
+<td align="center">在计算机中的存储</td>
+<td align="center">阶数</td>
+</tr>
+<tr>
+<td align="center">:—:</td>
+<td align="center">:—:</td>
+<td align="center">:—:</td>
+</tr>
+<tr>
+<td align="center">标量</td>
+<td align="center">一个数字</td>
+<td align="center">0阶张量</td>
+</tr>
+<tr>
+<td align="center">向量</td>
+<td align="center">一维数组 [2,3,4]</td>
+<td align="center">1阶张量</td>
+</tr>
+<tr>
+<td align="center">矩阵</td>
+<td align="center">二维数组[ [2,3,4],[2,3,4] ]</td>
+<td align="center">2阶张量</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr>
+<td align="center">张量</td>
+<td align="center">n维数组</td>
+<td align="center">n阶张量</td>
+</tr>
+<tr>
+<td align="center">### 创建张量的指令</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+<li>固定值张量    <pre><code class="python">tf.zeros(shape,dtype=tf.float32,name = <span class="literal">None</span>)
+tf.zeros_like(tensor,dtype=tf.float32,name=<span class="literal">None</span>)  
+tf.oness(shape,dtype=tf.float32,name = <span class="literal">None</span>)
+tf.ones_like(tensor,dtype=tf.float32,name=<span class="literal">None</span>) 
+<span class="comment">#创建了一个填充了标量值的张量，此操作创建一个张量的形状dims并填充她value </span>
+tf.fill(dims,value,name=<span class="literal">None</span>)
+<span class="comment">#创建一个常数张量</span>
+tf.constant(value,dtype=<span class="literal">None</span>,shape=<span class="literal">None</span>,name=<span class="string">'Const'</span>)  </code></pre>
+</li>
+<li>随机值张量  <pre><code class="python">tf.random_normal(shape,mean=<span class="number">0.0</span>,stddev=<span class="number">1.0</span>,dtype=float32,seed=<span class="literal">None</span>,name=<span class="literal">None</span>)  </code></pre>
+正态分布  </li>
+<li>其它特殊的创建张量OP：<blockquote>
+<ul>
+<li>tf.Variable  </li>
+<li>tf.placeholder  </li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3 id="张量的变换"><a href="#张量的变换" class="headerlink" title="张量的变换"></a>张量的变换</h3><ul>
+<li>类型改变  <pre><code class="python">tf.string_to_number(string_tensor,out_type=<span class="literal">None</span>,name=<span class="literal">None</span>)
+tf.to_double(x,name=<span class="string">'ToDouble'</span>)
+tf.to_float(x,name=<span class="string">'ToFloat'</span>)
+tf.to_bfloat16(x,name=<span class="string">'ToBFloat16'</span>)
+tf.to_int32(x,name=<span class="string">'ToInt32'</span>)
+tf.to_int64(x,name=<span class="string">'ToInt64'</span>)
+tf.cast(x,dtype,name=<span class="literal">None</span>)  </code></pre>
+tf.cast()不会改变原始的tensor，返回改变类型后新的tensor</li>
+<li>形状改变<br>TensorFlow的张量具有两种形状变换，动态形状和静态形状<pre><code class="python">tf.reshape（不会改变原始的tensor，返回新的改变类型后的tensor）  
+tf.set_shape  </code></pre>
+</li>
+<li>静态形状<br>Q：什么时候才能改变静态形状？<br>A：在形状还没有完全固定下来的情况。<br>Q：什么情况是形状未固定？<br>A：tf.placeholder生成的tensor中带有？号的部分 <pre><code class="python">a_p = tf.placeholder(dtype=tf.float32,shape=[<span class="literal">None</span>，<span class="literal">None</span>])   
+a_p.set_shapr(<span class="number">2</span>,<span class="number">10</span>)  </code></pre>
+</li>
+<li>动态形状(可以跨阶数改变,但是不能改变元素的总数)  <pre><code class="python">tf.reshape(a_p,shape=[<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>])   </code></pre>
+<h3 id="张量的数学运算"><a href="#张量的数学运算" class="headerlink" title="张量的数学运算"></a>张量的数学运算</h3></li>
+<li>算术运算符</li>
+<li>基本数学函数</li>
+<li>矩阵运算 </li>
+<li>reduce操作  </li>
+<li>序列索引操作  <blockquote>
+<p>详情请参考：<br><a href="https://www.tensorflow.org/versions/r1.8/api_guides/python/math_ops" target="_blank" rel="noopener" title="需要翻墙--已不能用">API</a></p>
+</blockquote>
+<h2 id="变量OP-用来存储模型参数"><a href="#变量OP-用来存储模型参数" class="headerlink" title="变量OP(用来存储模型参数)"></a>变量OP(用来存储模型参数)</h2>特点：</li>
+<li>存储持久化</li>
+<li>可修改值</li>
+<li>可指定被训练 <h3 id="创建变量"><a href="#创建变量" class="headerlink" title="创建变量"></a>创建变量</h3>tf.Variable(inital_value=None,trainable=True,collections=None,name=None)   </li>
+<li>inital_value:初始化的值   </li>
+<li>trainable:是否被训练  </li>
+<li>collections:新变量将添加到列出的图的集合中collections,默认为[GraphKeys.GLOBAL_VARIABLES],如果trainable是True变量也被添加到图形集合GraphKeys。TRAINABLE_VARIABLES</li>
+<li>变量需要显式初始化，才能运行值  <pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">variable_demo</span><span class="params">()</span>:</span>
+<span class="comment">#定义变量</span>
+a = tf.Variable(inital_value=<span class="number">40</span>)  
+b= tf.Variable(inital_value=<span class="number">50</span>)
+c = tf.add(a,b)  
+</code></pre>
+</li>
+</ul>
+<p>#初始化变量<br>init = tf.global_variables_initializer()  </p>
+<p>#开启对话  </p>
+<p>with tf.Session() as sess:<br>    #变量初始化<br>    sess.run(init)<br>    print(“c:\n”,sess.run(c))  </p>
+<pre><code>### 使用tf.variable_scope()修改变量的命名空间  
+会在OP的名字前面增加命名空间的指定名字  
+``` python  
+with tf.variable_scope(&quot;name&quot;):
+    var = tf.Variable(name=&apos;var&apos;,initial_value=[4],dtype=tf.float32) 
+    var_double = tf.Variable(name=&apos;var&apos;,inintaial_value=[4],dtype=tf.float32)  
+
+&lt;tf.Variable &apos;name/var:0&apos; shapr=() dtype=float32_ref&gt;  
+&lt;tf.Variable &apos;name/var_1:0&apos; shapr=() dtype=float32_ref&gt;      </code></pre><h2 id="高级API"><a href="#高级API" class="headerlink" title="高级API"></a>高级API</h2><h3 id="基础API"><a href="#基础API" class="headerlink" title="基础API"></a>基础API</h3><ul>
+<li>tf.app<blockquote>
+<p>这个模块相当于为TensorFlow进行的脚本提供一个main函数入口，可以定义脚本运行的flags</p>
+</blockquote>
+</li>
+<li>tf.image  <blockquote>
+<p>TensorFlow的图像处理操作。主要是一些颜色变换、变形和图像的编码和解释  </p>
+</blockquote>
+</li>
+<li>tf.gfile  <blockquote>
+<p>这个模块提供了一组文件操作函数 </p>
+</blockquote>
+</li>
+<li>tf.summary  <blockquote>
+<p>用来生成TensorBoard可用的统计日志，目前summary主要提供了4种类型：audio、image、histogram、scalar</p>
+</blockquote>
+</li>
+<li>tf.python_io  <blockquote>
+<p>用来读写TFRecords  </p>
+</blockquote>
+</li>
+<li>tf.train <blockquote>
+<p>这个模块提供了一些训练器，与tf.nn组合起来，实现一些网络的优化算法  </p>
+</blockquote>
+</li>
+<li>tf.nn <blockquote>
+<p>这个模块提供了一些构建神经网络的底层函数。TensorFlow构建网络的核心模块。  </p>
+</blockquote>
+<h3 id="高级API-1"><a href="#高级API-1" class="headerlink" title="高级API"></a>高级API</h3></li>
+<li>tf.keras<blockquote>
+<p>Keras本来是一个独立的深度学习库，tensorflow将其学习过来，增加这部分模块在于快速构建模型 </p>
+</blockquote>
+</li>
+<li>tf.layers<blockquote>
+<p>高级API，以更高级的概念层来定义一个模型。类似tf.keras  </p>
+</blockquote>
+</li>
+<li>td.contrib<br>tf.contrib.layers提供能将计算途中的 网络层、正则化、摘要操作，是构建计算图的高级操作，但是tf.contrib包含不稳定和实验代码，有可能以后API会改变  </li>
+<li>tf.estimator  <blockquote>
+<p>一个Estimator相当于Model + Training + Evaluate 的合体。在模块种，已经实现了集中简单的分类器和回归器，包括：Baseline，Learning和DNN。这里的DNN的网络，只是全连接网络，没有提供卷积之类的。</p>
+</blockquote>
+<h1 id="数据读取、神经网络"><a href="#数据读取、神经网络" class="headerlink" title="数据读取、神经网络"></a>数据读取、神经网络</h1><h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1></li>
 </ul>
 
       
