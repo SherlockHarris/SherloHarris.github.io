@@ -48,15 +48,15 @@
   };
 </script>
 
-  <meta name="description" content="ID3系列算法准备工作明确自变量和因变量，确定信息度量的方式（eg：熵，基尼系数等），确定终止条件（eg：纯度，记录条数，循环次数等）    信息熵：   信息论中的概念，香农提出   描述混乱程度的度量   取值范围0~1，值越大，越混乱   计算公式：$ H(U) &#x3D; E{-\log p_i} &#x3D; - \sum_{i&#x3D;1}^n p_i\log p_i $  选择特征得到当前待处理子集，计算所有">
+  <meta name="description" content="ID3系列算法准备工作明确自变量和因变量，确定信息度量的方式（eg：熵，基尼系数等），确定终止条件（eg：纯度，记录条数，循环次数等）    信息熵：   信息论中的概念，香农提出   描述混乱程度的度量   取值范围0~1，值越大，越混乱   计算公式：$$H(U) &#x3D; E{-\log p_i} &#x3D; - \sum_{i&#x3D;1}^n p_i\log p_i$$  选择特征得到当前待处理子集，计算所有">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="决策树">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;23&#x2F;%E5%86%B3%E7%AD%96%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
-<meta property="og:description" content="ID3系列算法准备工作明确自变量和因变量，确定信息度量的方式（eg：熵，基尼系数等），确定终止条件（eg：纯度，记录条数，循环次数等）    信息熵：   信息论中的概念，香农提出   描述混乱程度的度量   取值范围0~1，值越大，越混乱   计算公式：$ H(U) &#x3D; E{-\log p_i} &#x3D; - \sum_{i&#x3D;1}^n p_i\log p_i $  选择特征得到当前待处理子集，计算所有">
+<meta property="og:description" content="ID3系列算法准备工作明确自变量和因变量，确定信息度量的方式（eg：熵，基尼系数等），确定终止条件（eg：纯度，记录条数，循环次数等）    信息熵：   信息论中的概念，香农提出   描述混乱程度的度量   取值范围0~1，值越大，越混乱   计算公式：$$H(U) &#x3D; E{-\log p_i} &#x3D; - \sum_{i&#x3D;1}^n p_i\log p_i$$  选择特征得到当前待处理子集，计算所有">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T13:01:11.605Z">
+<meta property="og:updated_time" content="2020-02-24T13:07:25.309Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/02/23/%E5%86%B3%E7%AD%96%E6%A0%91/">
@@ -218,7 +218,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-24 21:01:11" itemprop="dateModified" datetime="2020-02-24T21:01:11+08:00">2020-02-24</time>
+                <time title="Modified: 2020-02-24 21:07:25" itemprop="dateModified" datetime="2020-02-24T21:07:25+08:00">2020-02-24</time>
               </span>
 
           
@@ -240,7 +240,7 @@
 <li>信息论中的概念，香农提出  </li>
 <li>描述混乱程度的度量  </li>
 <li>取值范围0~1，值越大，越混乱  </li>
-<li>计算公式：$ H(U) = E{-\log p_i} = - \sum_{i=1}^n p_i\log p_i $  <h2 id="选择特征"><a href="#选择特征" class="headerlink" title="选择特征"></a>选择特征</h2>得到当前待处理子集，计算所有特征信息度量，得到当前最佳分类特征  <h3 id="信息增益和特征选择"><a href="#信息增益和特征选择" class="headerlink" title="信息增益和特征选择"></a>信息增益和特征选择</h3><blockquote>
+<li>计算公式：$$H(U) = E{-\log p_i} = - \sum_{i=1}^n p_i\log p_i$$  <h2 id="选择特征"><a href="#选择特征" class="headerlink" title="选择特征"></a>选择特征</h2>得到当前待处理子集，计算所有特征信息度量，得到当前最佳分类特征  <h3 id="信息增益和特征选择"><a href="#信息增益和特征选择" class="headerlink" title="信息增益和特征选择"></a>信息增益和特征选择</h3><blockquote>
 <p>信息增益：</p>
 </blockquote>
 </li>
