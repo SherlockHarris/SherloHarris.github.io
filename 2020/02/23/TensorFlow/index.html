@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
 <meta property="og:description" content="TensorFlow框架介绍TF数据流图TensorFlow程序通常由两部分组成：构建图和执行图构建阶段：数据（张量-Tensor）与操作（节点-Operation）的执行步骤被描述成一个图执行阶段：使用会话执行构建好的图中的操作    图和会话：  图：时TensorFlow将计算表示为指令之间的依赖关系的一种表示法   会话：TensorFlow跨一个或多个本地或远程设备运行数据流图的机制">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T16:27:40.993Z">
+<meta property="og:updated_time" content="2020-02-25T00:11:56.054Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/02/23/TensorFlow/">
@@ -217,7 +217,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-25 00:27:40" itemprop="dateModified" datetime="2020-02-25T00:27:40+08:00">2020-02-25</time>
+                <time title="Modified: 2020-02-25 08:11:56" itemprop="dateModified" datetime="2020-02-25T08:11:56+08:00">2020-02-25</time>
               </span>
 
           
@@ -569,29 +569,30 @@ a_p.set_shapr(<span class="number">2</span>,<span class="number">10</span>)  </c
 <li>存储持久化</li>
 <li>可修改值</li>
 <li>可指定被训练 <h3 id="创建变量"><a href="#创建变量" class="headerlink" title="创建变量"></a>创建变量</h3>tf.Variable(inital_value=None,trainable=True,collections=None,name=None)   </li>
-<li>inital_value:初始化的值   </li>
-<li>trainable:是否被训练  </li>
-<li>collections:新变量将添加到列出的图的集合中collections,默认为[GraphKeys.GLOBAL_VARIABLES],如果trainable是True变量也被添加到图形集合GraphKeys。TRAINABLE_VARIABLES</li>
-<li>变量需要显式初始化，才能运行值  <pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">variable_demo</span><span class="params">()</span>:</span>
+<li>inital_value: 初始化的值   </li>
+<li>trainable: 是否被训练  </li>
+<li>collections: 新变量将添加到列出的图的集合中collections,默认为[GraphKeys.GLOBAL_VARIABLES],如果trainable是True变量也被添加到图形集合GraphKeys。TRAINABLE_VARIABLES</li>
+<li>变量需要显式初始化，才能运行值    <pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">variable_demo</span><span class="params">()</span>:</span>
 <span class="comment">#定义变量</span>
 a = tf.Variable(inital_value=<span class="number">40</span>)  
 b= tf.Variable(inital_value=<span class="number">50</span>)
 c = tf.add(a,b)  
+<span class="comment">#初始化变量</span>
+init = tf.global_variables_initializer()  
+<span class="comment">#开启对话  </span>
+<span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:
+  <span class="comment">#变量初始化  </span>
+  sess.run(init)
+  print(<span class="string">"c:\n"</span>,sess.run(c))  </code></pre>
+<h3 id="使用tf-variable-scope-修改变量的命名空间"><a href="#使用tf-variable-scope-修改变量的命名空间" class="headerlink" title="使用tf.variable_scope()修改变量的命名空间"></a>使用tf.variable_scope()修改变量的命名空间</h3>会在OP的名字前面增加命名空间的指定名字  <pre><code class="python"><span class="keyword">with</span> tf.variable_scope(<span class="string">"name"</span>):
+  var = tf.Variable(name=<span class="string">'var'</span>,initial_value=[<span class="number">4</span>],dtype=tf.float32) 
+  var_double = tf.Variable(name=<span class="string">'var'</span>,inintaial_value=[<span class="number">4</span>],dtype=tf.float32)  
 </code></pre>
 </li>
 </ul>
-<p>#初始化变量<br>init = tf.global_variables_initializer()  </p>
-<p>#开启对话  </p>
-<p>with tf.Session() as sess:<br>    #变量初始化<br>    sess.run(init)<br>    print(“c:\n”,sess.run(c))  </p>
-<pre><code>### 使用tf.variable_scope()修改变量的命名空间  
-会在OP的名字前面增加命名空间的指定名字  
-``` python  
-with tf.variable_scope(&quot;name&quot;):
-    var = tf.Variable(name=&apos;var&apos;,initial_value=[4],dtype=tf.float32) 
-    var_double = tf.Variable(name=&apos;var&apos;,inintaial_value=[4],dtype=tf.float32)  
-
-&lt;tf.Variable &apos;name/var:0&apos; shapr=() dtype=float32_ref&gt;  
-&lt;tf.Variable &apos;name/var_1:0&apos; shapr=() dtype=float32_ref&gt;      </code></pre><h2 id="高级API"><a href="#高级API" class="headerlink" title="高级API"></a>高级API</h2><h3 id="基础API"><a href="#基础API" class="headerlink" title="基础API"></a>基础API</h3><ul>
+<p>&lt;tf.Variable ‘name/var:0’ shapr=() dtype=float32_ref&gt;<br>&lt;tf.Variable ‘name/var_1:0’ shapr=() dtype=float32_ref&gt;      </p>
+<p>```  </p>
+<h2 id="高级API"><a href="#高级API" class="headerlink" title="高级API"></a>高级API</h2><h3 id="基础API"><a href="#基础API" class="headerlink" title="基础API"></a>基础API</h3><ul>
 <li>tf.app<blockquote>
 <p>这个模块相当于为TensorFlow进行的脚本提供一个main函数入口，可以定义脚本运行的flags</p>
 </blockquote>
@@ -690,7 +691,7 @@ with tf.variable_scope(&quot;name&quot;):
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow框架介绍"><span class="nav-number">1.</span> <span class="nav-text">TensorFlow框架介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TF数据流图"><span class="nav-number">1.1.</span> <span class="nav-text">TF数据流图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图与TensorBoard"><span class="nav-number">1.2.</span> <span class="nav-text">图与TensorBoard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认图"><span class="nav-number">1.2.1.</span> <span class="nav-text">默认图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义图"><span class="nav-number">1.2.2.</span> <span class="nav-text">自定义图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TensorBoard：可视化学习"><span class="nav-number">1.2.3.</span> <span class="nav-text">TensorBoard：可视化学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OP"><span class="nav-number">1.2.4.</span> <span class="nav-text">OP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见OP"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">常见OP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话"><span class="nav-number">1.3.</span> <span class="nav-text">会话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#会话创建"><span class="nav-number">1.3.1.</span> <span class="nav-text">会话创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话的注意资源"><span class="nav-number">1.3.2.</span> <span class="nav-text">会话的注意资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话的run"><span class="nav-number">1.3.3.</span> <span class="nav-text">会话的run()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feed操作"><span class="nav-number">1.3.4.</span> <span class="nav-text">feed操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量（和ndarray有联系）"><span class="nav-number">1.4.</span> <span class="nav-text">张量（和ndarray有联系）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#张量的类型"><span class="nav-number">1.4.1.</span> <span class="nav-text">张量的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量的变换"><span class="nav-number">1.4.2.</span> <span class="nav-text">张量的变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量的数学运算"><span class="nav-number">1.4.3.</span> <span class="nav-text">张量的数学运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量OP-用来存储模型参数"><span class="nav-number">1.5.</span> <span class="nav-text">变量OP(用来存储模型参数)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建变量"><span class="nav-number">1.5.1.</span> <span class="nav-text">创建变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级API"><span class="nav-number">1.6.</span> <span class="nav-text">高级API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础API"><span class="nav-number">1.6.1.</span> <span class="nav-text">基础API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级API-1"><span class="nav-number">1.6.2.</span> <span class="nav-text">高级API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据读取、神经网络"><span class="nav-number">2.</span> <span class="nav-text">数据读取、神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卷积神经网络"><span class="nav-number">3.</span> <span class="nav-text">卷积神经网络</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow框架介绍"><span class="nav-number">1.</span> <span class="nav-text">TensorFlow框架介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TF数据流图"><span class="nav-number">1.1.</span> <span class="nav-text">TF数据流图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图与TensorBoard"><span class="nav-number">1.2.</span> <span class="nav-text">图与TensorBoard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认图"><span class="nav-number">1.2.1.</span> <span class="nav-text">默认图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义图"><span class="nav-number">1.2.2.</span> <span class="nav-text">自定义图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TensorBoard：可视化学习"><span class="nav-number">1.2.3.</span> <span class="nav-text">TensorBoard：可视化学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OP"><span class="nav-number">1.2.4.</span> <span class="nav-text">OP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见OP"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">常见OP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话"><span class="nav-number">1.3.</span> <span class="nav-text">会话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#会话创建"><span class="nav-number">1.3.1.</span> <span class="nav-text">会话创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话的注意资源"><span class="nav-number">1.3.2.</span> <span class="nav-text">会话的注意资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话的run"><span class="nav-number">1.3.3.</span> <span class="nav-text">会话的run()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feed操作"><span class="nav-number">1.3.4.</span> <span class="nav-text">feed操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量（和ndarray有联系）"><span class="nav-number">1.4.</span> <span class="nav-text">张量（和ndarray有联系）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#张量的类型"><span class="nav-number">1.4.1.</span> <span class="nav-text">张量的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量的变换"><span class="nav-number">1.4.2.</span> <span class="nav-text">张量的变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量的数学运算"><span class="nav-number">1.4.3.</span> <span class="nav-text">张量的数学运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量OP-用来存储模型参数"><span class="nav-number">1.5.</span> <span class="nav-text">变量OP(用来存储模型参数)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建变量"><span class="nav-number">1.5.1.</span> <span class="nav-text">创建变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用tf-variable-scope-修改变量的命名空间"><span class="nav-number">1.5.2.</span> <span class="nav-text">使用tf.variable_scope()修改变量的命名空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级API"><span class="nav-number">1.6.</span> <span class="nav-text">高级API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础API"><span class="nav-number">1.6.1.</span> <span class="nav-text">基础API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级API-1"><span class="nav-number">1.6.2.</span> <span class="nav-text">高级API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据读取、神经网络"><span class="nav-number">2.</span> <span class="nav-text">数据读取、神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卷积神经网络"><span class="nav-number">3.</span> <span class="nav-text">卷积神经网络</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
