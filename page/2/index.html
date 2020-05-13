@@ -98,9 +98,9 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-<link rel="alternate" href="/atom.xml" title="Sherlcok's blogs" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="Sherlcok's blogs" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -297,7 +297,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 18:38:27" itemprop="dateModified" datetime="2020-05-13T18:38:27+08:00">2020-05-13</time>
+                <time title="Modified: 2020-05-13 18:40:23" itemprop="dateModified" datetime="2020-05-13T18:40:23+08:00">2020-05-13</time>
               </span>
 
           
@@ -311,7 +311,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="决策树-噜啦噜啦咧"><a href="#决策树-噜啦噜啦咧" class="headerlink" title="决策树(噜啦噜啦咧)"></a>决策树(噜啦噜啦咧)</h1><h2 id="问题引入（案例）"><a href="#问题引入（案例）" class="headerlink" title="问题引入（案例）"></a>问题引入（案例）</h2><p>根据电脑购买记录，对购买者建模。该模型可以基于客户的一些信息预测他是否会购买电脑  </p>
+          <h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h2 id="问题引入（案例）"><a href="#问题引入（案例）" class="headerlink" title="问题引入（案例）"></a>问题引入（案例）</h2><p>根据电脑购买记录，对购买者建模。该模型可以基于客户的一些信息预测他是否会购买电脑  </p>
 <div class="table-container">
 <table>
 <thead>
@@ -542,7 +542,7 @@
 <li>信息增益越大，对确定性贡献越大  </li>
 </ul>
 <p>计算整体的熵、基于特征1、2、3….n的熵<br>计算特征1、2、3….n的信息增益（整体的熵-特征熵）<br>得到当前最佳特征<br>根据当前最佳特征产生分支<br><img src="\picture\menu.png" alt="menu"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: 开始框</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">A&#x3D;&gt;operation: 选择当前最佳特征</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">B&#x3D;&gt;operation: 按照取值产生分支</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">C&#x3D;&gt;condition: 满足分支终止条件 </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">D&#x3D;&gt;condition: 是否有待处理分支  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">E&#x3D;&gt;operation: 产生处理结果</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">e&#x3D;&gt;end: 结束</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">st-&gt;A-&gt;B-&gt;C</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">C(no)-&gt;A  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">C(yes)-&gt;D  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">D(no)-&gt;E</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">D(yes,right)-&gt;A  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">E-&gt;e(down)</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: 开始框</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">A&#x3D;&gt;operation: 选择当前最佳特征</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">B&#x3D;&gt;operation: 按照取值产生分支</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">C&#x3D;&gt;condition: 满足分支终止条件 </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">D&#x3D;&gt;condition: 是否有待处理分支  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">E&#x3D;&gt;operation: 产生处理结果</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">e&#x3D;&gt;end: 结束</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">st-&gt;A-&gt;B-&gt;C</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">C(no)-&gt;A  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">C(yes)-&gt;D  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">D(no)-&gt;E</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">D(yes,right)-&gt;A  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">E-&gt;e(down)</span></pre></td></tr></table></figure>
 <h2 id="3-创建分支"><a href="#3-创建分支" class="headerlink" title="3.创建分支"></a>3.创建分支</h2><p>根据选中特征将当前记录分成不同分支，分支个数取决于算法  </p>
 <h2 id="4-是否终止"><a href="#4-是否终止" class="headerlink" title="4.是否终止"></a>4.是否终止</h2><p>判断是否满足终止条件，满足则退出循环，不满足则继续递归调用（返回2）   </p>
 <h2 id="5-生成结果"><a href="#5-生成结果" class="headerlink" title="5.生成结果"></a>5.生成结果</h2><p>判断是否需要剪枝，需要则进行适当修剪，不需要则为最终结果  </p>
