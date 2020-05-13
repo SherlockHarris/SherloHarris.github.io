@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="提前概要在2020年2月14日与队友讨论A题过程中需要查找苏格兰海域温度变化，因此第一次接触到气象数据netCDF(.nc)格式文件，在这里以北京大学所录数据，即比赛过程中所使用的数据为例，记录对这个格式文件的处理。基本思路是利用Python中xarray库处理，再将提取到的数据存储为csv格式文件。 安装推荐使用conda安装：   conda install xarray 在安装过程中出现fa">
+<meta name="keywords" content="美赛,netCDF(.nc),csv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nc2csv">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;15&#x2F;nc2csv&#x2F;index.html">
+<meta property="og:site_name" content="Sherlcok&#39;s blogs">
+<meta property="og:description" content="提前概要在2020年2月14日与队友讨论A题过程中需要查找苏格兰海域温度变化，因此第一次接触到气象数据netCDF(.nc)格式文件，在这里以北京大学所录数据，即比赛过程中所使用的数据为例，记录对这个格式文件的处理。基本思路是利用Python中xarray库处理，再将提取到的数据存储为csv格式文件。 安装推荐使用conda安装：   conda install xarray 在安装过程中出现fa">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-21T06:07:50.957Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/15/nc2csv/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>nc2csv | Sherlcok's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sherlcok's blogs" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sherlcok's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-categories"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/15/nc2csv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nc2csv
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-15 19:34:53" itemprop="dateCreated datePublished" datetime="2020-02-15T19:34:53+08:00">2020-02-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-21 14:07:50" itemprop="dateModified" datetime="2020-02-21T14:07:50+08:00">2020-02-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="提前概要"><a href="#提前概要" class="headerlink" title="提前概要"></a>提前概要</h2><p>在2020年2月14日与队友讨论A题过程中需要查找苏格兰海域温度变化，因此第一次接触到气象数据netCDF(.nc)格式文件，在这里以北京大学所录数据，即比赛过程中所使用的数据为例，记录对这个格式文件的处理。基本思路是利用Python中xarray库处理，再将提取到的数据存储为csv格式文件。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>推荐使用conda安装：  </p>
+<pre><code>conda install xarray
+</code></pre><p>在安装过程中出现faild信息，最后采用修改清华镜像解决</p>
+<h2 id="引入包"><a href="#引入包" class="headerlink" title="引入包"></a>引入包</h2><pre><code class="lang-python">import xarray as xr
+import csv
+</code></pre>
+<h2 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h2><pre><code class="lang-python">data = xr.open_dataset(&#39;ERsst.mnmean.nc&#39;)
+</code></pre>
+<blockquote>
+<p>读取到的数据：<br>```  </p>
+<p><xarray.Dataset><br>Dimensions:    (lat: 89, lon: 180, nbnds: 2, time: 1973)<br>Coordinates:</p>
+<ul>
+<li>lat        (lat) float32 88.0 86.0 84.0 82.0 … -82.0 -84.0 -86.0 -88.0</li>
+<li>lon        (lon) float32 0.0 2.0 4.0 6.0 8.0 … 352.0 354.0 356.0 358.0</li>
+<li>time       (time) datetime64[ns] 1854-01-01 1854-02-01 … 2018-05-01<br>Dimensions without coordinates: nbnds<br>Data variables:<br>time_bnds  (time, nbnds) float64 …<br>sst        (time, lat, lon) float32 …<br>Attributes:<br>climatology:               Climatology is based on 1971-2000 SST, Xue, Y….<br>description:               In situ data: ICOADS2.5 before 2007 and NCEP i…<br>keywords_vocabulary:       NASA Global Change Master Directory (GCMD) Sci…<br>keywords:                  Earth Science &gt; Oceans &gt; Ocean Temperature &gt; S…<br>instrument:                Conventional thermometers<br>source_comment:            SSTs were observed by conventional thermometer…<br>geospatial_lon_min:        -1.0<br>geospatial_lon_max:        359.0<br>geospatial_laty_max:       89.0<br>geospatial_laty_min:       -89.0<br>geospatial_lat_max:        89.0<br>geospatial_lat_min:        -89.0<br>geospatial_lat_units:      degrees_north<br>geospatial_lon_units:      degrees_east<br>cdm_data_type:             Grid<br>project:                   NOAA Extended Reconstructed Sea Surface Temper…<br>original_publisher_url:    <a href="http://www.ncdc.noaa.gov" target="_blank" rel="noopener">http://www.ncdc.noaa.gov</a><br>References:                <a href="https://www.ncdc.noaa.gov/data-access/marineoc" target="_blank" rel="noopener">https://www.ncdc.noaa.gov/data-access/marineoc</a>…<br>source:                    In situ data: ICOADS R3.0 before 2015, NCEP in…<br>title:                     NOAA ERSSTv5 (in situ only)<br>history:                   created 07/2017 by PSD data using NCEI’s ERSST…<br>institution:               This version written at NOAA/ESRL PSD: obtaine…<br>citation:                  Huang et al, 2017: Extended Reconstructed Sea …<br>platform:                  Ship and Buoy SSTs from ICOADS R3.0 and NCEP GTS<br>standard_name_vocabulary:  CF Standard Name Table (v40, 25 January 2017)<br>processing_level:          NOAA Level 4<br>Conventions:               CF-1.6, ACDD-1.3<br>metadata_link:             :metadata_link = <a href="https://doi.org/10.7289/V5T72" target="_blank" rel="noopener">https://doi.org/10.7289/V5T72</a>…<br>creator_name:              Boyin Huang (original)<br>date_created:              2017-06-30T12:18:00Z (original)<br>product_version:           Version 5<br>creator_url_original:      <a href="https://www.ncei.noaa.gov" target="_blank" rel="noopener">https://www.ncei.noaa.gov</a><br>license:                   No constraints on data access or use<br>comment:                   SSTs were observed by conventional thermometer…<br>summary:                   ERSST.v5 is developed based on v4 after revisi…<br>dataset_title:             NOAA Extended Reconstructed SST V5</li>
+</ul>
+</blockquote>
+<p>Process finished with exit code 0  </p>
+<pre><code>## 数据分析  
+包含的变量：  
+- time_bnds  
+- sst    
+&gt; time_bnds:    time和nbnds  
+
+&gt; sst:  time、lat、lon  
+
+&gt; sst是本次数据处理核心，取出sst中信息进行初步分析：    
+``` python    
+sst = data[&#39;sst&#39;]
+</code></pre><pre><code>&lt;xarray.DataArray &#39;sst&#39; (time: 1973, lat: 89, lon: 180)&gt;
+[31607460 values with dtype=float32]
+Coordinates:
+  * lat      (lat) float32 88.0 86.0 84.0 82.0 80.0 ... -82.0 -84.0 -86.0 -88.0
+  * lon      (lon) float32 0.0 2.0 4.0 6.0 8.0 ... 350.0 352.0 354.0 356.0 358.0
+  * time     (time) datetime64[ns] 1854-01-01 1854-02-01 ... 2018-05-01
+Attributes:
+    long_name:     Monthly Means of Sea Surface Temperature
+    units:         degC
+    var_desc:      Sea Surface Temperature
+    level_desc:    Surface
+    statistic:     Mean
+    dataset:       NOAA Extended Reconstructed SST V5
+    parent_stat:   Individual Values
+    actual_range:  [-1.8     42.32636]
+    valid_range:   [-1.8 45. ]
+
+Process finished with exit code 0
+</code></pre><p>可以看出，sst中包含三个主要信息：lat，lon已经time，事实上，sst的数据是一个三维矩阵，矩阵值的信息为time时刻，lat和lon构成的经纬坐标位置处的海域温度值，我们把sst的数据提取出来确认一下：  </p>
+<pre><code class="lang-python">sst = data[&#39;sst&#39;].data
+</code></pre>
+<p>运行上述代码，得到结果：  </p>
+<pre><code>[[[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ ...
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]]
+</code></pre><blockquote>
+<p>效仿上述做法，提取其它需要的数据:  </p>
+<pre><code class="lang-python">lat = data[&#39;lat&#39;].data
+lon = data[&#39;lon&#39;].data
+time = data[&#39;time&#39;].data
+</code></pre>
+<h2 id="写入csv文件"><a href="#写入csv文件" class="headerlink" title="写入csv文件"></a>写入csv文件</h2><h3 id="打开csv文件"><a href="#打开csv文件" class="headerlink" title="打开csv文件"></a>打开csv文件</h3><pre><code class="lang-python">with open(&#39;test11.csv&#39;,mode = &#39;w&#39;,newline=&#39;&#39;) as ice_file:
+</code></pre>
+<p>不加   <code>newline=&#39;&#39;</code>      会导致csv每两行数据间会多出一行空格  </p>
+<h3 id="写入表头"><a href="#写入表头" class="headerlink" title="写入表头"></a>写入表头</h3><p>在这里假定苏格兰海域范围为纬度+62～40，350～0～12  </p>
+<pre><code class="lang-python">ice_write.writerow((&#39;time&#39;,&#39;lat&#39;,&#39;0&#39;,&#39;2&#39;,&#39;4&#39;,&#39;6&#39;,&#39;8&#39;,&#39;10&#39;,&#39;12&#39;,&#39;350&#39;,&#39;352&#39;,&#39;354&#39;,&#39;356&#39;,&#39;358&#39;))
+</code></pre>
+<h3 id="写入信息"><a href="#写入信息" class="headerlink" title="写入信息"></a>写入信息</h3><p>从1968-01-01开始写入，time[1368]的值为1968-01-01T00:00:00.000000000  </p>
+<pre><code class="lang-python">with open(&#39;test11.csv&#39;,mode = &#39;w&#39;,newline=&#39;&#39;) as ice_file:
+    ice_write = csv.writer(ice_file)
+    ice_write.writerow((&#39;time&#39;,&#39;lat&#39;,&#39;0&#39;,&#39;2&#39;,&#39;4&#39;,&#39;6&#39;,&#39;8&#39;,&#39;10&#39;,&#39;12&#39;,&#39;350&#39;,&#39;352&#39;,&#39;354&#39;,&#39;356&#39;,&#39;358&#39;))
+    for i in range(len(time)):
+            if i &gt; 1367:
+                for j in range(len(lat)):
+                    if lat[j]&gt;=40 and lat[j]&lt;=62:
+                            tt = []
+                            for k in range(len(lon)):
+                                if lon[k]&lt;=12 or lon[k]&gt;=350:
+                                    tt.append(sst[i][j][k])
+                            res = [str(time[i])[:10],lat[j]]
+                            for p in range(len(tt)):
+                                res.append(tt[p])
+                            ice_write.writerow(res)
+ice_file.close()
+</code></pre>
+<p>因为writerow函数的参数仅为一个，所以把所有数据通过append函数整合在一起，<code>time[i][:10]</code>是为了消除时间后面的T00：00：00.00000000采用的取巧的方法</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><p>``` python<br>import xarray as xr<br>import csv<br>data = xr.open_dataset(‘ERsst.mnmean.nc’)<br>sst = data[‘sst’].data<br>lat = data[‘lat’].data<br>lon = data[‘lon’].data<br>time = data[‘time’].data<br>print(data[‘time’])</p>
+</blockquote>
+<p>with open(‘test11.csv’,mode = ‘w’,newline=’’) as ice_file:<br>    ice_write = csv.writer(ice_file)<br>    ice_write.writerow((‘time’,’lat’,’0’,’2’,’4’,’6’,’8’,’10’,’12’,’350’,’352’,’354’,’356’,’358’))<br>    for i in range(len(time)):<br>            if i &gt; 1367:<br>                for j in range(len(lat)):<br>                    if lat[j]&gt;=40 and lat[j]&lt;=62:<br>                            tt = []<br>                            for k in range(len(lon)):<br>                                if lon[k]&lt;=12 or lon[k]&gt;=350:<br>                                    tt.append(sst[i][j][k])<br>                            res = [str(time[i])[:10],lat[j]]<br>                            for p in range(len(tt)):<br>                                res.append(tt[p])<br>                            ice_write.writerow(res)<br>ice_file.close()<br>```  </p>
+<h2 id="读取的北大数据链接"><a href="#读取的北大数据链接" class="headerlink" title="读取的北大数据链接"></a>读取的北大数据链接</h2><p><a href="https://geodata.pku.edu.cn/index.php?c=content&amp;a=show&amp;id=728%E8%BF%99%E9%87%8C%E5%8F%AF%E4%BB%A5%E4%B8%8B%E8%BD%BD" target="_blank" rel="noopener" title="数据范围：1854-01-01到2018-05-01">北京大学地理数据平台-全球海温数据</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%8E%E8%B5%9B/" rel="tag"># 美赛</a>
+              <a href="/tags/netCDF-nc/" rel="tag"># netCDF(.nc)</a>
+              <a href="/tags/csv/" rel="tag"># csv</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/30/Matlab_Fuctions/" rel="prev" title="Fuctions">
+      <i class="fa fa-chevron-left"></i> Fuctions
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/16/ECS%E5%AE%89%E8%A3%85JDK/" rel="next" title="ECS安装JDK">
+      ECS安装JDK <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#提前概要"><span class="nav-number">1.</span> <span class="nav-text">提前概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入包"><span class="nav-number">3.</span> <span class="nav-text">引入包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据读取"><span class="nav-number">4.</span> <span class="nav-text">数据读取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写入csv文件"><span class="nav-number">5.</span> <span class="nav-text">写入csv文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#打开csv文件"><span class="nav-number">5.1.</span> <span class="nav-text">打开csv文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写入表头"><span class="nav-number">5.2.</span> <span class="nav-text">写入表头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写入信息"><span class="nav-number">5.3.</span> <span class="nav-text">写入信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整代码"><span class="nav-number">5.4.</span> <span class="nav-text">完整代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取的北大数据链接"><span class="nav-number">6.</span> <span class="nav-text">读取的北大数据链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Sherlock Harris</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sherlockharris" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sherlockharris" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sherlock Harris</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+ <script src="https://cdn.jsdelivr.net/gh/SherlockHarris/live2d-widget/autoload.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>
+
