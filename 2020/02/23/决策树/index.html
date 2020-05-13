@@ -48,13 +48,13 @@
   };
 </script>
 
-  <meta name="description" content="决策树(噜啦噜啦咧)问题引入（案例）根据电脑购买记录，对购买者建模。该模型可以基于客户的一些信息预测他是否会购买电脑|记录标识|年龄|收入层次|是否单身|信用等级|是否购买电脑||:—-:|:—-:|:—-:|:—-:|:—-:|:—-:||1|青少年|高|否|一般|否||2|青少年|高|否|良好|否||3|中年|高|否|一般|是||4|老年|中|否|一般|是||5|老年|低|是|一般|是||6|">
+  <meta name="description" content="决策树(噜啦噜啦咧)问题引入（案例）根据电脑购买记录，对购买者建模。该模型可以基于客户的一些信息预测他是否会购买电脑       记录标识 年龄 收入层次 是否单身 信用等级 是否购买电脑     1 青少年 高 否 一般 否   2 青少年 高 否 良好 否   3 中年 高 否 一般 是   4 老年 中 否 一般 是   5 老年 低 是 一般 是   6 老年 低 是 良好 否   7 中">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="决策树">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;23&#x2F;%E5%86%B3%E7%AD%96%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
-<meta property="og:description" content="决策树(噜啦噜啦咧)问题引入（案例）根据电脑购买记录，对购买者建模。该模型可以基于客户的一些信息预测他是否会购买电脑|记录标识|年龄|收入层次|是否单身|信用等级|是否购买电脑||:—-:|:—-:|:—-:|:—-:|:—-:|:—-:||1|青少年|高|否|一般|否||2|青少年|高|否|良好|否||3|中年|高|否|一般|是||4|老年|中|否|一般|是||5|老年|低|是|一般|是||6|">
+<meta property="og:description" content="决策树(噜啦噜啦咧)问题引入（案例）根据电脑购买记录，对购买者建模。该模型可以基于客户的一些信息预测他是否会购买电脑       记录标识 年龄 收入层次 是否单身 信用等级 是否购买电脑     1 青少年 高 否 一般 否   2 青少年 高 否 良好 否   3 中年 高 否 一般 是   4 老年 中 否 一般 是   5 老年 低 是 一般 是   6 老年 低 是 良好 否   7 中">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;picture&#x2F;one.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;picture&#x2F;two_one.png">
@@ -62,7 +62,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;picture&#x2F;two_three.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;picture&#x2F;result.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;picture&#x2F;menu.png">
-<meta property="og:updated_time" content="2020-05-13T10:34:39.040Z">
+<meta property="og:updated_time" content="2020-05-13T10:38:27.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;picture&#x2F;one.png">
 
@@ -109,9 +109,9 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</noscript>
 
-<link rel="alternate" href="/atom.xml" title="Sherlcok's blogs" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Sherlcok's blogs" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -225,7 +225,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 18:34:39" itemprop="dateModified" datetime="2020-05-13T18:34:39+08:00">2020-05-13</time>
+                <time title="Modified: 2020-05-13 18:38:27" itemprop="dateModified" datetime="2020-05-13T18:38:27+08:00">2020-05-13</time>
               </span>
 
           
@@ -239,7 +239,135 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="决策树-噜啦噜啦咧"><a href="#决策树-噜啦噜啦咧" class="headerlink" title="决策树(噜啦噜啦咧)"></a>决策树(噜啦噜啦咧)</h1><h2 id="问题引入（案例）"><a href="#问题引入（案例）" class="headerlink" title="问题引入（案例）"></a>问题引入（案例）</h2><p>根据电脑购买记录，对购买者建模。该模型可以基于客户的一些信息预测他是否会购买电脑<br>|记录标识|年龄|收入层次|是否单身|信用等级|是否购买电脑|<br>|:—-:|:—-:|:—-:|:—-:|:—-:|:—-:|<br>|1|青少年|高|否|一般|否|<br>|2|青少年|高|否|良好|否|<br>|3|中年|高|否|一般|是|<br>|4|老年|中|否|一般|是|<br>|5|老年|低|是|一般|是|<br>|6|老年|低|是|良好|否|<br>|7|中年|低|是|良好|是|<br>|8|青少年|中|否|一般|否|<br>|9|青少年|低|是|一般|是|<br>|10|老年|中|是|一般|是|<br>|11|青少年|中|是|良好|是|<br>|12|中年|中|否|良好|是|<br>|13|中年|高|是|一般|是|<br>|14|老年|中|否|良好|否|</p>
+        <h1 id="决策树-噜啦噜啦咧"><a href="#决策树-噜啦噜啦咧" class="headerlink" title="决策树(噜啦噜啦咧)"></a>决策树(噜啦噜啦咧)</h1><h2 id="问题引入（案例）"><a href="#问题引入（案例）" class="headerlink" title="问题引入（案例）"></a>问题引入（案例）</h2><p>根据电脑购买记录，对购买者建模。该模型可以基于客户的一些信息预测他是否会购买电脑  </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">记录标识</th>
+<th style="text-align:center">年龄</th>
+<th style="text-align:center">收入层次</th>
+<th style="text-align:center">是否单身</th>
+<th style="text-align:center">信用等级</th>
+<th style="text-align:center">是否购买电脑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">青少年</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">青少年</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">良好</td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">中年</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">老年</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">老年</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">老年</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">良好</td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">中年</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">良好</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">青少年</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">青少年</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">老年</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">青少年</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">良好</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">中年</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">良好</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">中年</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">老年</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">良好</td>
+<td style="text-align:center">否</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h3 id="确定自变量和因变量"><a href="#确定自变量和因变量" class="headerlink" title="确定自变量和因变量"></a>确定自变量和因变量</h3><ul>
 <li>自变量：年龄、收入层次、是否单身、信用等级</li>
 <li>因变量：是否购买电脑<h3 id="第一级特征选择（选择当前最佳特征）"><a href="#第一级特征选择（选择当前最佳特征）" class="headerlink" title="第一级特征选择（选择当前最佳特征）"></a>第一级特征选择（选择当前最佳特征）</h3><h4 id="计算整体的熵：购买：9例，未购买：5例"><a href="#计算整体的熵：购买：9例，未购买：5例" class="headerlink" title="计算整体的熵：购买：9例，未购买：5例"></a><strong>计算整体的熵</strong>：购买：9例，未购买：5例</h4><script type="math/tex; mode=display">熵_{整体} = -\frac{5}{14}\log_2\frac{5}{14}-\frac{9}{14}\log_2\frac{9}{14} = 0.940286</script><strong>计算年龄的熵</strong>：<table>
