@@ -98,9 +98,9 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</noscript>
 
-<link rel="alternate" href="/atom.xml" title="Sherlcok's blogs" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Sherlcok's blogs" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -180,112 +180,6 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/18/Requests%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sherlock Harris">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherlcok's blogs">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/18/Requests%E5%BA%93/" class="post-title-link" itemprop="url">Requests库</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-18 11:24:21" itemprop="dateCreated datePublished" datetime="2020-01-18T11:24:21+08:00">2020-01-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-16 15:14:48" itemprop="dateModified" datetime="2020-02-16T15:14:48+08:00">2020-02-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
-<p>Python实现的简单易用的HTTP库（基于urllib编写）  </p>
-<h1 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h1><h2 id="实例引入"><a href="#实例引入" class="headerlink" title="实例引入"></a>实例引入</h2><p>```python<br>import requests</p>
-</blockquote>
-<p>response = requests.get(‘<a href="http://baidu.com" target="_blank" rel="noopener">http://baidu.com</a>‘)<br>print(type(response))<br>print(response.status_code)<br>print(type(response.text))<br>print(response.text)<br>print(response.cookies)  </p>
-<pre><code>## 各种请求方式  
-```python  
-requests.post(&#39;http://httpbin.org/post&#39;)
-requests.put(&#39;http://httpbin.org/put&#39;)
-requests.delete(&#39;http://httpbin.org/delete&#39;)
-requests.head(&#39;http://httpbin.org/get&#39;)
-response = requests.get(&#39;http://httpbin.org/get&#39;)
-</code></pre><h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><h2 id="基本GET请求"><a href="#基本GET请求" class="headerlink" title="基本GET请求"></a>基本GET请求</h2><h3 id="基本写法"><a href="#基本写法" class="headerlink" title="基本写法"></a>基本写法</h3><pre><code class="lang-python">import requests
-
-response = requests.get(&#39;http://httpbin.org/get&#39;)
-print(response.text)
-</code></pre>
-<h3 id="带参数GET请求"><a href="#带参数GET请求" class="headerlink" title="带参数GET请求"></a>带参数GET请求</h3><figure class="highlight python"><figcaption><span>繁琐格式</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">response = requests.get(<span class="string">'http://httpbin.org/get?name=germey&amp;age=22'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">print(response.text)  </span></pre></td></tr></table></figure>
-<p>```python 简单（常用）格式<br>import requests</p>
-<p>data = {<br>    ‘name’: ‘germey’,<br>    ‘age’: 22<br>}<br>response = requests.get(‘<a href="http://httpbin.org/get" target="_blank" rel="noopener">http://httpbin.org/get</a>‘, params=data)<br>print(response.text)</p>
-<pre><code>### 解析json  
-```python  
-import requests
-
-response = requests.get(&#39;http://httpbin.org/get&#39;)
-print(type(response.text))
-print(response.json())
-print(type(response.json()))
-</code></pre><h3 id="获取二进制数据"><a href="#获取二进制数据" class="headerlink" title="获取二进制数据"></a>获取二进制数据</h3><pre><code class="lang-python">import requests
-
-response = requests.get(&#39;http://github.com/favicon.ico&#39;)
-print(type(response.text),type(response.content))
-print(response.text)
-print(response.content)
-</code></pre>
-<pre><code class="lang-python">import requests
-
-response = requests.get(&#39;http://github.com/favicon.ico&#39;)
-with open(&#39;favicon.ico&#39;,&#39;wb&#39;) as f:
-    f.write(response.content)
-    f.close()
-</code></pre>
-<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
         
   
   
@@ -705,7 +599,7 @@ with open(&#39;favicon.ico&#39;,&#39;wb&#39;) as f:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
