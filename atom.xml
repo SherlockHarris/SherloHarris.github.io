@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-06T03:14:03.808Z</updated>
+  <updated>2020-05-20T01:57:11.602Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>how could we use telnet in win10</title>
+    <link href="http://yoursite.com/2020/05/20/how-could-we-use-telnet-in-win10/"/>
+    <id>http://yoursite.com/2020/05/20/how-could-we-use-telnet-in-win10/</id>
+    <published>2020-05-20T00:24:51.000Z</published>
+    <updated>2020-05-20T01:57:11.602Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Step1-启用Telnet-Client"><a href="#Step1-启用Telnet-Client" class="headerlink" title="Step1:启用Telnet Client"></a>Step1:启用Telnet Client</h2><ul><li>控制面板-&gt;程序    </li><li>启动或关闭Windows功能</li><li>找到Telnet Client 或者 Telnet客户端，打勾</li><li>确定<br><img src="http://qal23xf82.bkt.clouddn.com/Telnet-step1.png" alt=""></li></ul><h2 id="Step2-安装Telnet服务端"><a href="#Step2-安装Telnet服务端" class="headerlink" title="Step2:安装Telnet服务端"></a>Step2:安装Telnet服务端</h2><blockquote><p>Win10以后取消了Telnet服务器的系统组件</p><p>每次关机后要再次手动打开服务器</p></blockquote><p>下载链接：</p><ul><li><a href="http://www.goodtechsys.com" target="_blank" rel="noopener">官网网站</a></li><li><a href="https://pan.baidu.com/s/1wc_UBcTUgux6NAzcprjeEA" target="_blank" rel="noopener">网盘</a>:提取码：m3x2<h2 id="Step3：测试"><a href="#Step3：测试" class="headerlink" title="Step3：测试"></a>Step3：测试</h2></li><li>客户端<br>在命令提示符窗口输入 telnet，出现如下界面安装成功<br><img src="http://qal23xf82.bkt.clouddn.com/Telnet-step3.1.png" alt=""></li><li>服务端<br>telnet远程IP，出现如下界面安装成功<br><img src="http://qal23xf82.bkt.clouddn.com/Telnet-step3.2.png" alt=""></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Step1-启用Telnet-Client&quot;&gt;&lt;a href=&quot;#Step1-启用Telnet-Client&quot; class=&quot;headerlink&quot; title=&quot;Step1:启用Telnet Client&quot;&gt;&lt;/a&gt;Step1:启用Telnet Client&lt;/
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Regression</title>
@@ -478,30 +500,6 @@
       
       
         &lt;h2 id=&quot;代码&quot;&gt;&lt;a href=&quot;#代码&quot; class=&quot;headerlink&quot; title=&quot;代码&quot;&gt;&lt;/a&gt;代码&lt;/h2&gt;&lt;figure class=&quot;highlight matlab&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Requests库</title>
-    <link href="http://yoursite.com/2020/01/18/Requests%E5%BA%93/"/>
-    <id>http://yoursite.com/2020/01/18/Requests%E5%BA%93/</id>
-    <published>2020-01-18T03:24:21.000Z</published>
-    <updated>2020-02-16T07:14:48.927Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote><p>Python实现的简单易用的HTTP库（基于urllib编写）  </p><h1 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h1><h2 id="实例引入"><a href="#实例引入" class="headerlink" title="实例引入"></a>实例引入</h2><p>```python<br>import requests</p></blockquote><p>response = requests.get(‘<a href="http://baidu.com" target="_blank" rel="noopener">http://baidu.com</a>‘)<br>print(type(response))<br>print(response.status_code)<br>print(type(response.text))<br>print(response.text)<br>print(response.cookies)  </p><pre><code>## 各种请求方式  ```python  requests.post(&#39;http://httpbin.org/post&#39;)requests.put(&#39;http://httpbin.org/put&#39;)requests.delete(&#39;http://httpbin.org/delete&#39;)requests.head(&#39;http://httpbin.org/get&#39;)response = requests.get(&#39;http://httpbin.org/get&#39;)</code></pre><h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><h2 id="基本GET请求"><a href="#基本GET请求" class="headerlink" title="基本GET请求"></a>基本GET请求</h2><h3 id="基本写法"><a href="#基本写法" class="headerlink" title="基本写法"></a>基本写法</h3><pre><code class="lang-python">import requestsresponse = requests.get(&#39;http://httpbin.org/get&#39;)print(response.text)</code></pre><h3 id="带参数GET请求"><a href="#带参数GET请求" class="headerlink" title="带参数GET请求"></a>带参数GET请求</h3><figure class="highlight python"><figcaption><span>繁琐格式</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">response = requests.get(<span class="string">'http://httpbin.org/get?name=germey&amp;age=22'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">print(response.text)  </span></pre></td></tr></table></figure><p>```python 简单（常用）格式<br>import requests</p><p>data = {<br>    ‘name’: ‘germey’,<br>    ‘age’: 22<br>}<br>response = requests.get(‘<a href="http://httpbin.org/get" target="_blank" rel="noopener">http://httpbin.org/get</a>‘, params=data)<br>print(response.text)</p><pre><code>### 解析json  ```python  import requestsresponse = requests.get(&#39;http://httpbin.org/get&#39;)print(type(response.text))print(response.json())print(type(response.json()))</code></pre><h3 id="获取二进制数据"><a href="#获取二进制数据" class="headerlink" title="获取二进制数据"></a>获取二进制数据</h3><pre><code class="lang-python">import requestsresponse = requests.get(&#39;http://github.com/favicon.ico&#39;)print(type(response.text),type(response.content))print(response.text)print(response.content)</code></pre><pre><code class="lang-python">import requestsresponse = requests.get(&#39;http://github.com/favicon.ico&#39;)with open(&#39;favicon.ico&#39;,&#39;wb&#39;) as f:    f.write(response.content)    f.close()</code></pre><h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;Python实现的简单易用的HTTP库（基于urllib编写）  &lt;/p&gt;
-&lt;h1 id=&quot;Requests&quot;&gt;&lt;
       
     
     </summary>
