@@ -184,6 +184,343 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/TensorFlow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/TensorFlow/" class="post-title-link" itemprop="url">TensorFlow</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-23 19:43:22" itemprop="dateCreated datePublished" datetime="2020-02-23T19:43:22+08:00">2020-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-25 08:17:05" itemprop="dateModified" datetime="2020-02-25T08:17:05+08:00">2020-02-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="TensorFlow框架介绍"><a href="#TensorFlow框架介绍" class="headerlink" title="TensorFlow框架介绍"></a>TensorFlow框架介绍</h1><h2 id="TF数据流图"><a href="#TF数据流图" class="headerlink" title="TF数据流图"></a>TF数据流图</h2><p>TensorFlow程序通常由两部分组成：<strong>构建图</strong>和<strong>执行图</strong><br>构建阶段：数据（张量-Tensor）与操作（节点-Operation）的执行步骤被描述成一个图<br>执行阶段：使用会话执行构建好的图中的操作  </p>
+<ul>
+<li>图和会话：<blockquote>
+<ul>
+<li>图：时TensorFlow将计算表示为指令之间的依赖关系的一种表示法  </li>
+<li>会话：TensorFlow跨一个或多个本地或远程设备运行数据流图的机制  </li>
+</ul>
+</blockquote>
+</li>
+<li>张量：TensorFlow中的基本操作对象  </li>
+<li>节点：提供图当中执行的操作 <h2 id="图与TensorBoard"><a href="#图与TensorBoard" class="headerlink" title="图与TensorBoard"></a>图与TensorBoard</h2>图包含了一组tf.Operation代表的<strong>计算单元对象</strong>和tf.Tensor代表的<strong>计算单元之间流动的数据</strong>，即<strong>数据+操作</strong><h3 id="默认图"><a href="#默认图" class="headerlink" title="默认图"></a>默认图</h3>TensorFlow默认创建的图<br>查看默认图的方式：</li>
+<li><strong>调用方法</strong>：通过调用tf.get_default_graph()访问，要将操作添加到默认图中，直接创建OP即可</li>
+<li><strong>查看属性</strong>：tensor、op、sess都含有graph属性，默认都在一张图中    </li>
+</ul>
+<h3 id="自定义图"><a href="#自定义图" class="headerlink" title="自定义图"></a>自定义图</h3><ul>
+<li>通过tf.Graph()自定义创建图      </li>
+</ul>
+<pre><code class="lang-python">new_g = tf.Graph()
+</code></pre>
+<ul>
+<li>使用tf.Graph.as_default()上下文管理器在该图中创建OP  </li>
+</ul>
+<pre><code class="lang-python">with new_g.as_default():  
+    定义数据和操作：
+</code></pre>
+<p>此时开启会话的时候要加参数：  </p>
+<pre><code class="lang-python">with tf.Session(graph = new_g) as new_sess
+</code></pre>
+<p>这是因为tf.Session的默认参数里graph = None 即默认图  </p>
+<h3 id="TensorBoard：可视化学习"><a href="#TensorBoard：可视化学习" class="headerlink" title="TensorBoard：可视化学习"></a>TensorBoard：可视化学习</h3><p>步骤：</p>
+<ul>
+<li>数据序列化-events文件（将图序列化）  <pre><code class="lang-python">#path最好用绝对路径  
+tf.summary.FileWriter(path,graph)
+</code></pre>
+在指定目录下生成一个event文件，其名称格式如下：<blockquote>
+<p>events.out.tfevents.{timestamp}.{hostname}</p>
+</blockquote>
+</li>
+<li>启动TensorBoard<blockquote>
+<p>在终端输入  </p>
+<pre><code>tensorboard --logdir=path
+</code></pre><p>path时序列化时使用的path<br>也可以使用   </p>
+<pre><code>tensorboard --logdir=path --host=127.0.0.1
+</code></pre><p>改变访问地址，注意在浏览器输入终端给出的地址时一定不能使用CTRL+C退出tensorboard   </p>
+<h3 id="OP"><a href="#OP" class="headerlink" title="OP"></a>OP</h3><p>| 操作函数 | 生成-&gt; | 操作对象 |<br>| :—-: | :—-: | :—-: |<br>| tf.constant(Tensor对象) | 生成 | 输入Tensor - Const - 输出 Tensor对象 |<br>| tf,add(Tensor对象1,Tensor对象2) | 生成 | 输入Tensor1，Tensor对象2 - Add对象 - 输出 Tensor对象3 |<br>一个操作对象（Operation）时TensorFlow途中的一个节点，可以接收0各或者多个Tensor，并且可以输出0个或者多个Tensor，<strong>Operation</strong>对象是通过op构造函数（如tf.mutmul()）创造出来的</p>
+<p>例如:c = tf.matmul(a,b)创建了一个Operation对象，类型未MatMul累心，它将张量a，b作为输入，c作为输出，并输出数据，打印的时候也是打印的数据。其中tf.matmul()是函数，在执行matmul函数的过程中会通过MatMul类创建一个与之对应的对象  </p>
+</blockquote>
+</li>
+</ul>
+<p>打印张量（Tensor）出来的：</p>
+<blockquote>
+<p>Tensor(“Const:0”,shape=(),dtype=float32)<br>Tensor(“Const_1:0”,shape=(),dtype=float32)<br>Tensor(“Add:0”,shape=(),dtype=float32)</p>
+</blockquote>
+<p>tf.Tensor对象以输出该Tensor的OP明确命名。Tensor名称的形式：  </p>
+<blockquote>
+<p><OP_NAME>:\<i>  </p>
+</blockquote>
+<p>其中：</p>
+<ul>
+<li><OP_NAME>是生成该Tensor的指令的名称  </li>
+<li>\<i>是一个整数，它表示该张量在指令中的输出中的索引  </li>
+</ul>
+<p><strong>指令名称</strong><br>tf.Graph对象为其包含的tf.Operation对象定义的一个命名空间<br>例如：</p>
+<pre><code class="lang-python">tf.constant(42.0,name=&quot;answer&quot;)
+</code></pre>
+<p>创建了一个名为”answer”的新tf.Operation并返回一个名为”answer:0”的tf.Tensor。如果默认图已经包含名为”answer”的指令，则TensorFlow会在名称上附加”1”、”2”等字符，以便让其名称具有唯一性</p>
+<blockquote>
+<p>当修改后，Tensorboard中显示的名字也会被修改</p>
+<h4 id="常见OP"><a href="#常见OP" class="headerlink" title="常见OP"></a>常见OP</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">标量运算</td>
+<td style="text-align:center">add,sub,mul,div,log,greater,less,equal</td>
+</tr>
+<tr>
+<td style="text-align:center">向量运算</td>
+<td style="text-align:center">concat,slice,splot,constant,rank,shape,shuffle</td>
+</tr>
+<tr>
+<td style="text-align:center">矩阵运算</td>
+<td style="text-align:center">matmul,matrixinverse,matrixdateminant</td>
+</tr>
+<tr>
+<td style="text-align:center">带状态的运算</td>
+<td style="text-align:center">Variable,assgin,assginadd</td>
+</tr>
+<tr>
+<td style="text-align:center">神经网络组件</td>
+<td style="text-align:center">softmax,sigmoid,relu,convolution,max_pool</td>
+</tr>
+<tr>
+<td style="text-align:center">存储，恢复</td>
+<td style="text-align:center">Save,Restore</td>
+</tr>
+<tr>
+<td style="text-align:center">队列及同步运算</td>
+<td style="text-align:center">Enqueue,Dequeue,MutexAcquire,MutexRelease</td>
+</tr>
+<tr>
+<td style="text-align:center">控制流</td>
+<td style="text-align:center">Merge,Switch,Enter,Leave,Nextiteration</td>
+</tr>
+</tbody>
+</table>
+</div>
+</blockquote>
+<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><h3 id="会话创建"><a href="#会话创建" class="headerlink" title="会话创建"></a>会话创建</h3><ul>
+<li>tf.Session:用于完整的程序当中  </li>
+<li>tf.InteractiveSession:用于交互式上下文中的TensorFlow，例如shell  <h3 id="会话的注意资源"><a href="#会话的注意资源" class="headerlink" title="会话的注意资源"></a>会话的注意资源</h3></li>
+<li>会话掌握资源，用完要回收 — 使用上下文管理器  </li>
+<li>初始化会话对象时的参数  <blockquote>
+<ul>
+<li>graph = None </li>
+<li>target:如果将此参数留空（默认设置），会话将使用本地计算机中的设备，可以指定grpc://网址，以便于指定TensorFlow服务器的地址，这使得会话可以访问该服务器控制的计算机上的所有设备  </li>
+<li>config:用来了解设备信息 — 根据打印的日志了解操作运行在哪个设备上<pre><code class="lang-python">#运行会话并打印设备信息   
+sess = tf.Session(config=tf.ConfigProt(allow_soft_placement=True,log_device_placement=True))
+</code></pre>
+<h3 id="会话的run"><a href="#会话的run" class="headerlink" title="会话的run()"></a>会话的run()</h3><pre><code class="lang-python">run(fetches,feed_dict=None,options=None,run_metadata=None)
+</code></pre>
+</li>
+<li>通过使用sess.run()来运行operation  </li>
+<li>fetches：单一的operation，或者列表、元组（其他不属于tensorflow的类型不行）  </li>
+<li>feed_dict：参数允许调用者覆盖途中张量的值，运行时赋值  </li>
+<li>与tf.placeholder搭配使用，则会检查值的形状是否与占位符兼容  <h3 id="feed操作"><a href="#feed操作" class="headerlink" title="feed操作"></a>feed操作</h3></li>
+<li>placeholder提供占位符，run时候通过feed_dict指定参数  <pre><code class="lang-python">def session_run_demo()：
+&quot;&quot;&quot;
+会话的run方法
+:return:
+&quot;&quot;&quot;  
+# 定义占位符  
+a = tf.placeholder(tf.float32)  
+b = tf.placeholder(tf.float32)
+sum_ab = tf.add(a,b)
+print(&quot;sum_ab = \n&quot;,sum_ab)
+# 开启会话  
+with tf.Session() as sess:
+print(&quot;占位符的结果：\n&quot;,sess.run(sum_ab,feed_dict={a:3.0,b:4.0}))
+return None
+</code></pre>
+请注意运行时候的错误error：<blockquote>
+<p>RuntimeError:如果这Session时无效状态（会话已关闭）。<br>TypeError:如果fetches或者feed_dict键的类型不合适。<br>ValueError:如果fetches或feed_dict键无效或引用Tensor不存在的键  </p>
+<h2 id="张量（和ndarray有联系）"><a href="#张量（和ndarray有联系）" class="headerlink" title="张量（和ndarray有联系）"></a>张量（和ndarray有联系）</h2><p>TensorFlow的张量就是一个n维数组，类型为tf.Tensor。Tensor具有两个重要的属性：</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>type：数据类型  </li>
+<li>shape：形状（阶）  <h3 id="张量的类型"><a href="#张量的类型" class="headerlink" title="张量的类型"></a>张量的类型</h3>| 数据类型 | Python类型 | 描述 |<br>| :—-: | :—-: | :—-: |<br>| DT_FLOAT | tf.float32 | 32位浮点数 |<br>| DT_DOUBLE | tf.float64 | 64位浮点数 |<br>| DT_INT64 | tf.int64 | 64位有符号整型 |<br>| DT_INT32 | tf.int32 | 32位有符号整型 |<br>| DT_INT16 | tf.int16 | 16位有符号整型 |<br>| DT_INT8 | tf.int8 | 8位有符号整型 |<br>| DT_UINT8 | tf.uint8 | 8位无符号整型 |<br>| DT_STRING | tf.string | 可变长度的字节数组，每一个张量元素都是一个字节数组 |<br>| DT_BOOL | tf.bool | 布尔型 |<br>| DT_COMPLEX64 | tf.complex64 | 由两个32位浮点数组成的复数：实数和虚数 |<br>| DT_QINT32 | tf.qint32 | 用于量化Ops的32位有符号整型 |<br>| DT_QINT8 | tf.qint8 | 用于量化Ops的8位有符号整型 |<br>| DT_QUINT8 | tf.quint8 | 用于量化Ops的8位无符号整型 |<h3 id="张量的阶"><a href="#张量的阶" class="headerlink" title="张量的阶"></a>张量的阶</h3>| 数据 | 在计算机中的存储 | 阶数 |<br>| :—-: | :—-: | :—-: |<br>| 标量 | 一个数字 | 0阶张量 |<br>| 向量 | 一维数组 [2,3,4] | 1阶张量 |<br>| 矩阵 | 二维数组[ [2,3,4],[2,3,4] ] | 2阶张量 |<br>| … | … | … |<br>| 张量 | n维数组 | n阶张量 |<h3 id="创建张量的指令"><a href="#创建张量的指令" class="headerlink" title="创建张量的指令"></a>创建张量的指令</h3></li>
+<li>固定值张量    <pre><code class="lang-python">tf.zeros(shape,dtype=tf.float32,name = None)
+tf.zeros_like(tensor,dtype=tf.float32,name=None)  
+tf.oness(shape,dtype=tf.float32,name = None)
+tf.ones_like(tensor,dtype=tf.float32,name=None) 
+#创建了一个填充了标量值的张量，此操作创建一个张量的形状dims并填充她value 
+tf.fill(dims,value,name=None)
+#创建一个常数张量
+tf.constant(value,dtype=None,shape=None,name=&#39;Const&#39;)
+</code></pre>
+</li>
+<li>随机值张量  <pre><code class="lang-python">tf.random_normal(shape,mean=0.0,stddev=1.0,dtype=float32,seed=None,name=None)
+</code></pre>
+正态分布  </li>
+<li>其它特殊的创建张量OP：<blockquote>
+<ul>
+<li>tf.Variable  </li>
+<li>tf.placeholder  </li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3 id="张量的变换"><a href="#张量的变换" class="headerlink" title="张量的变换"></a>张量的变换</h3><ul>
+<li>类型改变  <pre><code class="lang-python">tf.string_to_number(string_tensor,out_type=None,name=None)
+tf.to_double(x,name=&#39;ToDouble&#39;)
+tf.to_float(x,name=&#39;ToFloat&#39;)
+tf.to_bfloat16(x,name=&#39;ToBFloat16&#39;)
+tf.to_int32(x,name=&#39;ToInt32&#39;)
+tf.to_int64(x,name=&#39;ToInt64&#39;)
+tf.cast(x,dtype,name=None)
+</code></pre>
+tf.cast()不会改变原始的tensor，返回改变类型后新的tensor</li>
+<li>形状改变<br>TensorFlow的张量具有两种形状变换，动态形状和静态形状<pre><code class="lang-python">tf.reshape（不会改变原始的tensor，返回新的改变类型后的tensor）  
+tf.set_shape
+</code></pre>
+</li>
+<li>静态形状<br>Q：什么时候才能改变静态形状？<br>A：在形状还没有完全固定下来的情况。<br>Q：什么情况是形状未固定？<br>A：tf.placeholder生成的tensor中带有？号的部分 <pre><code class="lang-python">a_p = tf.placeholder(dtype=tf.float32,shape=[None，None])   
+a_p.set_shapr(2,10)
+</code></pre>
+</li>
+<li>动态形状(可以跨阶数改变,但是不能改变元素的总数)  <pre><code class="lang-python">tf.reshape(a_p,shape=[2,3,1])
+</code></pre>
+<h3 id="张量的数学运算"><a href="#张量的数学运算" class="headerlink" title="张量的数学运算"></a>张量的数学运算</h3></li>
+<li>算术运算符</li>
+<li>基本数学函数</li>
+<li>矩阵运算 </li>
+<li>reduce操作  </li>
+<li>序列索引操作  <blockquote>
+<p>详情请参考：<br><a href="https://www.tensorflow.org/versions/r1.8/api_guides/python/math_ops" target="_blank" rel="noopener" title="需要翻墙--已不能用">API</a></p>
+<h2 id="变量OP-用来存储模型参数"><a href="#变量OP-用来存储模型参数" class="headerlink" title="变量OP(用来存储模型参数)"></a>变量OP(用来存储模型参数)</h2><p>特点：</p>
+</blockquote>
+</li>
+<li>存储持久化</li>
+<li>可修改值</li>
+<li>可指定被训练 <h3 id="创建变量"><a href="#创建变量" class="headerlink" title="创建变量"></a>创建变量</h3>tf.Variable(inital_value=None,trainable=True,collections=None,name=None)   </li>
+<li>inital_value: 初始化的值   </li>
+<li>trainable: 是否被训练  </li>
+<li>collections: 新变量将添加到列出的图的集合中collections,默认为[GraphKeys.GLOBAL_VARIABLES],如果trainable是True变量也被添加到图形集合GraphKeys。TRAINABLE_VARIABLES</li>
+<li>变量需要显式初始化，才能运行值    <pre><code class="lang-python">def variable_demo():
+#定义变量
+a = tf.Variable(inital_value=40)  
+b= tf.Variable(inital_value=50)
+c = tf.add(a,b)  
+#初始化变量
+init = tf.global_variables_initializer()  
+#开启对话  
+with tf.Session() as sess:
+  #变量初始化  
+  sess.run(init)
+  print(&quot;c:\n&quot;,sess.run(c))
+</code></pre>
+<h3 id="使用tf-variable-scope-修改变量的命名空间"><a href="#使用tf-variable-scope-修改变量的命名空间" class="headerlink" title="使用tf.variable_scope()修改变量的命名空间"></a>使用tf.variable_scope()修改变量的命名空间</h3>会在OP的名字前面增加命名空间的指定名字<br>``` python<br>with tf.variable_scope(“name”):<br>  var = tf.Variable(name=’var’,initial_value=[4],dtype=tf.float32)<br>  var_double = tf.Variable(name=’var’,inintaial_value=[4],dtype=tf.float32)  </li>
+</ul>
+<p><tf.Variable 'name/var:0' shapr=() dtype=float32_ref>  </p>
+<p><tf.Variable 'name/var_1:0' shapr=() dtype=float32_ref><br>```  </p>
+<h2 id="高级API"><a href="#高级API" class="headerlink" title="高级API"></a>高级API</h2><h3 id="基础API"><a href="#基础API" class="headerlink" title="基础API"></a>基础API</h3><ul>
+<li>tf.app<blockquote>
+<p>这个模块相当于为TensorFlow进行的脚本提供一个main函数入口，可以定义脚本运行的flags</p>
+</blockquote>
+</li>
+<li>tf.image  <blockquote>
+<p>TensorFlow的图像处理操作。主要是一些颜色变换、变形和图像的编码和解释  </p>
+</blockquote>
+</li>
+<li>tf.gfile  <blockquote>
+<p>这个模块提供了一组文件操作函数 </p>
+</blockquote>
+</li>
+<li>tf.summary  <blockquote>
+<p>用来生成TensorBoard可用的统计日志，目前summary主要提供了4种类型：audio、image、histogram、scalar</p>
+</blockquote>
+</li>
+<li>tf.python_io  <blockquote>
+<p>用来读写TFRecords  </p>
+</blockquote>
+</li>
+<li>tf.train <blockquote>
+<p>这个模块提供了一些训练器，与tf.nn组合起来，实现一些网络的优化算法  </p>
+</blockquote>
+</li>
+<li>tf.nn <blockquote>
+<p>这个模块提供了一些构建神经网络的底层函数。TensorFlow构建网络的核心模块。  </p>
+<h3 id="高级API-1"><a href="#高级API-1" class="headerlink" title="高级API"></a>高级API</h3></blockquote>
+</li>
+<li>tf.keras<blockquote>
+<p>Keras本来是一个独立的深度学习库，tensorflow将其学习过来，增加这部分模块在于快速构建模型 </p>
+</blockquote>
+</li>
+<li>tf.layers<blockquote>
+<p>高级API，以更高级的概念层来定义一个模型。类似tf.keras  </p>
+</blockquote>
+</li>
+<li>td.contrib<br>tf.contrib.layers提供能将计算途中的 网络层、正则化、摘要操作，是构建计算图的高级操作，但是tf.contrib包含不稳定和实验代码，有可能以后API会改变  </li>
+<li>tf.estimator  <blockquote>
+<p>一个Estimator相当于Model + Training + Evaluate 的合体。在模块种，已经实现了集中简单的分类器和回归器，包括：Baseline，Learning和DNN。这里的DNN的网络，只是全连接网络，没有提供卷积之类的。</p>
+<h1 id="数据读取、神经网络"><a href="#数据读取、神经网络" class="headerlink" title="数据读取、神经网络"></a>数据读取、神经网络</h1><h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1></blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/The-difference-between-Machine-Learning-and-Deep-Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1369,71 +1706,6 @@ ice_file.close()
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/26/Matlab%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sherlock Harris">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherlcok's blogs">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/26/Matlab%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Matlab学习记录</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-26 11:38:46" itemprop="dateCreated datePublished" datetime="2020-01-26T11:38:46+08:00">2020-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-16 16:23:24" itemprop="dateModified" datetime="2020-02-16T16:23:24+08:00">2020-02-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">% Logistic曲线模型基本形式：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%         y=1/(a+b*exp(-t))</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">% 将y'=1/y,x'=exp(-t),就可以将其转换为直线模型：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%         y=a+b*x'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%Author: SherlockHarris</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%Date: Jan 26 2020</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%读入人口数据（1971-2000年）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">Y=[<span class="number">33815</span> <span class="number">33981</span> <span class="number">34004</span> <span class="number">34165</span> <span class="number">34212</span> <span class="number">34327</span> <span class="number">34344</span> <span class="number">34458</span> <span class="number">34498</span> <span class="number">34476</span> <span class="number">34483</span> <span class="number">34488</span> <span class="number">34513</span> <span class="number">34497</span> <span class="number">34511</span> <span class="number">34520</span> <span class="number">34507</span> <span class="number">34509</span> <span class="number">34521</span> <span class="number">34513</span> <span class="number">34515</span> <span class="number">34517</span> <span class="number">34519</span> <span class="number">34519</span> <span class="number">34521</span> <span class="number">34521</span> <span class="number">34523</span> <span class="number">34525</span> <span class="number">34525</span> <span class="number">34527</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%读入时间比那辆数据（t=年份-1970）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">T=[<span class="number">1</span>:<span class="number">30</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> t=<span class="number">1</span>:<span class="number">30</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    x(t) = <span class="built_in">exp</span>(-t);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    y(t) = <span class="number">1</span>/Y(<span class="number">1</span>,t);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算，并输出回归系数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">c = <span class="built_in">zeros</span>(<span class="number">30</span>,<span class="number">1</span>)+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">X=[c,x'];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">B=inv(X'*X)*X'*y';</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="number">30</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">%计算回归拟合值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    z(<span class="built_in">i</span>)=B(<span class="number">1</span>,<span class="number">1</span>)+B(<span class="number">2</span>,<span class="number">1</span>)*x(<span class="built_in">i</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">%计算离差</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    s(<span class="built_in">i</span>) = y(<span class="built_in">i</span>)-sum(y)/<span class="number">30</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">%计算误差</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    w(<span class="built_in">i</span>)=z(<span class="built_in">i</span>)-y(<span class="built_in">i</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算离差平方和S</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">S=s*s';</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算回归误差平方和Q</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">Q=w*w';</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算回归平方和U</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">U=S-Q;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算，并输出F检验值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">F=<span class="number">28</span>*U/Q;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算非线性回归模型的拟合值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">30</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    Y(<span class="built_in">j</span>)=<span class="number">1</span>/(B(<span class="number">1</span>,<span class="number">1</span>)+B(<span class="number">2</span>,<span class="number">1</span>)*<span class="built_in">exp</span>(-<span class="built_in">j</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算非线性回归模型的拟合曲线（Logistic曲线）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">plot</span>(T,Y)</span></pre></td></tr></table></figure>
-<h2 id="学习心得："><a href="#学习心得：" class="headerlink" title="学习心得："></a>学习心得：</h2><h3 id="inv-函数作用：求矩阵逆运算"><a href="#inv-函数作用：求矩阵逆运算" class="headerlink" title="inv()函数作用：求矩阵逆运算"></a>inv()函数作用：求矩阵逆运算</h3><h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1482,7 +1754,7 @@ ice_file.close()
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
