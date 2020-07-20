@@ -48,17 +48,21 @@
   };
 </script>
 
-  <meta name="description" content="回归定义 Regression就是找到一个函数function,通过输入特征x，输出一个数值Scalar 应用实例 股市预测 自动驾驶 商品推荐模型步骤 step1：模型假设，选择模型框架 step2: 模型评估，如何判断众多模型的好坏（损失函数） step3: 模型优化，如何筛选最优的模型（梯度下降）模型假设-线性模型 一元线性模型（单个特征） 多元线性模型（多个特征）线性回归的优点：结果易于理">
+  <meta name="description" content="前言本篇文章意在记录自己在申请谷歌云的流程、遇见的问题以及解决方案，总共用时10天。 流程申请一张MasterCard卡或者Visa卡7&#x2F;10，在工银e生活申请工商宇宙星座校园卡（Visa+银联）7&#x2F;16，收到信用卡7&#x2F;18，到附近网点激活信用卡   在Visa卡中预存至少1美元遇到的问题1.因为是学生申请，所以申请到的信用卡额度为0  解决方法：“中国工商银行APP-首页-转账汇款-境内汇款”，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Regression">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;06&#x2F;Regression&#x2F;index.html">
+<meta property="og:title" content="Google Cloud Plataform">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;07&#x2F;20&#x2F;Google-Cloud-Plataform&#x2F;index.html">
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
-<meta property="og:description" content="回归定义 Regression就是找到一个函数function,通过输入特征x，输出一个数值Scalar 应用实例 股市预测 自动驾驶 商品推荐模型步骤 step1：模型假设，选择模型框架 step2: 模型评估，如何判断众多模型的好坏（损失函数） step3: 模型优化，如何筛选最优的模型（梯度下降）模型假设-线性模型 一元线性模型（单个特征） 多元线性模型（多个特征）线性回归的优点：结果易于理">
+<meta property="og:description" content="前言本篇文章意在记录自己在申请谷歌云的流程、遇见的问题以及解决方案，总共用时10天。 流程申请一张MasterCard卡或者Visa卡7&#x2F;10，在工银e生活申请工商宇宙星座校园卡（Visa+银联）7&#x2F;16，收到信用卡7&#x2F;18，到附近网点激活信用卡   在Visa卡中预存至少1美元遇到的问题1.因为是学生申请，所以申请到的信用卡额度为0  解决方法：“中国工商银行APP-首页-转账汇款-境内汇款”，">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-05-06T03:14:03.808Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;qal23xf82.bkt.clouddn.com&#x2F;problem.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;qal23xf82.bkt.clouddn.com&#x2F;support.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;qal23xf82.bkt.clouddn.com&#x2F;mail.png">
+<meta property="og:updated_time" content="2020-07-20T12:22:16.361Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;qal23xf82.bkt.clouddn.com&#x2F;problem.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/05/06/Regression/">
+<link rel="canonical" href="http://yoursite.com/2020/07/20/Google-Cloud-Plataform/">
 
 
 <script id="page-configurations">
@@ -72,7 +76,7 @@
   };
 </script>
 
-  <title>Regression | Sherlcok's blogs</title>
+  <title>Google Cloud Plataform | Sherlcok's blogs</title>
   
 
 
@@ -187,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/Regression/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/20/Google-Cloud-Plataform/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -200,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Regression
+          Google Cloud Plataform
         </h1>
 
         <div class="post-meta">
@@ -211,7 +215,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-05-06 10:27:45 / Modified: 11:14:03" itemprop="dateCreated datePublished" datetime="2020-05-06T10:27:45+08:00">2020-05-06</time>
+              <time title="Created: 2020-07-20 19:37:07 / Modified: 20:22:16" itemprop="dateCreated datePublished" datetime="2020-07-20T19:37:07+08:00">2020-07-20</time>
             </span>
 
           
@@ -225,33 +229,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="回归定义"><a href="#回归定义" class="headerlink" title="回归定义"></a>回归定义</h2><blockquote>
-<p>Regression就是找到一个函数function,通过输入特征x，输出一个数值Scalar</p>
-<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><ul>
-<li>股市预测</li>
-<li>自动驾驶</li>
-<li>商品推荐<h2 id="模型步骤"><a href="#模型步骤" class="headerlink" title="模型步骤"></a>模型步骤</h2></li>
-<li>step1：模型假设，选择模型框架</li>
-<li>step2: 模型评估，如何判断众多模型的好坏（损失函数）</li>
-<li>step3: 模型优化，如何筛选最优的模型（梯度下降）<h3 id="模型假设-线性模型"><a href="#模型假设-线性模型" class="headerlink" title="模型假设-线性模型"></a>模型假设-线性模型</h3></li>
-<li>一元线性模型（单个特征）</li>
-<li>多元线性模型（多个特征）<br>线性回归的优点：结果易于理解，计算不复杂<br>线性回归的缺点：对非线性数据拟合不好<h4 id="疑问：在存在多个特征的情况下，如何进行特征选择"><a href="#疑问：在存在多个特征的情况下，如何进行特征选择" class="headerlink" title="疑问：在存在多个特征的情况下，如何进行特征选择"></a>疑问：在存在多个特征的情况下，如何进行特征选择</h4></li>
-</ul>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇文章意在记录自己在申请谷歌云的流程、遇见的问题以及解决方案，总共用时10天。</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="申请一张MasterCard卡或者Visa卡"><a href="#申请一张MasterCard卡或者Visa卡" class="headerlink" title="申请一张MasterCard卡或者Visa卡"></a>申请一张MasterCard卡或者Visa卡</h3><p>7/10，在工银e生活申请工商宇宙星座校园卡（Visa+银联）<br>7/16，收到信用卡<br>7/18，到附近网点激活信用卡  </p>
+<h3 id="在Visa卡中预存至少1美元"><a href="#在Visa卡中预存至少1美元" class="headerlink" title="在Visa卡中预存至少1美元"></a>在Visa卡中预存至少1美元</h3><h4 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h4><p>1.因为是学生申请，所以申请到的信用卡额度为0</p>
+<blockquote>
+<p>解决方法：“中国工商银行APP-首页-转账汇款-境内汇款”，将储蓄卡中的钱转一部分到申请到的信用卡中（即将信用卡当储蓄卡使用）<br>2.因为本人的工行储蓄卡与申请到的信用卡是异地，所以不能直接转美元，而当我试图购汇时显示可用的只有储蓄卡<br>解决方法：“中国工商银行APP-首页-全部-我的账户”，选中申请的信用卡，点击五角星使其变成实心黄色（设置为默认卡），这个时候再去购汇即可<br>3.如果没有预存1美元，在提交申请的时候会提示“请更正这张卡片的信息或改用其他卡试试”</p>
+<h3 id="申请Google-Cloud-Platform"><a href="#申请Google-Cloud-Platform" class="headerlink" title="申请Google Cloud Platform"></a>申请Google Cloud Platform</h3><p><a href="https://console.cloud.google.com/home/dashboard?project=cosmic-backbone-283911&amp;hl=zh-CN" target="_blank" rel="noopener">申请地址</a></p>
+<h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>1.国家/地区：美国<br>2.勾选服务条款<br>3.继续</p>
+<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>1.账号类型：个人<br>2.姓名和地址：<br><a href="https://www.fakenamegenerator.com/gen-male-us-us.php" target="_blank" rel="noopener">在线地址生成网站</a><br>3.付款选项：点击信用卡详细信息添加信用卡（信用卡验证码为信用卡背后卡号上面七位数后三位）<br>4.开启免费试用</p>
+<h4 id="遇到的问题-1"><a href="#遇到的问题-1" class="headerlink" title="遇到的问题"></a>遇到的问题</h4><p>点击“开启免费试用”后提示“交易遭拒：付款方式无效。了解详情[OR-CCSEH-05]”,如下图所示<br><img src="http://qal23xf82.bkt.clouddn.com/problem.png" alt="problem"><br>解决方法：在“Google Pay Help”中跟谷歌客服反应一下  </p>
 </blockquote>
-<h3 id="模型评估-损失函数"><a href="#模型评估-损失函数" class="headerlink" title="模型评估-损失函数"></a>模型评估-损失函数</h3><p>损失函数的本质仍然是使用距离来判定模型的好坏。</p>
-<h3 id="最佳模型-梯度下降"><a href="#最佳模型-梯度下降" class="headerlink" title="最佳模型-梯度下降"></a>最佳模型-梯度下降</h3><p>本质是筛选最优的模型。求解最优解的方法有最小二乘法和梯度下降法。</p>
-<h3 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h3><ul>
-<li>局部最优</li>
-<li>等于0</li>
-<li>趋近于0</li>
-<li>过拟合</li>
-</ul>
-<p>思考：可以通过正则化来优化解决过拟合，但是如何解决局部最优的问题</p>
-<h3 id="logistic回归"><a href="#logistic回归" class="headerlink" title="logistic回归"></a>logistic回归</h3><p>logistic回归主要解决分类问题，其解决问题的步骤与线性回归基本一致，但是存在一定的区别</p>
-<ul>
-<li>两者的损失函数也不同，线性回归使用的是MSE，其本质是使真实点到预测直线的方差最小；逻辑回归使用的是MLE，对数损失函数，其本质是使预测概率最接近真实值</li>
-</ul>
-
+<p><a href="https://support.google.com/pay/gethelp" target="_blank" rel="noopener">Google Pay Help</a></p>
+<p>1.Let’s get started<br>简单描述一下自己的情况（随便写也可以），点击Next step<br>2.弹出来的选项中选一个跟自己情况符合的（瞎选也可以），点击Next step<br>3.点击中间的chat，会在右下角弹出谷歌客服的聊天窗口，这个时候跟客服详细描述一下自己遇到的问题，最后她会告诉你要排除团队核实信息，七个工作日内会给你发邮件回复（本人大概13个小时左右）。注：英语不好可以借住翻译；注意联系客服的时间（时差，本人晚上12点左右联系的）</p>
+<p><img src="http://qal23xf82.bkt.clouddn.com/support.png" alt="support"><br>4.等待半天左右，注意查看自己的邮箱，会收到谷歌发来的邮件，如果核实成功，内容大致如下<br><img src="http://qal23xf82.bkt.clouddn.com/mail.png" alt="mail"></p>
+<h3 id="重新申请"><a href="#重新申请" class="headerlink" title="重新申请"></a>重新申请</h3>
     </div>
 
     
@@ -266,13 +257,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/26/KNN/" rel="prev" title="KNN">
-      <i class="fa fa-chevron-left"></i> KNN
+    <a href="/2020/05/23/SVM/" rel="prev" title="SVM">
+      <i class="fa fa-chevron-left"></i> SVM
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/12/%E5%86%B3%E7%AD%96%E6%A0%912/" rel="next" title="决策树2">
-      决策树2 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -310,7 +298,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#回归定义"><span class="nav-number">1.</span> <span class="nav-text">回归定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用实例"><span class="nav-number">2.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型步骤"><span class="nav-number">3.</span> <span class="nav-text">模型步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型假设-线性模型"><span class="nav-number">3.1.</span> <span class="nav-text">模型假设-线性模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#疑问：在存在多个特征的情况下，如何进行特征选择"><span class="nav-number">3.1.1.</span> <span class="nav-text">疑问：在存在多个特征的情况下，如何进行特征选择</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型评估-损失函数"><span class="nav-number">3.2.</span> <span class="nav-text">模型评估-损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最佳模型-梯度下降"><span class="nav-number">3.3.</span> <span class="nav-text">最佳模型-梯度下降</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可能出现的问题"><span class="nav-number">3.4.</span> <span class="nav-text">可能出现的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logistic回归"><span class="nav-number">3.5.</span> <span class="nav-text">logistic回归</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">2.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#申请一张MasterCard卡或者Visa卡"><span class="nav-number">2.1.</span> <span class="nav-text">申请一张MasterCard卡或者Visa卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在Visa卡中预存至少1美元"><span class="nav-number">2.2.</span> <span class="nav-text">在Visa卡中预存至少1美元</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#遇到的问题"><span class="nav-number">2.2.1.</span> <span class="nav-text">遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#申请Google-Cloud-Platform"><span class="nav-number">2.3.</span> <span class="nav-text">申请Google Cloud Platform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步"><span class="nav-number">2.4.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步"><span class="nav-number">2.5.</span> <span class="nav-text">第二步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#遇到的问题-1"><span class="nav-number">2.5.1.</span> <span class="nav-text">遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新申请"><span class="nav-number">2.6.</span> <span class="nav-text">重新申请</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -184,6 +184,284 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/15/nc2csv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/15/nc2csv/" class="post-title-link" itemprop="url">nc2csv</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-15 19:34:53" itemprop="dateCreated datePublished" datetime="2020-02-15T19:34:53+08:00">2020-02-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-21 14:07:50" itemprop="dateModified" datetime="2020-02-21T14:07:50+08:00">2020-02-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="提前概要"><a href="#提前概要" class="headerlink" title="提前概要"></a>提前概要</h2><p>在2020年2月14日与队友讨论A题过程中需要查找苏格兰海域温度变化，因此第一次接触到气象数据netCDF(.nc)格式文件，在这里以北京大学所录数据，即比赛过程中所使用的数据为例，记录对这个格式文件的处理。基本思路是利用Python中xarray库处理，再将提取到的数据存储为csv格式文件。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>推荐使用conda安装：  </p>
+<pre><code>conda install xarray
+</code></pre><p>在安装过程中出现faild信息，最后采用修改清华镜像解决</p>
+<h2 id="引入包"><a href="#引入包" class="headerlink" title="引入包"></a>引入包</h2><pre><code class="lang-python">import xarray as xr
+import csv
+</code></pre>
+<h2 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h2><pre><code class="lang-python">data = xr.open_dataset(&#39;ERsst.mnmean.nc&#39;)
+</code></pre>
+<blockquote>
+<p>读取到的数据：<br>```  </p>
+<p><xarray.Dataset><br>Dimensions:    (lat: 89, lon: 180, nbnds: 2, time: 1973)<br>Coordinates:</p>
+<ul>
+<li>lat        (lat) float32 88.0 86.0 84.0 82.0 … -82.0 -84.0 -86.0 -88.0</li>
+<li>lon        (lon) float32 0.0 2.0 4.0 6.0 8.0 … 352.0 354.0 356.0 358.0</li>
+<li>time       (time) datetime64[ns] 1854-01-01 1854-02-01 … 2018-05-01<br>Dimensions without coordinates: nbnds<br>Data variables:<br>time_bnds  (time, nbnds) float64 …<br>sst        (time, lat, lon) float32 …<br>Attributes:<br>climatology:               Climatology is based on 1971-2000 SST, Xue, Y….<br>description:               In situ data: ICOADS2.5 before 2007 and NCEP i…<br>keywords_vocabulary:       NASA Global Change Master Directory (GCMD) Sci…<br>keywords:                  Earth Science &gt; Oceans &gt; Ocean Temperature &gt; S…<br>instrument:                Conventional thermometers<br>source_comment:            SSTs were observed by conventional thermometer…<br>geospatial_lon_min:        -1.0<br>geospatial_lon_max:        359.0<br>geospatial_laty_max:       89.0<br>geospatial_laty_min:       -89.0<br>geospatial_lat_max:        89.0<br>geospatial_lat_min:        -89.0<br>geospatial_lat_units:      degrees_north<br>geospatial_lon_units:      degrees_east<br>cdm_data_type:             Grid<br>project:                   NOAA Extended Reconstructed Sea Surface Temper…<br>original_publisher_url:    <a href="http://www.ncdc.noaa.gov" target="_blank" rel="noopener">http://www.ncdc.noaa.gov</a><br>References:                <a href="https://www.ncdc.noaa.gov/data-access/marineoc" target="_blank" rel="noopener">https://www.ncdc.noaa.gov/data-access/marineoc</a>…<br>source:                    In situ data: ICOADS R3.0 before 2015, NCEP in…<br>title:                     NOAA ERSSTv5 (in situ only)<br>history:                   created 07/2017 by PSD data using NCEI’s ERSST…<br>institution:               This version written at NOAA/ESRL PSD: obtaine…<br>citation:                  Huang et al, 2017: Extended Reconstructed Sea …<br>platform:                  Ship and Buoy SSTs from ICOADS R3.0 and NCEP GTS<br>standard_name_vocabulary:  CF Standard Name Table (v40, 25 January 2017)<br>processing_level:          NOAA Level 4<br>Conventions:               CF-1.6, ACDD-1.3<br>metadata_link:             :metadata_link = <a href="https://doi.org/10.7289/V5T72" target="_blank" rel="noopener">https://doi.org/10.7289/V5T72</a>…<br>creator_name:              Boyin Huang (original)<br>date_created:              2017-06-30T12:18:00Z (original)<br>product_version:           Version 5<br>creator_url_original:      <a href="https://www.ncei.noaa.gov" target="_blank" rel="noopener">https://www.ncei.noaa.gov</a><br>license:                   No constraints on data access or use<br>comment:                   SSTs were observed by conventional thermometer…<br>summary:                   ERSST.v5 is developed based on v4 after revisi…<br>dataset_title:             NOAA Extended Reconstructed SST V5</li>
+</ul>
+</blockquote>
+<p>Process finished with exit code 0  </p>
+<pre><code>## 数据分析  
+包含的变量：  
+- time_bnds  
+- sst    
+&gt; time_bnds:    time和nbnds  
+
+&gt; sst:  time、lat、lon  
+
+&gt; sst是本次数据处理核心，取出sst中信息进行初步分析：    
+``` python    
+sst = data[&#39;sst&#39;]
+</code></pre><pre><code>&lt;xarray.DataArray &#39;sst&#39; (time: 1973, lat: 89, lon: 180)&gt;
+[31607460 values with dtype=float32]
+Coordinates:
+  * lat      (lat) float32 88.0 86.0 84.0 82.0 80.0 ... -82.0 -84.0 -86.0 -88.0
+  * lon      (lon) float32 0.0 2.0 4.0 6.0 8.0 ... 350.0 352.0 354.0 356.0 358.0
+  * time     (time) datetime64[ns] 1854-01-01 1854-02-01 ... 2018-05-01
+Attributes:
+    long_name:     Monthly Means of Sea Surface Temperature
+    units:         degC
+    var_desc:      Sea Surface Temperature
+    level_desc:    Surface
+    statistic:     Mean
+    dataset:       NOAA Extended Reconstructed SST V5
+    parent_stat:   Individual Values
+    actual_range:  [-1.8     42.32636]
+    valid_range:   [-1.8 45. ]
+
+Process finished with exit code 0
+</code></pre><p>可以看出，sst中包含三个主要信息：lat，lon已经time，事实上，sst的数据是一个三维矩阵，矩阵值的信息为time时刻，lat和lon构成的经纬坐标位置处的海域温度值，我们把sst的数据提取出来确认一下：  </p>
+<pre><code class="lang-python">sst = data[&#39;sst&#39;].data
+</code></pre>
+<p>运行上述代码，得到结果：  </p>
+<pre><code>[[[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ ...
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]
+
+ [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]
+  ...
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]
+  [ nan  nan  nan ...  nan  nan  nan]]]
+</code></pre><blockquote>
+<p>效仿上述做法，提取其它需要的数据:  </p>
+<pre><code class="lang-python">lat = data[&#39;lat&#39;].data
+lon = data[&#39;lon&#39;].data
+time = data[&#39;time&#39;].data
+</code></pre>
+<h2 id="写入csv文件"><a href="#写入csv文件" class="headerlink" title="写入csv文件"></a>写入csv文件</h2><h3 id="打开csv文件"><a href="#打开csv文件" class="headerlink" title="打开csv文件"></a>打开csv文件</h3><pre><code class="lang-python">with open(&#39;test11.csv&#39;,mode = &#39;w&#39;,newline=&#39;&#39;) as ice_file:
+</code></pre>
+<p>不加   <code>newline=&#39;&#39;</code>      会导致csv每两行数据间会多出一行空格  </p>
+<h3 id="写入表头"><a href="#写入表头" class="headerlink" title="写入表头"></a>写入表头</h3><p>在这里假定苏格兰海域范围为纬度+62～40，350～0～12  </p>
+<pre><code class="lang-python">ice_write.writerow((&#39;time&#39;,&#39;lat&#39;,&#39;0&#39;,&#39;2&#39;,&#39;4&#39;,&#39;6&#39;,&#39;8&#39;,&#39;10&#39;,&#39;12&#39;,&#39;350&#39;,&#39;352&#39;,&#39;354&#39;,&#39;356&#39;,&#39;358&#39;))
+</code></pre>
+<h3 id="写入信息"><a href="#写入信息" class="headerlink" title="写入信息"></a>写入信息</h3><p>从1968-01-01开始写入，time[1368]的值为1968-01-01T00:00:00.000000000  </p>
+<pre><code class="lang-python">with open(&#39;test11.csv&#39;,mode = &#39;w&#39;,newline=&#39;&#39;) as ice_file:
+    ice_write = csv.writer(ice_file)
+    ice_write.writerow((&#39;time&#39;,&#39;lat&#39;,&#39;0&#39;,&#39;2&#39;,&#39;4&#39;,&#39;6&#39;,&#39;8&#39;,&#39;10&#39;,&#39;12&#39;,&#39;350&#39;,&#39;352&#39;,&#39;354&#39;,&#39;356&#39;,&#39;358&#39;))
+    for i in range(len(time)):
+            if i &gt; 1367:
+                for j in range(len(lat)):
+                    if lat[j]&gt;=40 and lat[j]&lt;=62:
+                            tt = []
+                            for k in range(len(lon)):
+                                if lon[k]&lt;=12 or lon[k]&gt;=350:
+                                    tt.append(sst[i][j][k])
+                            res = [str(time[i])[:10],lat[j]]
+                            for p in range(len(tt)):
+                                res.append(tt[p])
+                            ice_write.writerow(res)
+ice_file.close()
+</code></pre>
+<p>因为writerow函数的参数仅为一个，所以把所有数据通过append函数整合在一起，<code>time[i][:10]</code>是为了消除时间后面的T00：00：00.00000000采用的取巧的方法</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><p>``` python<br>import xarray as xr<br>import csv<br>data = xr.open_dataset(‘ERsst.mnmean.nc’)<br>sst = data[‘sst’].data<br>lat = data[‘lat’].data<br>lon = data[‘lon’].data<br>time = data[‘time’].data<br>print(data[‘time’])</p>
+</blockquote>
+<p>with open(‘test11.csv’,mode = ‘w’,newline=’’) as ice_file:<br>    ice_write = csv.writer(ice_file)<br>    ice_write.writerow((‘time’,’lat’,’0’,’2’,’4’,’6’,’8’,’10’,’12’,’350’,’352’,’354’,’356’,’358’))<br>    for i in range(len(time)):<br>            if i &gt; 1367:<br>                for j in range(len(lat)):<br>                    if lat[j]&gt;=40 and lat[j]&lt;=62:<br>                            tt = []<br>                            for k in range(len(lon)):<br>                                if lon[k]&lt;=12 or lon[k]&gt;=350:<br>                                    tt.append(sst[i][j][k])<br>                            res = [str(time[i])[:10],lat[j]]<br>                            for p in range(len(tt)):<br>                                res.append(tt[p])<br>                            ice_write.writerow(res)<br>ice_file.close()<br>```  </p>
+<h2 id="读取的北大数据链接"><a href="#读取的北大数据链接" class="headerlink" title="读取的北大数据链接"></a>读取的北大数据链接</h2><p><a href="https://geodata.pku.edu.cn/index.php?c=content&amp;a=show&amp;id=728%E8%BF%99%E9%87%8C%E5%8F%AF%E4%BB%A5%E4%B8%8B%E8%BD%BD" target="_blank" rel="noopener" title="数据范围：1854-01-01到2018-05-01">北京大学地理数据平台-全球海温数据</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/Matlab_Fuctions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sherlock Harris">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlcok's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/30/Matlab_Fuctions/" class="post-title-link" itemprop="url">Fuctions</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-30 14:11:57" itemprop="dateCreated datePublished" datetime="2020-01-30T14:11:57+08:00">2020-01-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-21 14:07:54" itemprop="dateModified" datetime="2020-02-21T14:07:54+08:00">2020-02-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>factorial():阶乘   eg:factorial(79)  </p>
+<p>prod():连乘    eg:prod(2:10)  </p>
+<p>xlim():设置x轴范围 eg:xlim([0 2*pi])  </p>
+<p>[AX,H1,H2]=plotyy(…)：返回AX中创建的两个坐标轴的句柄以及H1和H2中 每个图形绘图对象的句柄。AX（1）为左侧轴， AX（2）为右侧轴。<br>eg:set(get(AX(1),’Ylabel’),’String’,’Slow’)<br>   set(H1,’LineStyle’,’—‘)</p>
+<p>question:print(‘-despsc’,’-tiff’,’-r300’,’name’)  </p>
+<p>load data.mat   </p>
+<p>importdata(‘myfile.txt’)  </p>
+<p>xlsread(‘data.xls’)  xlsread(‘data.xlsx’)</p>
+<p>xlswrite(‘data.xls’,S)  xlswrite(‘data.xlsx’,S)  </p>
+<p>csvwrite(‘data.csv’,S)  </p>
+<p>csvread(‘data.csv’)  </p>
+<p>sava ‘data.txt’ S -ascii</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/26/Matlab%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -770,7 +1048,7 @@ with open(&#39;favicon.ico&#39;,&#39;wb&#39;) as f:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-22T17:48:40.785Z</updated>
+  <updated>2020-07-20T12:22:16.361Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Google Cloud Plataform</title>
+    <link href="http://yoursite.com/2020/07/20/Google-Cloud-Plataform/"/>
+    <id>http://yoursite.com/2020/07/20/Google-Cloud-Plataform/</id>
+    <published>2020-07-20T11:37:07.000Z</published>
+    <updated>2020-07-20T12:22:16.361Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇文章意在记录自己在申请谷歌云的流程、遇见的问题以及解决方案，总共用时10天。</p><h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="申请一张MasterCard卡或者Visa卡"><a href="#申请一张MasterCard卡或者Visa卡" class="headerlink" title="申请一张MasterCard卡或者Visa卡"></a>申请一张MasterCard卡或者Visa卡</h3><p>7/10，在工银e生活申请工商宇宙星座校园卡（Visa+银联）<br>7/16，收到信用卡<br>7/18，到附近网点激活信用卡  </p><h3 id="在Visa卡中预存至少1美元"><a href="#在Visa卡中预存至少1美元" class="headerlink" title="在Visa卡中预存至少1美元"></a>在Visa卡中预存至少1美元</h3><h4 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h4><p>1.因为是学生申请，所以申请到的信用卡额度为0</p><blockquote><p>解决方法：“中国工商银行APP-首页-转账汇款-境内汇款”，将储蓄卡中的钱转一部分到申请到的信用卡中（即将信用卡当储蓄卡使用）<br>2.因为本人的工行储蓄卡与申请到的信用卡是异地，所以不能直接转美元，而当我试图购汇时显示可用的只有储蓄卡<br>解决方法：“中国工商银行APP-首页-全部-我的账户”，选中申请的信用卡，点击五角星使其变成实心黄色（设置为默认卡），这个时候再去购汇即可<br>3.如果没有预存1美元，在提交申请的时候会提示“请更正这张卡片的信息或改用其他卡试试”</p><h3 id="申请Google-Cloud-Platform"><a href="#申请Google-Cloud-Platform" class="headerlink" title="申请Google Cloud Platform"></a>申请Google Cloud Platform</h3><p><a href="https://console.cloud.google.com/home/dashboard?project=cosmic-backbone-283911&amp;hl=zh-CN" target="_blank" rel="noopener">申请地址</a></p><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>1.国家/地区：美国<br>2.勾选服务条款<br>3.继续</p><h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>1.账号类型：个人<br>2.姓名和地址：<br><a href="https://www.fakenamegenerator.com/gen-male-us-us.php" target="_blank" rel="noopener">在线地址生成网站</a><br>3.付款选项：点击信用卡详细信息添加信用卡（信用卡验证码为信用卡背后卡号上面七位数后三位）<br>4.开启免费试用</p><h4 id="遇到的问题-1"><a href="#遇到的问题-1" class="headerlink" title="遇到的问题"></a>遇到的问题</h4><p>点击“开启免费试用”后提示“交易遭拒：付款方式无效。了解详情[OR-CCSEH-05]”,如下图所示<br><img src="http://qal23xf82.bkt.clouddn.com/problem.png" alt="problem"><br>解决方法：在“Google Pay Help”中跟谷歌客服反应一下  </p></blockquote><p><a href="https://support.google.com/pay/gethelp" target="_blank" rel="noopener">Google Pay Help</a></p><p>1.Let’s get started<br>简单描述一下自己的情况（随便写也可以），点击Next step<br>2.弹出来的选项中选一个跟自己情况符合的（瞎选也可以），点击Next step<br>3.点击中间的chat，会在右下角弹出谷歌客服的聊天窗口，这个时候跟客服详细描述一下自己遇到的问题，最后她会告诉你要排除团队核实信息，七个工作日内会给你发邮件回复（本人大概13个小时左右）。注：英语不好可以借住翻译；注意联系客服的时间（时差，本人晚上12点左右联系的）</p><p><img src="http://qal23xf82.bkt.clouddn.com/support.png" alt="support"><br>4.等待半天左右，注意查看自己的邮箱，会收到谷歌发来的邮件，如果核实成功，内容大致如下<br><img src="http://qal23xf82.bkt.clouddn.com/mail.png" alt="mail"></p><h3 id="重新申请"><a href="#重新申请" class="headerlink" title="重新申请"></a>重新申请</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本篇文章意在记录自己在申请谷歌云的流程、遇见的问题以及解决方案，总共用时10天。&lt;/p&gt;
+&lt;h2 id=&quot;流程&quot;&gt;&lt;a href=&quot;#流程&quot;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>SVM</title>
@@ -52,6 +75,28 @@
       
       
         &lt;h2 id=&quot;Step1-启用Telnet-Client&quot;&gt;&lt;a href=&quot;#Step1-启用Telnet-Client&quot; class=&quot;headerlink&quot; title=&quot;Step1:启用Telnet Client&quot;&gt;&lt;/a&gt;Step1:启用Telnet Client&lt;/
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>决策树2</title>
+    <link href="http://yoursite.com/2020/05/12/%E5%86%B3%E7%AD%96%E6%A0%912/"/>
+    <id>http://yoursite.com/2020/05/12/%E5%86%B3%E7%AD%96%E6%A0%912/</id>
+    <published>2020-05-12T14:09:05.000Z</published>
+    <updated>2020-05-24T15:17:26.463Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="构建流程"><a href="#构建流程" class="headerlink" title="构建流程"></a>构建流程</h1><h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1.准备工作"></a>1.准备工作</h2><blockquote><p>明确自变量和因变量，确定信息度量的方式，确定终止条件</p><h2 id="2-选择特征"><a href="#2-选择特征" class="headerlink" title="2.选择特征"></a>2.选择特征</h2><p>得到当前待处理子集，计算所有特征信息度量，得到当前最佳分类特征</p><h2 id="3-创建分支"><a href="#3-创建分支" class="headerlink" title="3.创建分支"></a>3.创建分支</h2><p>根据选中特征将当前记录分成不同分支，分支个数取决于算法</p><h2 id="4-是否终止"><a href="#4-是否终止" class="headerlink" title="4.是否终止"></a>4.是否终止</h2><p>判断是否满足终止条件，满足则退出循环，不满足则继续递归</p><h2 id="5-结果生成"><a href="#5-结果生成" class="headerlink" title="5.结果生成"></a>5.结果生成</h2><p>判断是否需要剪枝，需要则进行适当修建，不需要则为最终结果</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;构建流程&quot;&gt;&lt;a href=&quot;#构建流程&quot; class=&quot;headerlink&quot; title=&quot;构建流程&quot;&gt;&lt;/a&gt;构建流程&lt;/h1&gt;&lt;h2 id=&quot;1-准备工作&quot;&gt;&lt;a href=&quot;#1-准备工作&quot; class=&quot;headerlink&quot; title=&quot;1.准备工
       
     
     </summary>
@@ -157,9 +202,9 @@
     <link href="http://yoursite.com/2020/03/30/%E7%AC%AC%E4%B8%89%E7%AB%A0/"/>
     <id>http://yoursite.com/2020/03/30/%E7%AC%AC%E4%B8%89%E7%AB%A0/</id>
     <published>2020-03-30T12:04:28.000Z</published>
-    <updated>2020-04-17T12:10:36.426Z</updated>
+    <updated>2020-05-24T15:17:26.468Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h4><ul><li>两个对象用 = 赋值的时候发生了什么</li><li>友元类的声明必须在public？</li><li>函数声明和实现的形参必须一样？声明的时候形参必须有？</li><li><h1 id="pragma-once"><a href="#pragma-once" class="headerlink" title="pragma once"></a>pragma once</h1></li><li>复制构造函数形式</li><li>复制构造函数调用时间</li><li>组合类的成员对象初始化必须放在初始化列表？顺序是按定义顺序<br>对象必须在初始化列表里面初始化</li><li>类内为什么可以有本类的指针</li><li>静态数据成员可以是private吗？还是必须是public？</li><li>静态成员函数可以访问非静态数据成员吗？</li><li>静态数据成员只能被初始化一次</li><li>静态成员函数内部可以有本类吗？</li><li>mutable?数据类型</li><li>栈区 堆区 无名区</li><li>指针数组和delete []p</li><li>Point *p = new Point[3]</li><li>Point (*p)[3]  = new Point[2][3]<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><blockquote><p>静态数据成员必须初始化，在类外初始化的时候不需要加static<br>静态成员方法在类外实现的时候也不需要加static<br>静态成员方法不能直接访问非静态数据成员（非静态成员函数里面都有一个隐含的this指针，静态成员函数没有），间接呢？</p><h2 id="常成员"><a href="#常成员" class="headerlink" title="常成员"></a>常成员</h2><p>只能在初始化列表中初始化且必须初始化<br>常成员函数  const加在后面  不能修改普通数据成员，只能修改mutable类型的数据成员，目的是为了访问常数据成员，也可以访问非常数据成员<br>常数据成员不能被修改<br>常对象只能访问常成员函数<br>常引用也必须在初始化列表中初始化<br>非常对象可以调用常成员函数<br>非常对象调用重载的成员函数优先非常成员函数</p><h2 id="对象数组"><a href="#对象数组" class="headerlink" title="对象数组"></a>对象数组</h2><h2 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h2></blockquote></li></ul><h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1><h2 id="重载赋值运算符和拷贝构造函数的情况："><a href="#重载赋值运算符和拷贝构造函数的情况：" class="headerlink" title="重载赋值运算符和拷贝构造函数的情况："></a>重载赋值运算符和拷贝构造函数的情况：</h2><p>类的数据成员内有指针的情况，</p>]]></content>
+    <content type="html"><![CDATA[<h4 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h4><ul><li>两个对象用 = 赋值的时候发生了什么</li><li>友元类的声明必须在public？</li><li>函数声明和实现的形参必须一样？声明的时候形参必须有？</li><li><h1 id="pragma-once"><a href="#pragma-once" class="headerlink" title="pragma once"></a>pragma once</h1></li><li>复制构造函数形式</li><li>复制构造函数调用时间</li><li>组合类的成员对象初始化必须放在初始化列表？顺序是按定义顺序<br>对象必须在初始化列表里面初始化</li><li>类内为什么可以有本类的指针</li><li>静态数据成员可以是private吗？还是必须是public？</li><li>静态成员函数可以访问非静态数据成员吗？</li><li>静态数据成员只能被初始化一次</li><li>静态成员函数内部可以有本类吗？</li><li>mutable?数据类型</li><li>栈区 堆区 无名区</li><li>指针数组和delete []p</li><li>Point *p = new Point[3]</li><li>Point (*p)[3]  = new Point[2][3]<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><blockquote><p>静态数据成员必须初始化，在类外初始化的时候不需要加static<br>静态成员方法在类外实现的时候也不需要加static<br>静态成员方法不能直接访问非静态数据成员（非静态成员函数里面都有一个隐含的this指针，静态成员函数没有），间接呢？</p><h2 id="常成员"><a href="#常成员" class="headerlink" title="常成员"></a>常成员</h2><p>只能在初始化列表中初始化且必须初始化<br>常成员函数  const加在后面  不能修改普通数据成员，只能修改mutable类型的数据成员，目的是为了访问常数据成员，也可以访问非常数据成员<br>常数据成员不能被修改<br>常对象只能访问常成员函数<br>常引用也必须在初始化列表中初始化<br>非常对象可以调用常成员函数<br>非常对象调用重载的成员函数优先非常成员函数</p><h2 id="对象数组"><a href="#对象数组" class="headerlink" title="对象数组"></a>对象数组</h2><h2 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h2></blockquote></li></ul><h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1><h2 id="重载赋值运算符和拷贝构造函数的情况："><a href="#重载赋值运算符和拷贝构造函数的情况：" class="headerlink" title="重载赋值运算符和拷贝构造函数的情况："></a>重载赋值运算符和拷贝构造函数的情况：</h2><blockquote><p>类的数据成员内有指针的情况，使用赋值运算符和拷贝构造函数后，析构的时候会对同一指针释放两次，这是不允许的</p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -237,9 +282,9 @@
     <link href="http://yoursite.com/2020/02/28/pandas/"/>
     <id>http://yoursite.com/2020/02/28/pandas/</id>
     <published>2020-02-28T11:30:01.000Z</published>
-    <updated>2020-03-01T00:46:10.308Z</updated>
+    <updated>2020-05-24T15:17:26.468Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Pandas介绍"><a href="#Pandas介绍" class="headerlink" title="Pandas介绍"></a>Pandas介绍</h2><h3 id="Pandas介绍-数据处理工具"><a href="#Pandas介绍-数据处理工具" class="headerlink" title="Pandas介绍 - 数据处理工具"></a>Pandas介绍 - 数据处理工具</h3><pre><code>panel + data + analysis  面板    数据    分析  面板数据分析  </code></pre><h3 id="优点"><a href="#优点" class="headerlink" title="优点:"></a>优点:</h3><ul><li>便捷的数据处理能力  </li><li>读取文件方便  </li><li>封装了Matplotlib、Numpy的画图和计算    <h2 id="核心数据结构："><a href="#核心数据结构：" class="headerlink" title="核心数据结构："></a>核心数据结构：</h2></li><li>DataFrame  </li><li>Panel  </li><li>Series    <h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h3><pre><code class="lang-python">stock_change = pd.DataFrame(stock_change)  #添加行索引：    stock = [&quot;股票{}&quot;.format(i) for i in range(10)]  pd.DataFrame(stock_change,index = stock)  #添加列索引：  date = pd.date_range(start = &quot;20180101&quot;,period = 5,fred=&quot;B&quot;)  pd.DataFrame(stock_change,index = stock,conlumns=date)</code></pre><h4 id="结构："><a href="#结构：" class="headerlink" title="结构："></a>结构：</h4>有行索引和列索引的<strong>二维数组</strong>  <h4 id="属性："><a href="#属性：" class="headerlink" title="属性："></a>属性：</h4></li><li>shape  </li><li>index：行索引  </li><li>columns：列索引   </li><li>values  </li><li>T      <h4 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h4></li><li>head()：前几行  </li><li>tail()：后几行  <h4 id="索引设置："><a href="#索引设置：" class="headerlink" title="索引设置："></a>索引设置：</h4></li><li>修改索引值(不能单独修改某个索引)：重新建立，并设置索引  </li><li>重设索引（行索引）（不常用）：  data.reset_index(drop = False),默认drop为False，不删除原来索引，True删除原来索引  </li><li>以某列值设置为新的索引：data.set_index(‘列名’)</li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="Pandas介绍"><a href="#Pandas介绍" class="headerlink" title="Pandas介绍"></a>Pandas介绍</h2><h3 id="Pandas介绍-数据处理工具"><a href="#Pandas介绍-数据处理工具" class="headerlink" title="Pandas介绍 - 数据处理工具"></a>Pandas介绍 - 数据处理工具</h3><pre><code>panel + data + analysis  面板    数据    分析  面板数据分析  </code></pre><h3 id="优点"><a href="#优点" class="headerlink" title="优点:"></a>优点:</h3><ul><li>便捷的数据处理能力  </li><li>读取文件方便  </li><li>封装了Matplotlib、Numpy的画图和计算    <h2 id="核心数据结构："><a href="#核心数据结构：" class="headerlink" title="核心数据结构："></a>核心数据结构：</h2></li><li>DataFrame  </li><li>Panel  </li><li>Series    <h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h3><pre><code class="lang-python">stock_change = pd.DataFrame(stock_change)  #添加行索引：    stock = [&quot;股票{}&quot;.format(i) for i in range(10)]  pd.DataFrame(stock_change,index = stock)  #添加列索引：  date = pd.date_range(start = &quot;20180101&quot;,period = 5,fred=&quot;B&quot;)  pd.DataFrame(stock_change,index = stock,conlumns=date)</code></pre><h4 id="结构："><a href="#结构：" class="headerlink" title="结构："></a>结构：</h4>有行索引和列索引的<strong>二维数组</strong>  <h4 id="属性："><a href="#属性：" class="headerlink" title="属性："></a>属性：</h4></li><li>shape  </li><li>index：行索引  </li><li>columns：列索引   </li><li>values  </li><li>T      <h4 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h4></li><li>head()：前几行  </li><li>tail()：后几行  <h4 id="索引设置："><a href="#索引设置：" class="headerlink" title="索引设置："></a>索引设置：</h4></li><li>修改索引值(不能单独修改某个索引)：重新建立，并设置索引  </li><li>重设索引（行索引）（不常用）：  data.reset_index(drop = False),默认drop为False，不删除原来索引，True删除原来索引  </li><li>以某列值设置为新的索引：data.set_index(keys1,drop),可以设置多个索引的时候数据类型变为MultiIndex，可以存储三维数组  <h4 id="MultiIndex属性："><a href="#MultiIndex属性：" class="headerlink" title="MultiIndex属性："></a>MultiIndex属性：</h4></li><li>name:索引。调用方式:data.index.name  </li><li>levels:索引下包含的值。调用方式：data.index.levels  <h3 id="Panel"><a href="#Panel" class="headerlink" title="Panel"></a>Panel</h3>用来存储三维数据的容器,可以认为是DataFrame的容器<br>使用方法：  <pre><code class="lang-python">pd.Panel(data=None,items=None,major_axis=None,minor_axis=None,copy=False,dtype=None)</code></pre><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3>带索引的一维数组，Series结构只有行索引（原来的列索引变为行索引）<br>创建Series：  </li><li>指定内容，默认索引（索引从0开始递增）  </li><li>指定索引   </li><li>通过字典数据创建<br>总结：DataFrame是Series的容器  <h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4></li><li>index  </li><li>value</li></ul>]]></content>
     
     <summary type="html">
     
@@ -451,60 +496,6 @@
       <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
     
       <category term="centOS" scheme="http://yoursite.com/tags/centOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nc2csv</title>
-    <link href="http://yoursite.com/2020/02/15/nc2csv/"/>
-    <id>http://yoursite.com/2020/02/15/nc2csv/</id>
-    <published>2020-02-15T11:34:53.000Z</published>
-    <updated>2020-02-21T06:07:50.957Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="提前概要"><a href="#提前概要" class="headerlink" title="提前概要"></a>提前概要</h2><p>在2020年2月14日与队友讨论A题过程中需要查找苏格兰海域温度变化，因此第一次接触到气象数据netCDF(.nc)格式文件，在这里以北京大学所录数据，即比赛过程中所使用的数据为例，记录对这个格式文件的处理。基本思路是利用Python中xarray库处理，再将提取到的数据存储为csv格式文件。</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>推荐使用conda安装：  </p><pre><code>conda install xarray</code></pre><p>在安装过程中出现faild信息，最后采用修改清华镜像解决</p><h2 id="引入包"><a href="#引入包" class="headerlink" title="引入包"></a>引入包</h2><pre><code class="lang-python">import xarray as xrimport csv</code></pre><h2 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h2><pre><code class="lang-python">data = xr.open_dataset(&#39;ERsst.mnmean.nc&#39;)</code></pre><blockquote><p>读取到的数据：<br>```  </p><p><xarray.Dataset><br>Dimensions:    (lat: 89, lon: 180, nbnds: 2, time: 1973)<br>Coordinates:</p><ul><li>lat        (lat) float32 88.0 86.0 84.0 82.0 … -82.0 -84.0 -86.0 -88.0</li><li>lon        (lon) float32 0.0 2.0 4.0 6.0 8.0 … 352.0 354.0 356.0 358.0</li><li>time       (time) datetime64[ns] 1854-01-01 1854-02-01 … 2018-05-01<br>Dimensions without coordinates: nbnds<br>Data variables:<br>time_bnds  (time, nbnds) float64 …<br>sst        (time, lat, lon) float32 …<br>Attributes:<br>climatology:               Climatology is based on 1971-2000 SST, Xue, Y….<br>description:               In situ data: ICOADS2.5 before 2007 and NCEP i…<br>keywords_vocabulary:       NASA Global Change Master Directory (GCMD) Sci…<br>keywords:                  Earth Science &gt; Oceans &gt; Ocean Temperature &gt; S…<br>instrument:                Conventional thermometers<br>source_comment:            SSTs were observed by conventional thermometer…<br>geospatial_lon_min:        -1.0<br>geospatial_lon_max:        359.0<br>geospatial_laty_max:       89.0<br>geospatial_laty_min:       -89.0<br>geospatial_lat_max:        89.0<br>geospatial_lat_min:        -89.0<br>geospatial_lat_units:      degrees_north<br>geospatial_lon_units:      degrees_east<br>cdm_data_type:             Grid<br>project:                   NOAA Extended Reconstructed Sea Surface Temper…<br>original_publisher_url:    <a href="http://www.ncdc.noaa.gov" target="_blank" rel="noopener">http://www.ncdc.noaa.gov</a><br>References:                <a href="https://www.ncdc.noaa.gov/data-access/marineoc" target="_blank" rel="noopener">https://www.ncdc.noaa.gov/data-access/marineoc</a>…<br>source:                    In situ data: ICOADS R3.0 before 2015, NCEP in…<br>title:                     NOAA ERSSTv5 (in situ only)<br>history:                   created 07/2017 by PSD data using NCEI’s ERSST…<br>institution:               This version written at NOAA/ESRL PSD: obtaine…<br>citation:                  Huang et al, 2017: Extended Reconstructed Sea …<br>platform:                  Ship and Buoy SSTs from ICOADS R3.0 and NCEP GTS<br>standard_name_vocabulary:  CF Standard Name Table (v40, 25 January 2017)<br>processing_level:          NOAA Level 4<br>Conventions:               CF-1.6, ACDD-1.3<br>metadata_link:             :metadata_link = <a href="https://doi.org/10.7289/V5T72" target="_blank" rel="noopener">https://doi.org/10.7289/V5T72</a>…<br>creator_name:              Boyin Huang (original)<br>date_created:              2017-06-30T12:18:00Z (original)<br>product_version:           Version 5<br>creator_url_original:      <a href="https://www.ncei.noaa.gov" target="_blank" rel="noopener">https://www.ncei.noaa.gov</a><br>license:                   No constraints on data access or use<br>comment:                   SSTs were observed by conventional thermometer…<br>summary:                   ERSST.v5 is developed based on v4 after revisi…<br>dataset_title:             NOAA Extended Reconstructed SST V5</li></ul></blockquote><p>Process finished with exit code 0  </p><pre><code>## 数据分析  包含的变量：  - time_bnds  - sst    &gt; time_bnds:    time和nbnds  &gt; sst:  time、lat、lon  &gt; sst是本次数据处理核心，取出sst中信息进行初步分析：    ``` python    sst = data[&#39;sst&#39;]</code></pre><pre><code>&lt;xarray.DataArray &#39;sst&#39; (time: 1973, lat: 89, lon: 180)&gt;[31607460 values with dtype=float32]Coordinates:  * lat      (lat) float32 88.0 86.0 84.0 82.0 80.0 ... -82.0 -84.0 -86.0 -88.0  * lon      (lon) float32 0.0 2.0 4.0 6.0 8.0 ... 350.0 352.0 354.0 356.0 358.0  * time     (time) datetime64[ns] 1854-01-01 1854-02-01 ... 2018-05-01Attributes:    long_name:     Monthly Means of Sea Surface Temperature    units:         degC    var_desc:      Sea Surface Temperature    level_desc:    Surface    statistic:     Mean    dataset:       NOAA Extended Reconstructed SST V5    parent_stat:   Individual Values    actual_range:  [-1.8     42.32636]    valid_range:   [-1.8 45. ]Process finished with exit code 0</code></pre><p>可以看出，sst中包含三个主要信息：lat，lon已经time，事实上，sst的数据是一个三维矩阵，矩阵值的信息为time时刻，lat和lon构成的经纬坐标位置处的海域温度值，我们把sst的数据提取出来确认一下：  </p><pre><code class="lang-python">sst = data[&#39;sst&#39;].data</code></pre><p>运行上述代码，得到结果：  </p><pre><code>[[[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  ...  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]] [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  ...  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]] [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  ...  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]] ... [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  ...  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]] [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  ...  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]] [[-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  [-1.8 -1.8 -1.8 ... -1.8 -1.8 -1.8]  ...  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]  [ nan  nan  nan ...  nan  nan  nan]]]</code></pre><blockquote><p>效仿上述做法，提取其它需要的数据:  </p><pre><code class="lang-python">lat = data[&#39;lat&#39;].datalon = data[&#39;lon&#39;].datatime = data[&#39;time&#39;].data</code></pre><h2 id="写入csv文件"><a href="#写入csv文件" class="headerlink" title="写入csv文件"></a>写入csv文件</h2><h3 id="打开csv文件"><a href="#打开csv文件" class="headerlink" title="打开csv文件"></a>打开csv文件</h3><pre><code class="lang-python">with open(&#39;test11.csv&#39;,mode = &#39;w&#39;,newline=&#39;&#39;) as ice_file:</code></pre><p>不加   <code>newline=&#39;&#39;</code>      会导致csv每两行数据间会多出一行空格  </p><h3 id="写入表头"><a href="#写入表头" class="headerlink" title="写入表头"></a>写入表头</h3><p>在这里假定苏格兰海域范围为纬度+62～40，350～0～12  </p><pre><code class="lang-python">ice_write.writerow((&#39;time&#39;,&#39;lat&#39;,&#39;0&#39;,&#39;2&#39;,&#39;4&#39;,&#39;6&#39;,&#39;8&#39;,&#39;10&#39;,&#39;12&#39;,&#39;350&#39;,&#39;352&#39;,&#39;354&#39;,&#39;356&#39;,&#39;358&#39;))</code></pre><h3 id="写入信息"><a href="#写入信息" class="headerlink" title="写入信息"></a>写入信息</h3><p>从1968-01-01开始写入，time[1368]的值为1968-01-01T00:00:00.000000000  </p><pre><code class="lang-python">with open(&#39;test11.csv&#39;,mode = &#39;w&#39;,newline=&#39;&#39;) as ice_file:    ice_write = csv.writer(ice_file)    ice_write.writerow((&#39;time&#39;,&#39;lat&#39;,&#39;0&#39;,&#39;2&#39;,&#39;4&#39;,&#39;6&#39;,&#39;8&#39;,&#39;10&#39;,&#39;12&#39;,&#39;350&#39;,&#39;352&#39;,&#39;354&#39;,&#39;356&#39;,&#39;358&#39;))    for i in range(len(time)):            if i &gt; 1367:                for j in range(len(lat)):                    if lat[j]&gt;=40 and lat[j]&lt;=62:                            tt = []                            for k in range(len(lon)):                                if lon[k]&lt;=12 or lon[k]&gt;=350:                                    tt.append(sst[i][j][k])                            res = [str(time[i])[:10],lat[j]]                            for p in range(len(tt)):                                res.append(tt[p])                            ice_write.writerow(res)ice_file.close()</code></pre><p>因为writerow函数的参数仅为一个，所以把所有数据通过append函数整合在一起，<code>time[i][:10]</code>是为了消除时间后面的T00：00：00.00000000采用的取巧的方法</p><h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><p>``` python<br>import xarray as xr<br>import csv<br>data = xr.open_dataset(‘ERsst.mnmean.nc’)<br>sst = data[‘sst’].data<br>lat = data[‘lat’].data<br>lon = data[‘lon’].data<br>time = data[‘time’].data<br>print(data[‘time’])</p></blockquote><p>with open(‘test11.csv’,mode = ‘w’,newline=’’) as ice_file:<br>    ice_write = csv.writer(ice_file)<br>    ice_write.writerow((‘time’,’lat’,’0’,’2’,’4’,’6’,’8’,’10’,’12’,’350’,’352’,’354’,’356’,’358’))<br>    for i in range(len(time)):<br>            if i &gt; 1367:<br>                for j in range(len(lat)):<br>                    if lat[j]&gt;=40 and lat[j]&lt;=62:<br>                            tt = []<br>                            for k in range(len(lon)):<br>                                if lon[k]&lt;=12 or lon[k]&gt;=350:<br>                                    tt.append(sst[i][j][k])<br>                            res = [str(time[i])[:10],lat[j]]<br>                            for p in range(len(tt)):<br>                                res.append(tt[p])<br>                            ice_write.writerow(res)<br>ice_file.close()<br>```  </p><h2 id="读取的北大数据链接"><a href="#读取的北大数据链接" class="headerlink" title="读取的北大数据链接"></a>读取的北大数据链接</h2><p><a href="https://geodata.pku.edu.cn/index.php?c=content&amp;a=show&amp;id=728%E8%BF%99%E9%87%8C%E5%8F%AF%E4%BB%A5%E4%B8%8B%E8%BD%BD" target="_blank" rel="noopener" title="数据范围：1854-01-01到2018-05-01">北京大学地理数据平台-全球海温数据</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;提前概要&quot;&gt;&lt;a href=&quot;#提前概要&quot; class=&quot;headerlink&quot; title=&quot;提前概要&quot;&gt;&lt;/a&gt;提前概要&lt;/h2&gt;&lt;p&gt;在2020年2月14日与队友讨论A题过程中需要查找苏格兰海域温度变化，因此第一次接触到气象数据netCDF(.nc)格式文件
-      
-    
-    </summary>
-    
-    
-    
-      <category term="美赛" scheme="http://yoursite.com/tags/%E7%BE%8E%E8%B5%9B/"/>
-    
-      <category term="netCDF(.nc)" scheme="http://yoursite.com/tags/netCDF-nc/"/>
-    
-      <category term="csv" scheme="http://yoursite.com/tags/csv/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Fuctions</title>
-    <link href="http://yoursite.com/2020/01/30/Matlab_Fuctions/"/>
-    <id>http://yoursite.com/2020/01/30/Matlab_Fuctions/</id>
-    <published>2020-01-30T06:11:57.000Z</published>
-    <updated>2020-02-21T06:07:54.566Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>factorial():阶乘   eg:factorial(79)  </p><p>prod():连乘    eg:prod(2:10)  </p><p>xlim():设置x轴范围 eg:xlim([0 2*pi])  </p><p>[AX,H1,H2]=plotyy(…)：返回AX中创建的两个坐标轴的句柄以及H1和H2中 每个图形绘图对象的句柄。AX（1）为左侧轴， AX（2）为右侧轴。<br>eg:set(get(AX(1),’Ylabel’),’String’,’Slow’)<br>   set(H1,’LineStyle’,’—‘)</p><p>question:print(‘-despsc’,’-tiff’,’-r300’,’name’)  </p><p>load data.mat   </p><p>importdata(‘myfile.txt’)  </p><p>xlsread(‘data.xls’)  xlsread(‘data.xlsx’)</p><p>xlswrite(‘data.xls’,S)  xlswrite(‘data.xlsx’,S)  </p><p>csvwrite(‘data.csv’,S)  </p><p>csvread(‘data.csv’)  </p><p>sava ‘data.txt’ S -ascii</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;factorial():阶乘   eg:factorial(79)  &lt;/p&gt;
-&lt;p&gt;prod():连乘    eg:prod(2:10)  &lt;/p&gt;
-&lt;p&gt;xlim():设置x轴范围 eg:xlim([0 2*pi])  &lt;/p&gt;
-&lt;p&gt;[AX,
-      
-    
-    </summary>
-    
-    
     
   </entry>
   

@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="Sherlcok&#39;s blogs">
 <meta property="og:description" content="Q 两个对象用 &#x3D; 赋值的时候发生了什么 友元类的声明必须在public？ 函数声明和实现的形参必须一样？声明的时候形参必须有？ pragma once 复制构造函数形式 复制构造函数调用时间 组合类的成员对象初始化必须放在初始化列表？顺序是按定义顺序对象必须在初始化列表里面初始化 类内为什么可以有本类的指针 静态数据成员可以是private吗？还是必须是public？ 静态成员函数可以访问非静态">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-17T12:10:36.426Z">
+<meta property="og:updated_time" content="2020-05-24T15:17:26.468Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/03/30/%E7%AC%AC%E4%B8%89%E7%AB%A0/">
@@ -217,7 +217,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-17 20:10:36" itemprop="dateModified" datetime="2020-04-17T20:10:36+08:00">2020-04-17</time>
+                <time title="Modified: 2020-05-24 23:17:26" itemprop="dateModified" datetime="2020-05-24T23:17:26+08:00">2020-05-24</time>
               </span>
 
           
@@ -254,7 +254,9 @@
 <h2 id="对象数组"><a href="#对象数组" class="headerlink" title="对象数组"></a>对象数组</h2><h2 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h2></blockquote>
 </li>
 </ul>
-<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1><h2 id="重载赋值运算符和拷贝构造函数的情况："><a href="#重载赋值运算符和拷贝构造函数的情况：" class="headerlink" title="重载赋值运算符和拷贝构造函数的情况："></a>重载赋值运算符和拷贝构造函数的情况：</h2><p>类的数据成员内有指针的情况，</p>
+<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1><h2 id="重载赋值运算符和拷贝构造函数的情况："><a href="#重载赋值运算符和拷贝构造函数的情况：" class="headerlink" title="重载赋值运算符和拷贝构造函数的情况："></a>重载赋值运算符和拷贝构造函数的情况：</h2><blockquote>
+<p>类的数据成员内有指针的情况，使用赋值运算符和拷贝构造函数后，析构的时候会对同一指针释放两次，这是不允许的</p>
+</blockquote>
 
     </div>
 
@@ -328,7 +330,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
